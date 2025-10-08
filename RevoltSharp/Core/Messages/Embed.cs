@@ -40,36 +40,54 @@ public class EmbedBuilder
     /// </summary>
     public RevoltColor? Color { get; set; }
 
-    public EmbedBuilder SetTitle(string title)
+    /// <summary>
+    /// Set embed title
+    /// </summary>
+    public EmbedBuilder SetTitle(string? title)
     {
         Title = title;
         return this;
     }
 
-    public EmbedBuilder SetUrl(string url)
+    /// <summary>
+    /// Set embed url
+    /// </summary>
+    public EmbedBuilder SetUrl(string? url)
     {
         Url = url;
         return this;
     }
 
-    public EmbedBuilder SetIconUrl(string iconUrl)
+    /// <summary>
+    /// Set embed icon url
+    /// </summary>
+    public EmbedBuilder SetIconUrl(string? iconUrl)
     {
         IconUrl = iconUrl;
         return this;
     }
 
-    public EmbedBuilder SetDescription(string description)
+    /// <summary>
+    /// Set embed description
+    /// </summary>
+    public EmbedBuilder SetDescription(string? description)
     {
         Description = description;
         return this;
     }
 
-    public EmbedBuilder SetImage(string image)
+    /// <summary>
+    /// Set embed image
+    /// </summary>
+    public EmbedBuilder SetImage(string? image)
     {
         Image = image;
         return this;
     }
 
+    /// <summary>
+    /// Set embed color
+    /// </summary>
     public EmbedBuilder SetColor(RevoltColor color)
     {
         Color = color;
@@ -134,7 +152,7 @@ public class MessageEmbed
         if (model.colour.HasValue)
             Color = new RevoltColor(model.colour.Value);
         else
-            Color = new RevoltColor("");
+            Color = new RevoltColor(null);
         Image = model.image == null ? null : new EmbedMedia(model.image);
         Media = model.media == null ? null : new Attachment(client, (model.media as JObject).ToObject<AttachmentJson>());
         Video = model.video == null ? null : new EmbedMedia(model.video);
