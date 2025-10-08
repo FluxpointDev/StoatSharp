@@ -2193,6 +2193,36 @@
             Embed color
             </summary>
         </member>
+        <member name="M:RevoltSharp.EmbedBuilder.SetTitle(System.String)">
+            <summary>
+            Set embed title
+            </summary>
+        </member>
+        <member name="M:RevoltSharp.EmbedBuilder.SetUrl(System.String)">
+            <summary>
+            Set embed url
+            </summary>
+        </member>
+        <member name="M:RevoltSharp.EmbedBuilder.SetIconUrl(System.String)">
+            <summary>
+            Set embed icon url
+            </summary>
+        </member>
+        <member name="M:RevoltSharp.EmbedBuilder.SetDescription(System.String)">
+            <summary>
+            Set embed description
+            </summary>
+        </member>
+        <member name="M:RevoltSharp.EmbedBuilder.SetImage(System.String)">
+            <summary>
+            Set embed image
+            </summary>
+        </member>
+        <member name="M:RevoltSharp.EmbedBuilder.SetColor(RevoltSharp.RevoltColor)">
+            <summary>
+            Set embed color
+            </summary>
+        </member>
         <member name="M:RevoltSharp.EmbedBuilder.Build">
             <summary>
             Build the embed to use it in messages
@@ -2531,6 +2561,16 @@
         <member name="F:RevoltSharp.SystemType.GroupOwnerChanged">
             <summary>
             Group channel owner has been changed.
+            </summary>
+        </member>
+        <member name="F:RevoltSharp.SystemType.MessagePinned">
+            <summary>
+            Message has been pinned
+            </summary>
+        </member>
+        <member name="F:RevoltSharp.SystemType.MessageUnPinned">
+            <summary>
+            Message has been unpinned
             </summary>
         </member>
         <member name="T:RevoltSharp.UserMessage">

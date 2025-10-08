@@ -18,22 +18,18 @@ public abstract class SystemData
 /// </summary>
 public class SystemDataUnknown : SystemData
 {
-    internal SystemDataUnknown()
-    {
-        Name = BaseName!;
-        Text = BaseText!;
-        Id = BaseId!;
-        By = BaseBy!;
-        From = BaseFrom!;
-        To = BaseTo!;
-    }
+    public string Name => BaseName;
+    public string From => BaseFrom;
+    public string To => BaseTo;
+    public string Text => BaseText;
+    public string Id => BaseId;
+    public string By => BaseBy;
+}
 
-    public string Name { get; internal set; }
-    public string From { get; internal set; }
-    public string To { get; internal set; }
-    public string Text { get; internal set; }
-    public string Id { get; internal set; }
-    public string By { get; internal set; }
+public class SystemDataMessagePinned : SystemData
+{
+    public string Id => BaseId;
+    public string By => BaseBy;
 }
 
 /// <summary>
@@ -41,11 +37,7 @@ public class SystemDataUnknown : SystemData
 /// </summary>
 public class SystemDataText : SystemData
 {
-    internal SystemDataText()
-    {
-        Text = BaseText!;
-    }
-    public string Text { get; internal set; }
+    public string Text => BaseText;
 }
 
 /// <summary>
@@ -53,13 +45,8 @@ public class SystemDataText : SystemData
 /// </summary>
 public class SystemDataUserAdded : SystemData
 {
-    internal SystemDataUserAdded()
-    {
-        Id = BaseId!;
-        By = BaseBy!;
-    }
-    public string Id { get; internal set; }
-    public string By { get; internal set; }
+    public string Id => BaseId;
+    public string By => BaseBy;
 }
 
 /// <summary>
@@ -67,13 +54,8 @@ public class SystemDataUserAdded : SystemData
 /// </summary>
 public class SystemDataUserRemoved : SystemData
 {
-    internal SystemDataUserRemoved()
-    {
-        Id = BaseId!;
-        By = BaseBy!;
-    }
-    public string Id { get; internal set; }
-    public string By { get; internal set; }
+    public string Id => BaseId;
+    public string By => BaseBy;
 }
 
 /// <summary>
@@ -81,11 +63,7 @@ public class SystemDataUserRemoved : SystemData
 /// </summary>
 public class SystemDataUserJoined : SystemData
 {
-    internal SystemDataUserJoined()
-    {
-        Id = BaseId!;
-    }
-    public string Id { get; internal set; }
+    public string Id => BaseId;
 }
 
 /// <summary>
@@ -93,11 +71,7 @@ public class SystemDataUserJoined : SystemData
 /// </summary>
 public class SystemDataUserLeft : SystemData
 {
-    internal SystemDataUserLeft()
-    {
-        Id = BaseId!;
-    }
-    public string Id { get; internal set; }
+    public string Id => BaseId;
 }
 
 /// <summary>
@@ -105,11 +79,7 @@ public class SystemDataUserLeft : SystemData
 /// </summary>
 public class SystemDataUserKicked : SystemData
 {
-    internal SystemDataUserKicked()
-    {
-        Id = BaseId!;
-    }
-    public string Id { get; internal set; }
+    public string Id => BaseId;
 }
 
 /// <summary>
@@ -117,11 +87,7 @@ public class SystemDataUserKicked : SystemData
 /// </summary>
 public class SystemDataUserBanned : SystemData
 {
-    internal SystemDataUserBanned()
-    {
-        Id = BaseId!;
-    }
-    public string Id { get; internal set; }
+    public string Id => BaseId;
 }
 
 /// <summary>
@@ -129,13 +95,8 @@ public class SystemDataUserBanned : SystemData
 /// </summary>
 public class SystemDataChannelRenamed : SystemData
 {
-    internal SystemDataChannelRenamed()
-    {
-        Name = BaseName!;
-        By = BaseBy!;
-    }
-    public string Name { get; internal set; }
-    public string By { get; internal set; }
+    public string Name => BaseName;
+    public string By => BaseBy;
 }
 
 /// <summary>
@@ -143,11 +104,7 @@ public class SystemDataChannelRenamed : SystemData
 /// </summary>
 public class SystemDataChannelDescriptionChanged : SystemData
 {
-    internal SystemDataChannelDescriptionChanged()
-    {
-        By = BaseBy!;
-    }
-    public string By { get; internal set; }
+    public string By => BaseBy;
 }
 
 /// <summary>
@@ -155,11 +112,7 @@ public class SystemDataChannelDescriptionChanged : SystemData
 /// </summary>
 public class SystemDataChannelIconChanged : SystemData
 {
-    internal SystemDataChannelIconChanged()
-    {
-        By = BaseBy!;
-    }
-    public string By { get; internal set; }
+    public string By => BaseBy;
 }
 
 /// <summary>
@@ -167,11 +120,6 @@ public class SystemDataChannelIconChanged : SystemData
 /// </summary>
 public class SystemDataChannelOwnershipChanged : SystemData
 {
-    internal SystemDataChannelOwnershipChanged()
-    {
-        From = BaseFrom!;
-        To = BaseTo!;
-    }
-    public string From { get; internal set; }
-    public string To { get; internal set; }
+    public string From => BaseFrom;
+    public string To => BaseTo;
 }

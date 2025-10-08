@@ -38,7 +38,7 @@ public abstract class Message : CreatedEntity
             ServerId = SC.ServerId;
             if (client.WebSocket != null && model.AuthorId != User.SystemUserId)
             {
-                if (Server.InternalMembers.TryGetValue(model.AuthorId, out var member))
+                if (Server.InternalMembers.TryGetValue(model.AuthorId, out ServerMember? member))
                     Member = member;
                 else if (members != null)
                 {
@@ -46,7 +46,7 @@ public abstract class Message : CreatedEntity
                     if (MemberData != null)
                         Member = new ServerMember(client, MemberData, null, Author);
                 }
-                    
+
             }
         }
     }
@@ -81,6 +81,10 @@ public abstract class Message : CreatedEntity
                         return new SystemMessage<SystemDataChannelIconChanged>(client, model, new SystemDataChannelIconChanged(), SystemType.GroupIconChanged);
                     case "channel_ownership_changed":
                         return new SystemMessage<SystemDataChannelOwnershipChanged>(client, model, new SystemDataChannelOwnershipChanged(), SystemType.GroupOwnerChanged);
+                    case "message_pinned":
+                        return new SystemMessage<SystemDataMessagePinned>(client, model, new SystemDataUnknown(), SystemType.MessagePinned);
+                    case "message_unpinned":
+                        return new SystemMessage<SystemDataMessagePinned>(client, model, new SystemDataUnknown(), SystemType.MessageUnPinned);
                 }
             }
             return new SystemMessage<SystemDataUnknown>(client, model, new SystemDataUnknown(), SystemType.Unknown);

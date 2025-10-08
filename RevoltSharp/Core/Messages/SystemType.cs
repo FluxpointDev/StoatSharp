@@ -60,5 +60,15 @@ public enum SystemType
     /// <summary>
     /// Group channel owner has been changed.
     /// </summary>
-    GroupOwnerChanged
+    GroupOwnerChanged,
+
+    /// <summary>
+    /// Message has been pinned
+    /// </summary>
+    MessagePinned,
+
+    /// <summary>
+    /// Message has been unpinned
+    /// </summary>
+    MessageUnPinned
 }
