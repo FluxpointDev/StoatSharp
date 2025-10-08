@@ -49,6 +49,8 @@ public abstract class Message : CreatedEntity
 
             }
         }
+
+        IsPinned = model.Pinned;
     }
 
     internal static Message Create(RevoltClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
@@ -82,9 +84,9 @@ public abstract class Message : CreatedEntity
                     case "channel_ownership_changed":
                         return new SystemMessage<SystemDataChannelOwnershipChanged>(client, model, new SystemDataChannelOwnershipChanged(), SystemType.GroupOwnerChanged);
                     case "message_pinned":
-                        return new SystemMessage<SystemDataMessagePinned>(client, model, new SystemDataUnknown(), SystemType.MessagePinned);
+                        return new SystemMessage<SystemDataMessagePinned>(client, model, new SystemDataMessagePinned(), SystemType.MessagePinned);
                     case "message_unpinned":
-                        return new SystemMessage<SystemDataMessagePinned>(client, model, new SystemDataUnknown(), SystemType.MessageUnPinned);
+                        return new SystemMessage<SystemDataMessagePinned>(client, model, new SystemDataMessagePinned(), SystemType.MessageUnPinned);
                 }
             }
             return new SystemMessage<SystemDataUnknown>(client, model, new SystemDataUnknown(), SystemType.Unknown);
@@ -158,6 +160,8 @@ public abstract class Message : CreatedEntity
     public MessageType Type { get; internal set; } = MessageType.User;
 
     public MessageFlag Flags { get; internal set; }
+
+    public bool IsPinned { get; internal set; }
 
     /// <summary> Returns a string that represents the current object.</summary>
     /// <returns> User/bot/system message </returns>

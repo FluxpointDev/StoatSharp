@@ -55,6 +55,9 @@ internal class MessageJson
 
     [JsonProperty("flags")]
     public MessageFlag Flags { get; set; }
+
+    [JsonProperty("pinned")]
+    public bool Pinned { get; set; }
 }
 internal class MessageMasqueradeJson
 {
