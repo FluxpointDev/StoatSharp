@@ -45,4 +45,7 @@ internal class MessageUpdateDataJson
 
     [JsonProperty("edited")]
     public DateTime EditedAt;
+
+    [JsonProperty("pinned")]
+    public Optional<bool> Pinned;
 }
