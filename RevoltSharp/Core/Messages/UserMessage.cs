@@ -55,7 +55,10 @@ public class UserMessage : Message
     /// </summary>
     public MessageMasquerade? Masquerade { get; internal set; }
 
-    //public MessageWebhook? Webhook { get; internal set; }
+    /// <summary>
+    /// Webhook info for this message.
+    /// </summary>
+    public MessageWebhook? Webhook { get; internal set; }
 
     internal UserMessage(RevoltClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
         : base(client, model, users, members)
@@ -66,7 +69,7 @@ public class UserMessage : Message
         UserMentions = model.Mentions == null ? new List<string>() : new List<string>(model.Mentions);
         RoleMentions = model.RoleMentions == null ? new List<string>() : new List<string>(model.RoleMentions);
         Replies = model.Replies == null ? new List<string>() : new List<string>(model.Replies);
-        //Webhook = model.Webhook != null ? new MessageWebhook(client, model.Webhook) : null;
+        Webhook = model.Webhook != null ? new MessageWebhook(client, model.Webhook) : null;
         if (model.EditedAt.HasValue)
             EditedAt = model.EditedAt.Value;
 
