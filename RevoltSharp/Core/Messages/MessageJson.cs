@@ -32,6 +32,9 @@ internal class MessageJson
     [JsonProperty("mentions")]
     public string[]? Mentions { get; set; }
 
+    [JsonProperty("role_mentions")]
+    public string[]? RoleMentions { get; set; }
+
     [JsonProperty("replies")]
     public string[]? Replies { get; set; }
 

@@ -16,9 +16,14 @@ public class UserMessage : Message
     public IReadOnlyList<Attachment> Attachments { get; internal set; }
 
     /// <summary>
-    /// Mentions in this message.
+    /// User Mentions in this message.
     /// </summary>
-    public IReadOnlyList<string> Mentions { get; internal set; }
+    public IReadOnlyList<string> UserMentions { get; internal set; }
+
+    /// <summary>
+    /// Role Mentions in this message.
+    /// </summary>
+    public IReadOnlyList<string> RoleMentions { get; internal set; }
 
     /// <summary>
     /// Replies in this message.
@@ -58,7 +63,8 @@ public class UserMessage : Message
         Content = model.Content;
         Masquerade = MessageMasquerade.Create(model.Masquerade);
         Attachments = model.Attachments == null ? new List<Attachment>() : new List<Attachment>(model.Attachments.Select(a => Attachment.Create(client, a)!));
-        Mentions = model.Mentions == null ? new List<string>() : new List<string>(model.Mentions);
+        UserMentions = model.Mentions == null ? new List<string>() : new List<string>(model.Mentions);
+        RoleMentions = model.RoleMentions == null ? new List<string>() : new List<string>(model.RoleMentions);
         Replies = model.Replies == null ? new List<string>() : new List<string>(model.Replies);
         //Webhook = model.Webhook != null ? new MessageWebhook(client, model.Webhook) : null;
         if (model.EditedAt.HasValue)
@@ -79,7 +85,7 @@ public class UserMessage : Message
             foreach (KeyValuePair<string, string[]> r in model.Reactions.Value)
             {
                 react_count.Add(r.Key.Trim(), r.Value);
-                var Emoji = Client.GetEmoji(r.Key);
+                Emoji? Emoji = Client.GetEmoji(r.Key);
                 if (Emoji == null)
                     continue;
 
