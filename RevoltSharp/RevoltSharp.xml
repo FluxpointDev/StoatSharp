@@ -1466,14 +1466,19 @@
             List of message flags.
             </summary>
         </member>
-        <member name="F:RevoltSharp.MessageFlag.None">
-            <summary>
-            Message has no flags.
-            </summary>
-        </member>
         <member name="F:RevoltSharp.MessageFlag.SupressNotifications">
             <summary>
             Message has supressed notifications for other users.
+            </summary>
+        </member>
+        <member name="F:RevoltSharp.MessageFlag.MentionsEveryone">
+            <summary>
+            Message has mentioned all members.
+            </summary>
+        </member>
+        <member name="F:RevoltSharp.MessageFlag.MentionsOnline">
+            <summary>
+            Message has mentioned online members.
             </summary>
         </member>
         <member name="T:RevoltSharp.RevoltErrorType">
@@ -2583,9 +2588,14 @@
             File attachments for the message.
             </summary>
         </member>
-        <member name="P:RevoltSharp.UserMessage.Mentions">
+        <member name="P:RevoltSharp.UserMessage.UserMentions">
             <summary>
-            Mentions in this message.
+            User Mentions in this message.
+            </summary>
+        </member>
+        <member name="P:RevoltSharp.UserMessage.RoleMentions">
+            <summary>
+            Role Mentions in this message.
             </summary>
         </member>
         <member name="P:RevoltSharp.UserMessage.Replies">
@@ -2616,6 +2626,11 @@
         <member name="P:RevoltSharp.UserMessage.Masquerade">
             <summary>
             Masquerade options for this message.
+            </summary>
+        </member>
+        <member name="P:RevoltSharp.UserMessage.Webhook">
+            <summary>
+            Webhook info for this message.
             </summary>
         </member>
         <member name="M:RevoltSharp.UserMessage.ToString">
@@ -3502,6 +3517,11 @@
             Channel id of the webhook.
             </summary>
         </member>
+        <member name="P:RevoltSharp.Webhook.CreatedUserId">
+            <summary>
+            User id that created the webhook
+            </summary>
+        </member>
         <member name="P:RevoltSharp.Webhook.Channel">
             <summary>
             Channel of the webhook.
@@ -4065,10 +4085,10 @@
             Revolt http/rest methods for messages.
             </summary>
         </member>
-        <member name="M:RevoltSharp.MessageHelper.SendMessageAsync(RevoltSharp.Channel,System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)">
-            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendMessageAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)" />
+        <member name="M:RevoltSharp.MessageHelper.SendMessageAsync(RevoltSharp.Channel,System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
+            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendMessageAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})" />
         </member>
-        <member name="M:RevoltSharp.MessageHelper.SendMessageAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)">
+        <member name="M:RevoltSharp.MessageHelper.SendMessageAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
             <summary>
             Send a message to the channel.
             </summary>
@@ -4078,16 +4098,16 @@
             <exception cref="T:RevoltSharp.RevoltArgumentException"></exception>
             <exception cref="T:RevoltSharp.RevoltRestException"></exception>
         </member>
-        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Channel,System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)">
-            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)" />
+        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Channel,System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
+            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})" />
         </member>
-        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Channel,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)">
-            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)" />
+        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Channel,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
+            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})" />
         </member>
-        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)">
-            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)" />
+        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
+            <inheritdoc cref="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})" />
         </member>
-        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],RevoltSharp.MessageFlag)">
+        <member name="M:RevoltSharp.MessageHelper.SendFileAsync(RevoltSharp.Rest.RevoltRestClient,System.String,System.Byte[],System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
             <summary>
             Upload a file and send a message to the channel.
             </summary>

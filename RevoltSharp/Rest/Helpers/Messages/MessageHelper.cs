@@ -17,8 +17,8 @@ namespace RevoltSharp;
 /// </summary>
 public static class MessageHelper
 {
-    /// <inheritdoc cref="SendMessageAsync(RevoltRestClient, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag)" />
-    public static Task<UserMessage> SendMessageAsync(this Channel channel, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag flags = MessageFlag.None)
+    /// <inheritdoc cref="SendMessageAsync(RevoltRestClient, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendMessageAsync(this Channel channel, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
         => SendMessageAsync(channel.Client.Rest, channel.Id, text, embeds, attachments, masquerade, interactions, replies, flags);
 
     /// <summary>
@@ -29,7 +29,7 @@ public static class MessageHelper
     /// </returns>
     /// <exception cref="RevoltArgumentException"></exception>
     /// <exception cref="RevoltRestException"></exception>
-    public static async Task<UserMessage> SendMessageAsync(this RevoltRestClient rest, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag flags = MessageFlag.None)
+    public static async Task<UserMessage> SendMessageAsync(this RevoltRestClient rest, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     {
         Conditions.ChannelIdLength(channelId, nameof(SendMessageAsync));
         Conditions.MessagePropertiesEmpty(text, attachments, embeds, nameof(SendMessageAsync));
@@ -74,8 +74,8 @@ public static class MessageHelper
             Conditions.MessageContentLength(text, nameof(SendMessageAsync));
             Req.content = Optional.Some(text);
         }
-        if (flags.HasFlag(MessageFlag.SupressNotifications))
-            Req.flags = Optional.Some(flags);
+        if (flags.HasValue && flags.Value.HasFlag(MessageFlag.SupressNotifications))
+            Req.flags = Optional.Some(flags.Value);
 
         if (attachments != null && attachments.Any())
         {
@@ -107,16 +107,16 @@ public static class MessageHelper
         return (UserMessage)Message.Create(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag)" />
-    public static Task<UserMessage> SendFileAsync(this Channel channel, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag flags = MessageFlag.None)
+    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this Channel channel, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => SendFileAsync(channel.Client.Rest, channel.Id, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag)" />
-    public static Task<UserMessage> SendFileAsync(this Channel channel, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag flags = MessageFlag.None)
+    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this Channel channel, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => SendFileAsync(channel.Client.Rest, channel.Id, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag)" />
-    public static Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag flags = MessageFlag.None)
+    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => SendFileAsync(rest, channelId, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
 
     /// <summary>
@@ -127,7 +127,7 @@ public static class MessageHelper
     /// </returns>
     /// <exception cref="RevoltArgumentException"></exception>
     /// <exception cref="RevoltRestException"></exception>
-    public static async Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag flags = MessageFlag.None)
+    public static async Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     {
         Conditions.FileBytesEmpty(bytes, nameof(SendFileAsync));
         Conditions.FileNameEmpty(fileName, nameof(SendFileAsync));
