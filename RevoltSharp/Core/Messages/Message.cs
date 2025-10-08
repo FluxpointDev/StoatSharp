@@ -16,7 +16,7 @@ public abstract class Message : CreatedEntity
         if (model.Webhook != null)
         {
             Type = MessageType.Webhook;
-            AuthorId = model.Webhook.Id;
+            AuthorId = User.SystemUserId;
             Author = new User(Client, model.Webhook);
         }
         else

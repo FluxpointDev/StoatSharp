@@ -32,7 +32,7 @@ public class User : CreatedEntity
         IsPrivileged = model.Privileged;
     }
 
-    internal User(RevoltClient client, MessageWebhookJson model) : base(client, model.Id)
+    internal User(RevoltClient client, MessageWebhookJson model) : base(client, User.SystemUserId)
     {
         Username = model.Name;
         Discriminator = "0000";
