@@ -28,7 +28,10 @@ public class ClientConfig
     /// <summary>
     /// Do not change this unless you know what you're doing.
     /// </summary>
-    public string ApiUrl = "https://api.revolt.chat/0.8/";
+    /// <remarks>
+    /// Defaults to https://stoat.chat/api/
+    /// </remarks>
+    public string ApiUrl = "https://stoat.chat/api/";
 
     /// <summary>
     /// Do not use this unless you know what you're doing.
@@ -71,33 +74,21 @@ public class ClientDebugConfig
     /// This will be changed once you run Client.StartAsync()
     /// </summary>
     /// <remarks>
-    /// Defaults to https://autumn.revolt.chat
+    /// Defaults to https://cdn.stoatusercontent.com/
     /// </remarks>
-    public string UploadUrl { get; internal set; } = "https://autumn.revolt.chat/";
+    public string UploadUrl { get; internal set; } = "https://cdn.stoatusercontent.com/";
 
     /// <summary>
     /// This will be changed once you run Client.StartAsync()
     /// </summary>
     /// <remarks>
-    /// Defaults to wss://ws.revolt.chat
+    /// Defaults to wss://events.stoat.chat
     /// </remarks>
-    public string WebsocketUrl { get; internal set; } = "wss://revolt.chat";
+    public string WebsocketUrl { get; internal set; } = "wss://events.stoat.chat";
 
-    /// <summary>
-    /// This will be changed once you run Client.StartAsync()
-    /// </summary>
-    /// <remarks>
-    /// Defaults to https://vortex.revolt.chat
-    /// </remarks>
-    public string VoiceServerUrl { get; internal set; } = "https://vortex.revolt.chat/";
+    //public string VoiceServerUrl { get; internal set; } = "https://vortex.revolt.chat/";
 
-    /// <summary>
-    /// This will be changed once you run Client.StartAsync()
-    /// </summary>
-    /// <remarks>
-    /// Defaults to wss://vortex.revolt.chat
-    /// </remarks>
-    public string VoiceWebsocketUrl { get; internal set; } = "wss://vortex.revolt.chat";
+    //public string VoiceWebsocketUrl { get; internal set; } = "wss://vortex.revolt.chat";
 
     /// <summary>
     /// Log all websocket events that you get from Revolt.

@@ -30,7 +30,7 @@ public class CmdTest : ModuleBase
     [Command("test")]
     public async Task Test()
     {
-        await Context.Server.GetCategory("01G2RNWH0G4HD6N4NTZZ2DHPAT").ModifyAsync(name: new Option<string>("Hello Chat"));
+        await Context.Server.GetCategory("01G2RNWH0G4HD6N4NTZZ2DHPAT").ModifyAsync(name: new Option<string>("Chat"));
     }
     [Command("testcat")]
     public async Task TestCat()

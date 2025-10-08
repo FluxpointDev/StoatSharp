@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>RevoltSharp</RootNamespace>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 
-	  <Version>1.0.1</Version>
+	  <Version>1.3.0</Version>
 	  <Authors>Builderb (Fluxpoint Development)</Authors>
 	  <Company>Fluxpoint Development</Company>
 	  <Product>RevoltSharp.InstanceAdmin</Product>

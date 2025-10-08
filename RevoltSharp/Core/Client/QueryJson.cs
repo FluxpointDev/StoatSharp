@@ -25,9 +25,6 @@ internal class QueryFeaturesJson
     [JsonProperty("january")]
     public QueryJanuaryJson? JanuaryServer { get; set; }
 
-    [JsonProperty("voso")]
-    public QueryVosoJson? VoiceServer { get; set; }
-
     public QueryCaptchaJson? captcha { get; set; }
 
     public bool email { get; set; }

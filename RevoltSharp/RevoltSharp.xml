@@ -28,6 +28,9 @@
             <summary>
             Do not change this unless you know what you're doing.
             </summary>
+            <remarks>
+            Defaults to https://stoat.chat/api/
+            </remarks>
         </member>
         <member name="F:RevoltSharp.ClientConfig.Debug">
             <summary>
@@ -68,7 +71,7 @@
             This will be changed once you run Client.StartAsync()
             </summary>
             <remarks>
-            Defaults to https://autumn.revolt.chat
+            Defaults to https://cdn.stoatusercontent.com/
             </remarks>
         </member>
         <member name="P:RevoltSharp.ClientDebugConfig.WebsocketUrl">
@@ -76,23 +79,7 @@
             This will be changed once you run Client.StartAsync()
             </summary>
             <remarks>
-            Defaults to wss://ws.revolt.chat
-            </remarks>
-        </member>
-        <member name="P:RevoltSharp.ClientDebugConfig.VoiceServerUrl">
-            <summary>
-            This will be changed once you run Client.StartAsync()
-            </summary>
-            <remarks>
-            Defaults to https://vortex.revolt.chat
-            </remarks>
-        </member>
-        <member name="P:RevoltSharp.ClientDebugConfig.VoiceWebsocketUrl">
-            <summary>
-            This will be changed once you run Client.StartAsync()
-            </summary>
-            <remarks>
-            Defaults to wss://vortex.revolt.chat
+            Defaults to wss://events.stoat.chat
             </remarks>
         </member>
         <member name="P:RevoltSharp.ClientDebugConfig.LogWebSocketFull">

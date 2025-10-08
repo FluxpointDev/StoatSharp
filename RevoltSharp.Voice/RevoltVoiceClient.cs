@@ -18,11 +18,11 @@ public class RevoltVoiceClient : IVoiceClient
     {
         Client.Logger.LogMessage("Connecting to Voice Server", RevoltLogSeverity.Info);
 
-        var Req = await Client.Rest.SendRequestAsync(Rest.RequestType.Get, Client.Config.Debug.VoiceServerUrl);
-        if (Req.IsSuccessStatusCode)
-            Client.Logger.LogMessage("Connected to Voice Server!", RevoltLogSeverity.Info);
-        else
-            Client.Logger.LogMessage("Failed to connect to Voice Server", RevoltLogSeverity.Warn);
+        //var Req = await Client.Rest.SendRequestAsync(Rest.RequestType.Get, Client.Config.Debug.VoiceServerUrl);
+        //if (Req.IsSuccessStatusCode)
+        //    Client.Logger.LogMessage("Connected to Voice Server!", RevoltLogSeverity.Info);
+        //else
+        //    Client.Logger.LogMessage("Failed to connect to Voice Server", RevoltLogSeverity.Warn);
 
 
 

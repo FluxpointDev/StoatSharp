@@ -23,11 +23,11 @@ public class Query
         if (!JanuaryServerUrl.EndsWith("/"))
             JanuaryServerUrl += "/";
 
-        VoiceApiUrl = json.ServerFeatures.VoiceServer.url;
-        if (!VoiceApiUrl.EndsWith("/"))
-            VoiceApiUrl += "/";
+        //VoiceApiUrl = json.ServerFeatures.VoiceServer.url;
+        //if (!VoiceApiUrl.EndsWith("/"))
+        //    VoiceApiUrl += "/";
 
-        VoiceWebsocketUrl = json.ServerFeatures.VoiceServer.ws;
+        //VoiceWebsocketUrl = json.ServerFeatures.VoiceServer.ws;
     }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -48,9 +48,9 @@ public class Query
 
     public string JanuaryServerUrl { get; internal set; }
 
-    public string VoiceApiUrl { get; internal set; }
+    //public string VoiceApiUrl { get; internal set; }
 
-    public string VoiceWebsocketUrl { get; internal set; }
+    //public string VoiceWebsocketUrl { get; internal set; }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

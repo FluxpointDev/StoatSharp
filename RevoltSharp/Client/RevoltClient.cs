@@ -231,8 +231,8 @@ public class RevoltClient : ClientEvents
             Config.Debug.UploadUrl = CurrentQuery.ImageServerUrl;
             Rest.FileHttpClient.BaseAddress = new Uri(Config.Debug.UploadUrl);
 
-            Config.Debug.VoiceServerUrl = CurrentQuery.VoiceApiUrl;
-            Config.Debug.VoiceWebsocketUrl = CurrentQuery.VoiceWebsocketUrl;
+            //Config.Debug.VoiceServerUrl = CurrentQuery.VoiceApiUrl;
+            //Config.Debug.VoiceWebsocketUrl = CurrentQuery.VoiceWebsocketUrl;
 
             InvokeLog($"Started: {CurrentUser.Username} ({CurrentUser.Id})", RevoltLogSeverity.Info);
             InvokeStarted(CurrentUser);
