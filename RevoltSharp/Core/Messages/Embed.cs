@@ -40,12 +40,63 @@ public class EmbedBuilder
     /// </summary>
     public RevoltColor? Color { get; set; }
 
+    public EmbedBuilder SetTitle(string title)
+    {
+        Title = title;
+        return this;
+    }
+
+    public EmbedBuilder SetUrl(string url)
+    {
+        Url = url;
+        return this;
+    }
+
+    public EmbedBuilder SetIconUrl(string iconUrl)
+    {
+        IconUrl = iconUrl;
+        return this;
+    }
+
+    public EmbedBuilder SetDescription(string description)
+    {
+        Description = description;
+        return this;
+    }
+
+    public EmbedBuilder SetImage(string image)
+    {
+        Image = image;
+        return this;
+    }
+
+    public EmbedBuilder SetColor(RevoltColor color)
+    {
+        Color = color;
+        return this;
+    }
+
     /// <summary>
     /// Build the embed to use it in messages
     /// </summary>
     /// <returns><see cref="Embed" /></returns>
     public Embed Build()
     {
+        if (!string.IsNullOrEmpty(Title) && Title.Length > 100)
+            throw new RevoltArgumentException("Title length can't be more than 100 characters.");
+
+        if (!string.IsNullOrEmpty(Url) && Url.Length > 256)
+            throw new RevoltArgumentException("Url length can't be more than 256 characters.");
+
+        if (!string.IsNullOrEmpty(IconUrl) && IconUrl.Length > 256)
+            throw new RevoltArgumentException("Icon Url length can't be more than 256 characters.");
+
+        if (!string.IsNullOrEmpty(Description) && Description.Length > 2000)
+            throw new RevoltArgumentException("Description length can't be more than 2000 characters.");
+
+        if (Color != null && !string.IsNullOrEmpty(Color.Value) && Color.Value.Length > 128)
+            throw new RevoltArgumentException("Color length can't be more than 128 characters.");
+
         return new Embed
         {
             Title = Title,
@@ -53,7 +104,7 @@ public class EmbedBuilder
             IconUrl = IconUrl,
             Description = Description,
             Image = Image,
-            Color = Color == null ? new RevoltColor("") : Color
+            Color = Color == null ? new RevoltColor(null) : Color
         };
     }
 }

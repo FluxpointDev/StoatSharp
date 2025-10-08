@@ -82,7 +82,7 @@ public class RevoltColor
     public int B { get; internal set; } = 0;
     public string Hex
     => (R == 0 && G == 0 && B == 0) ? "#000000" : '#' + string.Format("{0:X2}{1:X2}{2:X2}", R, G, B);
-    public string Value { get; set; }
+    public string? Value { get; set; }
 
     /// <summary>
     /// Creates a new RevoltColor from a <see cref="Color"/>.
@@ -121,7 +121,7 @@ public class RevoltColor
     /// Creates a new RevoltColor from a hex string.
     /// </summary>
     /// <param name="hex">The hex code to use</param>
-    public RevoltColor(string hex)
+    public RevoltColor(string? hex)
     {
         Value = hex;
         if (HasValue)
@@ -139,7 +139,7 @@ public class RevoltColor
 
     /// <summary> Returns a string that represents the current object.</summary>
     /// <returns> Color format </returns>
-    public override string ToString()
+    public override string? ToString()
     {
         return Value;
     }
