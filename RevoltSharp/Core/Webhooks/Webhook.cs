@@ -12,6 +12,7 @@ public class Webhook : CreatedEntity
         ChannelId = model.ChannelId!;
         Permissions = new WebhookPermissions(model.Permissions ?? 0);
         Token = model.Token;
+        CreatedUserId = model.CreatedUserId;
     }
 
     /// <summary>
@@ -28,6 +29,11 @@ public class Webhook : CreatedEntity
     /// Channel id of the webhook.
     /// </summary>
     public string ChannelId { get; internal set; }
+
+    /// <summary>
+    /// User id that created the webhook
+    /// </summary>
+    public string CreatedUserId { get; internal set; }
 
     /// <summary>
     /// Channel of the webhook.

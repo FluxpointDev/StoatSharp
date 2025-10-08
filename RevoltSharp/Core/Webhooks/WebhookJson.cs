@@ -22,4 +22,7 @@ internal class WebhookJson
 
     [JsonProperty("token")]
     public string? Token { get; set; }
+
+    [JsonProperty("creator_id")]
+    public string CreatedUserId { get; set; }
 }
