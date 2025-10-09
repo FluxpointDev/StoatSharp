@@ -52,7 +52,7 @@ public class RevoltRestClient
         if (!Client.Config.Debug.UploadUrl.EndsWith('/'))
             Client.Config.Debug.UploadUrl = Client.Config.Debug.UploadUrl + "/";
 
-        var ClientHandler = new HttpClientHandler() { UseProxy = Client.Config.RestProxy != null };
+        HttpClientHandler ClientHandler = new HttpClientHandler() { UseProxy = Client.Config.RestProxy != null };
         ClientHandler.Proxy = Client.Config.RestProxy;
 
         Http = new HttpClient(ClientHandler)
@@ -62,7 +62,7 @@ public class RevoltRestClient
 
         Http.DefaultRequestHeaders.Add("User-Agent", Client.Config.UserAgent);
         Http.DefaultRequestHeaders.Add("Accept", "application/json");
-        var FileHandler = new HttpClientHandler() { UseProxy = Client.Config.RestProxy != null };
+        HttpClientHandler FileHandler = new HttpClientHandler() { UseProxy = Client.Config.RestProxy != null };
         FileHandler.Proxy = Client.Config.RestProxy;
         FileHttpClient = new HttpClient(FileHandler)
         {
@@ -127,8 +127,8 @@ public class RevoltRestClient
     internal Task PutAsync(string endpoint, IRevoltRequest json = null)
         => SendRequestAsync(RequestType.Put, endpoint, json);
 
-    internal Task<TResponse> PostAsync<TResponse>(string endpoint, IRevoltRequest json = null) where TResponse : class
-        => SendRequestAsync<TResponse>(RequestType.Post, endpoint, json);
+    internal Task<TResponse> PostAsync<TResponse>(string endpoint, IRevoltRequest json = null, bool isWebhookRequest = false) where TResponse : class
+        => SendRequestAsync<TResponse>(RequestType.Post, endpoint, json, false, isWebhookRequest);
 
     internal Task PostAsync(string endpoint, IRevoltRequest json = null)
         => SendRequestAsync(RequestType.Post, endpoint, json);
@@ -146,8 +146,8 @@ public class RevoltRestClient
     /// }
     /// </remarks>
     /// <returns>Input your own <see langword="class" /> object to parse the response data from json.</returns>
-    public Task<TResponse> SendRequestAsync<TResponse>(RequestType method, string endpoint, IRevoltRequest json = null, bool throwGetRequest = false) where TResponse : class
-        => InternalJsonRequest<TResponse>(GetMethod(method), endpoint, json, throwGetRequest);
+    public Task<TResponse> SendRequestAsync<TResponse>(RequestType method, string endpoint, IRevoltRequest json = null, bool throwGetRequest = false, bool isWebhookRequest = false) where TResponse : class
+        => InternalJsonRequest<TResponse>(GetMethod(method), endpoint, json, throwGetRequest, isWebhookRequest);
 
 
     internal static HttpMethod GetMethod(RequestType method)
@@ -356,10 +356,10 @@ public class RevoltRestClient
         }
         return Req;
     }
-    internal async Task<TResponse> InternalJsonRequest<TResponse>(HttpMethod method, string endpoint, object request, bool throwGetRequest = false)
+    internal async Task<TResponse> InternalJsonRequest<TResponse>(HttpMethod method, string endpoint, object request, bool throwGetRequest = false, bool isWebhookRequest = false)
         where TResponse : class
     {
-        HttpRequestMessage Mes = new HttpRequestMessage(method, Client.Config.ApiUrl + endpoint);
+        HttpRequestMessage Mes = new HttpRequestMessage(method, isWebhookRequest ? endpoint : Client.Config.ApiUrl + endpoint);
         if (request != null)
         {
             Mes.Content = new StringContent(SerializeJson(request), Encoding.UTF8, "application/json");

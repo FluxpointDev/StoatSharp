@@ -17,9 +17,17 @@ namespace RevoltSharp;
 /// </summary>
 public static class MessageHelper
 {
-    /// <inheritdoc cref="SendMessageAsync(RevoltRestClient, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendMessageAsync(RevoltRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendMessageAsync(this Channel channel, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
-        => SendMessageAsync(channel.Client.Rest, channel.Id, text, embeds, attachments, masquerade, interactions, replies, flags);
+        => InternalSendMessageAsync(channel.Client.Rest, null, channel.Id, text, embeds, attachments, masquerade, interactions, replies, flags);
+
+    /// <inheritdoc cref="InternalSendMessageAsync(RevoltRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendMessageAsync(this RevoltRestClient rest, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+        => InternalSendMessageAsync(rest.Client.Rest, null, channelId, text, embeds, attachments, masquerade, interactions, replies, flags);
+
+    /// <inheritdoc cref="InternalSendMessageAsync(RevoltRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendMessageAsync(this StoatWebhookClient webhook, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+        => InternalSendMessageAsync(webhook.Client.Rest, webhook, null, text, embeds, attachments, masquerade, interactions, replies, flags);
 
     /// <summary>
     /// Send a message to the channel.
@@ -29,9 +37,11 @@ public static class MessageHelper
     /// </returns>
     /// <exception cref="RevoltArgumentException"></exception>
     /// <exception cref="RevoltRestException"></exception>
-    public static async Task<UserMessage> SendMessageAsync(this RevoltRestClient rest, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    internal static async Task<UserMessage> InternalSendMessageAsync(RevoltRestClient rest, StoatWebhookClient? webhook, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     {
-        Conditions.ChannelIdLength(channelId, nameof(SendMessageAsync));
+        if (webhook == null)
+            Conditions.ChannelIdLength(channelId, nameof(SendMessageAsync));
+
         Conditions.MessagePropertiesEmpty(text, attachments, embeds, nameof(SendMessageAsync));
 
         if (embeds != null)
@@ -103,21 +113,33 @@ public static class MessageHelper
             Req.interactions = Optional.Some(interactions.ToJson());
 
 
-        MessageJson Data = await rest.PostAsync<MessageJson>($"channels/{channelId}/messages", Req);
+        MessageJson Data = await rest.PostAsync<MessageJson>(webhook == null ? $"channels/{channelId}/messages" : webhook.Url, Req, webhook != null);
         return (UserMessage)Message.Create(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this Channel channel, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
-    => SendFileAsync(channel.Client.Rest, channel.Id, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
+    => InternalSendFileAsync(channel.Client.Rest, null, channel.Id, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this Channel channel, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
-    => SendFileAsync(channel.Client.Rest, channel.Id, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
+    => InternalSendFileAsync(channel.Client.Rest, null, channel.Id, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="SendFileAsync(RevoltRestClient, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
-    => SendFileAsync(rest, channelId, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
+    => InternalSendFileAsync(rest, null, channelId, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
+
+    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    => InternalSendFileAsync(rest, null, channelId, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
+
+    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this StoatWebhookClient webhook, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    => InternalSendFileAsync(webhook.Client.Rest, webhook, null, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
+
+    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this StoatWebhookClient webhook, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    => InternalSendFileAsync(webhook.Client.Rest, webhook, null, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
 
     /// <summary>
     /// Upload a file and send a message to the channel.
@@ -127,14 +149,17 @@ public static class MessageHelper
     /// </returns>
     /// <exception cref="RevoltArgumentException"></exception>
     /// <exception cref="RevoltRestException"></exception>
-    public static async Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    internal static async Task<UserMessage> InternalSendFileAsync(this RevoltRestClient rest, StoatWebhookClient? webhook, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     {
         Conditions.FileBytesEmpty(bytes, nameof(SendFileAsync));
         Conditions.FileNameEmpty(fileName, nameof(SendFileAsync));
         Conditions.MessageContentLength(text, nameof(SendFileAsync));
 
         FileAttachment File = await rest.UploadFileAsync(bytes, fileName, UploadFileType.Attachment);
-        return await rest.SendMessageAsync(channelId, text, embeds, new string[] { File.Id }, masquerade, interactions, replies, flags).ConfigureAwait(false);
+        if (webhook != null)
+            return await webhook.SendMessageAsync(text, embeds, new string[] { File.Id }, masquerade, interactions, replies, flags).ConfigureAwait(false);
+        else
+            return await rest.SendMessageAsync(channelId, text, embeds, new string[] { File.Id }, masquerade, interactions, replies, flags).ConfigureAwait(false);
     }
 
     /// <inheritdoc cref="GetMessagesAsync(RevoltRestClient, string, int, MessageSortType, bool, string, string, string)" />
