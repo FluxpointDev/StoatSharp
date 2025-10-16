@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -8,7 +8,7 @@ namespace RevoltSharp;
 /// </summary>
 public class Emoji : CreatedEntity
 {
-    internal Emoji(RevoltClient client, EmojiJson model) : base(client, model.Id)
+    internal Emoji(StoatClient client, EmojiJson model) : base(client, model.Id)
     {
         Name = model.Name!;
         CreatorId = model.CreatorId;
@@ -17,7 +17,7 @@ public class Emoji : CreatedEntity
         IsNsfw = model.Nsfw;
     }
 
-    internal Emoji(RevoltClient client, string emoji) : base(client, emoji)
+    internal Emoji(StoatClient client, string emoji) : base(client, emoji)
     {
         Name = emoji;
     }
@@ -32,7 +32,7 @@ public class Emoji : CreatedEntity
         Name = Id;
         if (parseDefaultEmojis)
         {
-            EmojiList.NameToUnicode.TryGetValue(emoji, out var Name);
+            EmojiList.NameToUnicode.TryGetValue(emoji, out string? Name);
         }
     }
 

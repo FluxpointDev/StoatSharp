@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -37,11 +37,11 @@ public class Role : CreatedEntity
 
     public BigInteger Rank { get; internal set; }
 
-    public RevoltColor Color { get; internal set; }
+    public StoatColor Color { get; internal set; }
 
-    internal Role(RevoltClient client, RoleJson model, string serverId, string roleId) : base(client, roleId)
+    internal Role(StoatClient client, RoleJson model, string serverId, string roleId) : base(client, roleId)
     {
-        Color = new RevoltColor(model.Colour);
+        Color = new StoatColor(model.Colour);
         IsHoisted = model.Hoist;
         Name = model.Name;
         Permissions = model.Permissions == null ? new ServerPermissions(Server, 0) : new ServerPermissions(Server, model.Permissions.Allowed);
@@ -49,7 +49,7 @@ public class Role : CreatedEntity
         ServerId = serverId;
     }
 
-    internal Role(RevoltClient client, PartialRoleJson model, string serverId, string roleId) : base(client, roleId)
+    internal Role(StoatClient client, PartialRoleJson model, string serverId, string roleId) : base(client, roleId)
     {
         Name = model.Name.Value;
         if (model.Permissions.HasValue)
@@ -58,9 +58,9 @@ public class Role : CreatedEntity
             Permissions = new ServerPermissions(Server, 0);
 
         if (model.Colour.HasValue)
-            Color = new RevoltColor(model.Colour.Value);
+            Color = new StoatColor(model.Colour.Value);
         else
-            Color = new RevoltColor("");
+            Color = new StoatColor("");
 
         ServerId = serverId;
     }
@@ -80,7 +80,7 @@ public class Role : CreatedEntity
             Rank = json.Rank.Value;
 
         if (json.Colour.HasValue)
-            Color = new RevoltColor(json.Colour.Value);
+            Color = new StoatColor(json.Colour.Value);
     }
 
     internal Role Clone()

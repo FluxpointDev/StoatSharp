@@ -1,23 +1,23 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt http/rest methods for users.
+/// Stoat http/rest methods for users.
 /// </summary>
 public static class UserHelper
 {
-    /// <inheritdoc cref="GetUserAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetUserAsync(StoatRestClient, string)" />
     public static Task<User?> GetUserAsync(this Server server, string userId)
         => GetUserAsync(server.Client.Rest, userId);
 
-    /// <inheritdoc cref="GetUserAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetUserAsync(StoatRestClient, string)" />
     public static Task<User?> GetUserAsync(this GroupChannel chan, string userId)
         => GetUserAsync(chan.Client.Rest, userId);
 
-    /// <inheritdoc cref="GetUserAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetUserAsync(StoatRestClient, string)" />
     public static Task<User?> GetUserAsync(this DMChannel chan)
         => GetUserAsync(chan.Client.Rest, chan.UserId);
 
@@ -27,9 +27,9 @@ public static class UserHelper
     /// <returns>
     /// <see cref="User" /> or <see langword="null" /> if no mutual servers, groups or dms.
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<User?> GetUserAsync(this RevoltRestClient rest, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<User?> GetUserAsync(this StoatRestClient rest, string userId)
     {
         Conditions.UserIdLength(userId, nameof(GetUserAsync));
 
@@ -46,16 +46,16 @@ public static class UserHelper
         return user;
     }
 
-    /// <inheritdoc cref="GetProfileAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetProfileAsync(StoatRestClient, string)" />
     public static Task<Profile?> GetProfileAsync(this User user)
         => GetProfileAsync(user.Client.Rest, user.Id);
 
-    /// <inheritdoc cref="GetProfileAsync(RevoltRestClient, string)" />
-    public static Task<Profile?> GetProfileAsync(this RevoltRestClient rest, User user)
+    /// <inheritdoc cref="GetProfileAsync(StoatRestClient, string)" />
+    public static Task<Profile?> GetProfileAsync(this StoatRestClient rest, User user)
         => GetProfileAsync(rest, user.Id);
 
-    /// <inheritdoc cref="GetProfileAsync(RevoltRestClient, string)" />
-    public static Task<Profile?> GetProfileAsync(this RevoltRestClient rest, ServerMember member)
+    /// <inheritdoc cref="GetProfileAsync(StoatRestClient, string)" />
+    public static Task<Profile?> GetProfileAsync(this StoatRestClient rest, ServerMember member)
         => GetProfileAsync(rest, member.Id);
 
     /// <summary>
@@ -64,9 +64,9 @@ public static class UserHelper
     /// <returns>
     /// <see cref="Profile" /> or <see langword="null" /> if no mutual servers, groups or dms.
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Profile?> GetProfileAsync(this RevoltRestClient rest, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Profile?> GetProfileAsync(this StoatRestClient rest, string userId)
     {
         Conditions.UserIdLength(userId, nameof(GetProfileAsync));
 
@@ -77,12 +77,12 @@ public static class UserHelper
         return new Profile(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="GetUserDMChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetUserDMChannelAsync(StoatRestClient, string)" />
     public static Task<DMChannel?> GetDMChannelAsync(this User user)
         => GetUserDMChannelAsync(user.Client.Rest, user.Id);
 
-    /// <inheritdoc cref="GetUserDMChannelAsync(RevoltRestClient, string)" />
-    public static Task<DMChannel?> GetUserDMChannelAsync(this RevoltRestClient rest, User user)
+    /// <inheritdoc cref="GetUserDMChannelAsync(StoatRestClient, string)" />
+    public static Task<DMChannel?> GetUserDMChannelAsync(this StoatRestClient rest, User user)
         => GetUserDMChannelAsync(rest, user.Id);
 
     /// <summary>
@@ -91,9 +91,9 @@ public static class UserHelper
     /// <returns>
     /// <see cref="DMChannel" /> or <see langword="null" /> if no mutual servers, groups or dms.
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<DMChannel?> GetUserDMChannelAsync(this RevoltRestClient rest, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<DMChannel?> GetUserDMChannelAsync(this StoatRestClient rest, string userId)
     {
         Conditions.UserIdLength(userId, nameof(GetUserDMChannelAsync));
         Conditions.NotSelf(rest, userId, nameof(GetUserDMChannelAsync));
@@ -104,7 +104,7 @@ public static class UserHelper
         return Channel.Create(rest.Client, Data) as DMChannel;
     }
 
-    /// <inheritdoc cref="BlockUserAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="BlockUserAsync(StoatRestClient, string)" />
     public static Task<User?> BlockAsync(this User user)
         => BlockUserAsync(user.Client.Rest, user.Id);
 
@@ -117,12 +117,12 @@ public static class UserHelper
     /// <returns>
     /// <see cref="User" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
     /// /// <returns>
     /// <see cref="User" /> or <see langword="null" /> if the user is already blocked.
     /// </returns>
-    public static async Task<User?> BlockUserAsync(this RevoltRestClient rest, string userId)
+    public static async Task<User?> BlockUserAsync(this StoatRestClient rest, string userId)
     {
         Conditions.UserIdLength(userId, nameof(BlockUserAsync));
         Conditions.NotSelf(rest, userId, nameof(BlockUserAsync));
@@ -133,7 +133,7 @@ public static class UserHelper
         return new User(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="UnBlockUserAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="UnBlockUserAsync(StoatRestClient, string)" />
     public static Task<User?> UnBlockAsync(this User user)
         => UnBlockUserAsync(user.Client.Rest, user.Id);
 
@@ -143,9 +143,9 @@ public static class UserHelper
     /// <returns>
     /// <see cref="User" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<User?> UnBlockUserAsync(this RevoltRestClient rest, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<User?> UnBlockUserAsync(this StoatRestClient rest, string userId)
     {
         Conditions.UserIdLength(userId, nameof(UnBlockUserAsync));
         Conditions.NotSelf(rest, userId, nameof(UnBlockUserAsync));
@@ -156,12 +156,12 @@ public static class UserHelper
         return new User(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="GetMutualsAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetMutualsAsync(StoatRestClient, string)" />
     public static Task<UserMutuals?> GetMutualsAsync(this User user)
         => GetMutualsAsync(user.Client.Rest, user.Id);
 
-    /// <inheritdoc cref="GetMutualsAsync(RevoltRestClient, string)" />
-    public static Task<UserMutuals?> GetMutualsAsync(this RevoltRestClient rest, User user)
+    /// <inheritdoc cref="GetMutualsAsync(StoatRestClient, string)" />
+    public static Task<UserMutuals?> GetMutualsAsync(this StoatRestClient rest, User user)
         => GetMutualsAsync(rest, user.Id);
 
     /// <summary>
@@ -170,9 +170,9 @@ public static class UserHelper
     /// <returns>
     /// <see cref="UserMutuals" /> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<UserMutuals?> GetMutualsAsync(this RevoltRestClient rest, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<UserMutuals?> GetMutualsAsync(this StoatRestClient rest, string userId)
     {
         Conditions.UserIdLength(userId, nameof(GetMutualsAsync));
         Conditions.NotSelf(rest, userId, nameof(GetMutualsAsync));

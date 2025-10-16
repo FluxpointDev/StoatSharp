@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -9,7 +9,7 @@ namespace RevoltSharp;
 /// </summary>
 public abstract class Message : CreatedEntity
 {
-    internal Message(RevoltClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
+    internal Message(StoatClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
         : base(client, model.MessageId)
     {
         ChannelId = model.ChannelId;
@@ -53,7 +53,7 @@ public abstract class Message : CreatedEntity
         IsPinned = model.Pinned;
     }
 
-    internal static Message Create(RevoltClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
+    internal static Message Create(StoatClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
     {
         if (model.AuthorId == User.SystemUserId)
         {

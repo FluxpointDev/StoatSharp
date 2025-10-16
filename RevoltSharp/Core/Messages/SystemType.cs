@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 public enum SystemType
 {

@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>

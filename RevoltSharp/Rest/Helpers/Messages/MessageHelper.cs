@@ -1,6 +1,6 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,24 +8,24 @@ using System.Linq;
 using System.Threading.Tasks;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
-namespace RevoltSharp;
+namespace StoatSharp;
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
 
 /// <summary>
-/// Revolt http/rest methods for messages.
+/// Stoat http/rest methods for messages.
 /// </summary>
 public static class MessageHelper
 {
-    /// <inheritdoc cref="InternalSendMessageAsync(RevoltRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendMessageAsync(StoatRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendMessageAsync(this Channel channel, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
         => InternalSendMessageAsync(channel.Client.Rest, null, channel.Id, text, embeds, attachments, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendMessageAsync(RevoltRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
-    public static Task<UserMessage> SendMessageAsync(this RevoltRestClient rest, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    /// <inheritdoc cref="InternalSendMessageAsync(StoatRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendMessageAsync(this StoatRestClient rest, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
         => InternalSendMessageAsync(rest.Client.Rest, null, channelId, text, embeds, attachments, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendMessageAsync(RevoltRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendMessageAsync(StoatRestClient, StoatWebhookClient?, string, string, Embed[], string[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendMessageAsync(this StoatWebhookClient webhook, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
         => InternalSendMessageAsync(webhook.Client.Rest, webhook, null, text, embeds, attachments, masquerade, interactions, replies, flags);
 
@@ -35,9 +35,9 @@ public static class MessageHelper
     /// <returns>
     /// <see cref="UserMessage"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    internal static async Task<UserMessage> InternalSendMessageAsync(RevoltRestClient rest, StoatWebhookClient? webhook, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    internal static async Task<UserMessage> InternalSendMessageAsync(StoatRestClient rest, StoatWebhookClient? webhook, string channelId, string? text, Embed[]? embeds = null, string[]? attachments = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     {
         if (webhook == null)
             Conditions.ChannelIdLength(channelId, nameof(SendMessageAsync));
@@ -61,7 +61,7 @@ public static class MessageHelper
                 else if (x.Image.Contains('/') || x.Image.Contains('\\'))
                 {
                     if (!System.IO.File.Exists(x.Image))
-                        throw new RevoltArgumentException("Embed image url path does not exist.");
+                        throw new StoatArgumentException("Embed image url path does not exist.");
                     try
                     {
                         FileAttachment Upload = await rest.UploadFileAsync(x.Image, UploadFileType.Attachment);
@@ -117,27 +117,27 @@ public static class MessageHelper
         return (UserMessage)Message.Create(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(StoatRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this Channel channel, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => InternalSendFileAsync(channel.Client.Rest, null, channel.Id, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(StoatRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this Channel channel, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => InternalSendFileAsync(channel.Client.Rest, null, channel.Id, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
-    public static Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    /// <inheritdoc cref="InternalSendFileAsync(StoatRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this StoatRestClient rest, string channelId, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => InternalSendFileAsync(rest, null, channelId, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
-    public static Task<UserMessage> SendFileAsync(this RevoltRestClient rest, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    /// <inheritdoc cref="InternalSendFileAsync(StoatRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    public static Task<UserMessage> SendFileAsync(this StoatRestClient rest, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => InternalSendFileAsync(rest, null, channelId, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(StoatRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this StoatWebhookClient webhook, string filePath, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => InternalSendFileAsync(webhook.Client.Rest, webhook, null, System.IO.File.ReadAllBytes(filePath), filePath.Split('/').Last().Split('\\').Last(), text, embeds, masquerade, interactions, replies, flags);
 
-    /// <inheritdoc cref="InternalSendFileAsync(RevoltRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
+    /// <inheritdoc cref="InternalSendFileAsync(StoatRestClient, StoatWebhookClient?, string, byte[], string, string, Embed[], MessageMasquerade, MessageInteractions, MessageReply[], MessageFlag?)" />
     public static Task<UserMessage> SendFileAsync(this StoatWebhookClient webhook, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     => InternalSendFileAsync(webhook.Client.Rest, webhook, null, bytes, fileName, text, embeds, masquerade, interactions, replies, flags);
 
@@ -147,9 +147,9 @@ public static class MessageHelper
     /// <returns>
     /// <see cref="UserMessage"/> 
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    internal static async Task<UserMessage> InternalSendFileAsync(this RevoltRestClient rest, StoatWebhookClient? webhook, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    internal static async Task<UserMessage> InternalSendFileAsync(this StoatRestClient rest, StoatWebhookClient? webhook, string channelId, byte[] bytes, string fileName, string? text = null, Embed[]? embeds = null, MessageMasquerade? masquerade = null, MessageInteractions? interactions = null, MessageReply[]? replies = null, MessageFlag? flags = null)
     {
         Conditions.FileBytesEmpty(bytes, nameof(SendFileAsync));
         Conditions.FileNameEmpty(fileName, nameof(SendFileAsync));
@@ -162,7 +162,7 @@ public static class MessageHelper
             return await rest.SendMessageAsync(channelId, text, embeds, new string[] { File.Id }, masquerade, interactions, replies, flags).ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="GetMessagesAsync(RevoltRestClient, string, int, MessageSortType, bool, string, string, string)" />
+    /// <inheritdoc cref="GetMessagesAsync(StoatRestClient, string, int, MessageSortType, bool, string, string, string)" />
     public static Task<IReadOnlyCollection<Message>?> GetMessagesAsync(this Channel channel, int messageCount = 100, MessageSortType sortBy = MessageSortType.Latest, bool includeUserDetails = false, string nearbyMessageId = "", string beforeMessageId = "", string afterMessageId = "")
         => GetMessagesAsync(channel.Client.Rest, channel.Id, messageCount, sortBy, includeUserDetails, nearbyMessageId, beforeMessageId, afterMessageId);
 
@@ -172,9 +172,9 @@ public static class MessageHelper
     /// <returns>
     /// List of <see cref="Message"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<IReadOnlyCollection<Message>?> GetMessagesAsync(this RevoltRestClient rest, string channelId, int messageCount = 100, MessageSortType sortBy = MessageSortType.Latest, bool includeUserDetails = false, string nearbyMessageId = "", string beforeMessageId = "", string afterMessageId = "")
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<IReadOnlyCollection<Message>?> GetMessagesAsync(this StoatRestClient rest, string channelId, int messageCount = 100, MessageSortType sortBy = MessageSortType.Latest, bool includeUserDetails = false, string nearbyMessageId = "", string beforeMessageId = "", string afterMessageId = "")
     {
         Conditions.ChannelIdLength(channelId, nameof(GetMessagesAsync));
         Conditions.MessageSearchCount(messageCount, nameof(GetMessagesAsync));
@@ -218,7 +218,7 @@ public static class MessageHelper
         }
     }
 
-    /// <inheritdoc cref="GetMessageAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="GetMessageAsync(StoatRestClient, string, string)" />
     public static Task<Message?> GetMessageAsync(this Channel channel, string messageId)
         => GetMessageAsync(channel.Client.Rest, channel.Id, messageId);
 
@@ -228,9 +228,9 @@ public static class MessageHelper
     /// <returns>
     /// <see cref="Message"/> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Message?> GetMessageAsync(this RevoltRestClient rest, string channelId, string messageId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Message?> GetMessageAsync(this StoatRestClient rest, string channelId, string messageId)
     {
         Conditions.ChannelIdLength(channelId, nameof(GetMessageAsync));
         Conditions.MessageIdLength(messageId, nameof(GetMessageAsync));
@@ -243,7 +243,7 @@ public static class MessageHelper
 
         if (msg.Type == MessageType.User && rest.Client.Mode == ClientMode.Http)
         {
-            rest.Client.InvokeLog("Http mode fetching ", RevoltLogSeverity.Debug);
+            rest.Client.InvokeLog("Http mode fetching ", StoatLogSeverity.Debug);
             msg.Author = await rest.GetUserAsync(msg.AuthorId);
         }
         else
@@ -255,7 +255,7 @@ public static class MessageHelper
         return msg;
     }
 
-    /// <inheritdoc cref="EditMessageAsync(RevoltRestClient, string, string, Option{string}, Option{Embed[]})" />
+    /// <inheritdoc cref="EditMessageAsync(StoatRestClient, string, string, Option{string}, Option{Embed[]})" />
     public static Task<UserMessage> EditMessageAsync(this UserMessage msg, Option<string?>? content = null, Option<Embed[]?>? embeds = null)
         => EditMessageAsync(msg.Client.Rest, msg.ChannelId, msg.Id, content, embeds);
 
@@ -265,9 +265,9 @@ public static class MessageHelper
     /// <returns>
     /// <see cref="UserMessage"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<UserMessage> EditMessageAsync(this RevoltRestClient rest, string channelId, string messageId, Option<string?>? content = null, Option<Embed[]?>? embeds = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<UserMessage> EditMessageAsync(this StoatRestClient rest, string channelId, string messageId, Option<string?>? content = null, Option<Embed[]?>? embeds = null)
     {
         Conditions.ChannelIdLength(channelId, nameof(EditMessageAsync));
         Conditions.MessageIdLength(messageId, nameof(EditMessageAsync));
@@ -283,32 +283,32 @@ public static class MessageHelper
         return (UserMessage)Message.Create(rest.Client, Data);
     }
 
-    /// <inheritdoc cref="DeleteMessageAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="DeleteMessageAsync(StoatRestClient, string, string)" />
     public static Task DeleteAsync(this Message mes)
       => DeleteMessageAsync(mes.Channel.Client.Rest, mes.ChannelId, mes.Id);
 
-    /// <inheritdoc cref="DeleteMessageAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="DeleteMessageAsync(StoatRestClient, string, string)" />
     public static Task DeleteMessageAsync(this Channel channel, Message message)
         => DeleteMessageAsync(channel.Client.Rest, channel.Id, message.Id);
 
-    /// <inheritdoc cref="DeleteMessageAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="DeleteMessageAsync(StoatRestClient, string, string)" />
     public static Task DeleteMessageAsync(this Channel channel, string messageId)
         => DeleteMessageAsync(channel.Client.Rest, channel.Id, messageId);
 
-    /// <inheritdoc cref="DeleteMessageAsync(RevoltRestClient, string, string)" />
-    public static Task DeleteMessageAsync(this RevoltRestClient rest, Channel channel, Message message)
+    /// <inheritdoc cref="DeleteMessageAsync(StoatRestClient, string, string)" />
+    public static Task DeleteMessageAsync(this StoatRestClient rest, Channel channel, Message message)
         => DeleteMessageAsync(rest, channel.Id, message.Id);
 
-    /// <inheritdoc cref="DeleteMessageAsync(RevoltRestClient, string, string)" />
-    public static Task DeleteMessageAsync(this RevoltRestClient rest, Channel channel, string messageId)
+    /// <inheritdoc cref="DeleteMessageAsync(StoatRestClient, string, string)" />
+    public static Task DeleteMessageAsync(this StoatRestClient rest, Channel channel, string messageId)
         => DeleteMessageAsync(rest, channel.Id, messageId);
 
     /// <summary>
     /// Delete a message from a channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task DeleteMessageAsync(this RevoltRestClient rest, string channelId, string messageId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task DeleteMessageAsync(this StoatRestClient rest, string channelId, string messageId)
     {
         Conditions.ChannelIdLength(channelId, nameof(DeleteMessageAsync));
         Conditions.MessageIdLength(messageId, nameof(DeleteMessageAsync));
@@ -316,20 +316,20 @@ public static class MessageHelper
         await rest.DeleteAsync($"channels/{channelId}/messages/{messageId}");
     }
 
-    /// <inheritdoc cref="DeleteMessagesAsync(RevoltRestClient, string, string[])" />
+    /// <inheritdoc cref="DeleteMessagesAsync(StoatRestClient, string, string[])" />
     public static Task DeleteMessagesAsync(this Channel channel, Message[] messages)
         => DeleteMessagesAsync(channel.Client.Rest, channel.Id, messages.Select(x => x.Id).ToArray());
 
-    /// <inheritdoc cref="DeleteMessagesAsync(RevoltRestClient, string, string[])" />
+    /// <inheritdoc cref="DeleteMessagesAsync(StoatRestClient, string, string[])" />
     public static Task DeleteMessagesAsync(this Channel channel, string[] messageIds)
         => DeleteMessagesAsync(channel.Client.Rest, channel.Id, messageIds);
 
     /// <summary>
     /// Delete a list of messages from a channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task DeleteMessagesAsync(this RevoltRestClient rest, string channelId, string[] messageIds)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task DeleteMessagesAsync(this StoatRestClient rest, string channelId, string[] messageIds)
     {
         Conditions.ChannelIdLength(channelId, nameof(DeleteMessagesAsync));
         Conditions.MessageIdsCount(messageIds, nameof(DeleteMessagesAsync));
@@ -340,20 +340,20 @@ public static class MessageHelper
         });
     }
 
-    /// <inheritdoc cref="CloseDMChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="CloseDMChannelAsync(StoatRestClient, string)" />
     public static Task CloseAsync(this DMChannel dm)
         => CloseDMChannelAsync(dm.Client.Rest, dm.Id);
 
-    /// <inheritdoc cref="CloseDMChannelAsync(RevoltRestClient, string)" />
-    public static Task CloseAsync(this RevoltRestClient rest, DMChannel dm)
+    /// <inheritdoc cref="CloseDMChannelAsync(StoatRestClient, string)" />
+    public static Task CloseAsync(this StoatRestClient rest, DMChannel dm)
         => CloseDMChannelAsync(rest, dm.Id);
 
     /// <summary>
     /// Close a DM channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task CloseDMChannelAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task CloseDMChannelAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(CloseDMChannelAsync));
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -8,7 +8,7 @@ namespace RevoltSharp;
 /// </summary>
 public class FileAttachment : CreatedEntity
 {
-    public FileAttachment(RevoltClient client, string id) : base(client, id)
+    public FileAttachment(StoatClient client, string id) : base(client, id)
     {
 
     }

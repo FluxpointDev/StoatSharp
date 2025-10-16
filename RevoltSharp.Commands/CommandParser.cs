@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal static class CommandParser

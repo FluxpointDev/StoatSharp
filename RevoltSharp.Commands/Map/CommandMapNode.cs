@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal class CommandMapNode

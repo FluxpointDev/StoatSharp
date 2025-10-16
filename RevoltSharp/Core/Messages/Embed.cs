@@ -2,7 +2,7 @@
 using Optionals;
 using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -38,7 +38,7 @@ public class EmbedBuilder
     /// <summary>
     /// Embed color
     /// </summary>
-    public RevoltColor? Color { get; set; }
+    public StoatColor? Color { get; set; }
 
     /// <summary>
     /// Set embed title
@@ -88,7 +88,7 @@ public class EmbedBuilder
     /// <summary>
     /// Set embed color
     /// </summary>
-    public EmbedBuilder SetColor(RevoltColor color)
+    public EmbedBuilder SetColor(StoatColor color)
     {
         Color = color;
         return this;
@@ -101,19 +101,19 @@ public class EmbedBuilder
     public Embed Build()
     {
         if (!string.IsNullOrEmpty(Title) && Title.Length > 100)
-            throw new RevoltArgumentException("Title length can't be more than 100 characters.");
+            throw new StoatArgumentException("Title length can't be more than 100 characters.");
 
         if (!string.IsNullOrEmpty(Url) && Url.Length > 256)
-            throw new RevoltArgumentException("Url length can't be more than 256 characters.");
+            throw new StoatArgumentException("Url length can't be more than 256 characters.");
 
         if (!string.IsNullOrEmpty(IconUrl) && IconUrl.Length > 256)
-            throw new RevoltArgumentException("Icon Url length can't be more than 256 characters.");
+            throw new StoatArgumentException("Icon Url length can't be more than 256 characters.");
 
         if (!string.IsNullOrEmpty(Description) && Description.Length > 2000)
-            throw new RevoltArgumentException("Description length can't be more than 2000 characters.");
+            throw new StoatArgumentException("Description length can't be more than 2000 characters.");
 
         if (Color != null && !string.IsNullOrEmpty(Color.Value) && Color.Value.Length > 128)
-            throw new RevoltArgumentException("Color length can't be more than 128 characters.");
+            throw new StoatArgumentException("Color length can't be more than 128 characters.");
 
         return new Embed
         {
@@ -122,7 +122,7 @@ public class EmbedBuilder
             IconUrl = IconUrl,
             Description = Description,
             Image = Image,
-            Color = Color == null ? new RevoltColor(null) : Color
+            Color = Color == null ? new StoatColor(null) : Color
         };
     }
 }
@@ -132,7 +132,7 @@ public class EmbedBuilder
 /// </summary>
 public class MessageEmbed
 {
-    private MessageEmbed(RevoltClient client, EmbedJson model)
+    private MessageEmbed(StoatClient client, EmbedJson model)
     {
         Type = model.type;
         switch (Type)
@@ -150,16 +150,16 @@ public class MessageEmbed
         Description = model.description;
         Site = model.site_name;
         if (model.colour.HasValue)
-            Color = new RevoltColor(model.colour.Value);
+            Color = new StoatColor(model.colour.Value);
         else
-            Color = new RevoltColor(null);
+            Color = new StoatColor(null);
         Image = model.image == null ? null : new EmbedMedia(model.image);
         Media = model.media == null ? null : new Attachment(client, (model.media as JObject).ToObject<AttachmentJson>());
         Video = model.video == null ? null : new EmbedMedia(model.video);
         Provider = model.special == null ? EmbedProviderType.None : model.special.Type;
     }
 
-    internal static MessageEmbed? Create(RevoltClient client, EmbedJson model)
+    internal static MessageEmbed? Create(StoatClient client, EmbedJson model)
     {
         if (model != null)
             return new MessageEmbed(client, model);
@@ -199,7 +199,7 @@ public class MessageEmbed
     /// <summary>
     /// Embed color
     /// </summary>
-    public RevoltColor Color { get; internal set; }
+    public StoatColor Color { get; internal set; }
 
     /// <summary>
     /// Embed image attachment
@@ -255,7 +255,7 @@ public class Embed
     /// <summary>
     /// Embed color
     /// </summary>
-    public RevoltColor? Color { get; internal set; }
+    public StoatColor? Color { get; internal set; }
 
 
     internal EmbedJson ToJson()

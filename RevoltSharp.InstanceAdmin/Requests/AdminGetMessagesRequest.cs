@@ -1,8 +1,8 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
+using StoatSharp.Rest;
 
-namespace RevoltSharp.Requests;
-internal class AdminGetMessagesRequest : IRevoltRequest
+namespace StoatSharp.Requests;
+internal class AdminGetMessagesRequest : IStoatRequest
 {
     public Optional<string> nearby { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 internal readonly struct UlidStringHelper
 {
     public UlidStringHelper(Ulid value)

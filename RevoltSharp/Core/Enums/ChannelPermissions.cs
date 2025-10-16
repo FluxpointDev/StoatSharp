@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Optionals;
-using RevoltSharp;
-using RevoltSharp.Commands;
+using StoatSharp;
+using StoatSharp.Commands;
 using System;
 using System.Net;
 using System.Reflection;
@@ -17,7 +17,7 @@ class Program
         Start().GetAwaiter().GetResult();
     }
 
-    public static RevoltClient Client;
+    public static StoatClient Client;
 
     public static async Task Start()
     {
@@ -28,9 +28,9 @@ class Program
         string Token = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/RevoltBots/Config.txt");
 
 
-        Client = new RevoltClient(ClientMode.WebSocket, new ClientConfig
+        Client = new StoatClient(ClientMode.WebSocket, new ClientConfig
         {
-            LogMode = RevoltLogSeverity.Debug,
+            LogMode = StoatLogSeverity.Debug,
             //ApiUrl = "http://local.revolt.chat/api/",
             Debug = new ClientDebugConfig
             {
@@ -92,13 +92,13 @@ class Program
 
 public class CommandHandler
 {
-    public CommandHandler(RevoltClient client)
+    public CommandHandler(StoatClient client)
     {
         Client = client;
         Client.OnMessageRecieved += Client_OnMessageRecieved;
         Service.OnCommandExecuted += Service_OnCommandExecuted;
     }
-    private RevoltClient Client;
+    private StoatClient Client;
     public static CommandService Service = new CommandService();
 
     // Change this prefix

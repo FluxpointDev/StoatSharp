@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 /// <summary>
 ///     Marks the <see cref="Type"/> to be read by the specified <see cref="TypeReader"/>.

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class ProfileJson

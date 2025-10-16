@@ -1,13 +1,13 @@
 ﻿using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
 /// Properties that have been updated for the user.
 /// </summary>
 public class UserUpdatedProperties
 {
-    internal UserUpdatedProperties(RevoltClient client, PartialUserJson json)
+    internal UserUpdatedProperties(StoatClient client, PartialUserJson json)
     {
         if (json.Status.HasValue && json.Status.Value.Text != null)
             StatusText = Optional.Some(json.Status.Value.Text!);

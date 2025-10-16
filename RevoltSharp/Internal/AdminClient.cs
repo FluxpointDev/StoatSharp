@@ -1,10 +1,10 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
-public class AdminClient
+public class StoatAdminClient
 {
-    internal AdminClient(RevoltClient client)
+    internal StoatAdminClient(StoatClient client)
     {
         Client = client;
     }
-    internal RevoltClient Client;
+    internal StoatClient Client;
 }

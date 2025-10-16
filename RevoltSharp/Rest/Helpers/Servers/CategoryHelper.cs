@@ -1,22 +1,22 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
-/// Revolt http/rest methods for categories.
+/// Stoat http/rest methods for categories.
 /// </summary>
 public static class CategoryHelper
 {
     public static Task AddCategoryAsync(this Server server, string name, int position = 0)
         => AddServerCategoryAsync(server.Client.Rest, server, name, position);
 
-    public static async Task AddServerCategoryAsync(this RevoltRestClient rest, Server server, string name, int position = 0)
+    public static async Task AddServerCategoryAsync(this StoatRestClient rest, Server server, string name, int position = 0)
     {
         Conditions.ServerIdLength(server.Id, nameof(AddServerCategoryAsync));
 
@@ -43,7 +43,7 @@ public static class CategoryHelper
     public static Task RemoveAsync(this ServerCategory category)
         => RemoveServerCategory(category.Client.Rest, category.Server, category.Id);
 
-    public static async Task RemoveServerCategory(this RevoltRestClient rest, Server server, string categoryId)
+    public static async Task RemoveServerCategory(this StoatRestClient rest, Server server, string categoryId)
     {
         Conditions.ServerIdLength(server.Id, nameof(AddServerCategoryAsync));
 
@@ -52,7 +52,7 @@ public static class CategoryHelper
         ModifyServerRequest Req = new ModifyServerRequest();
         List<CategoryJson> Categories = server.Categories.Where(x => x.Id != categoryId).OrderBy(x => x.Position).Select(x => x.ToJson()).ToList();
         Req.categories = Optional.Some(Categories);
-        
+
 
         try
         {
@@ -67,7 +67,7 @@ public static class CategoryHelper
     public static Task ModifyAsync(this ServerCategory category, Option<string> name = null, Option<string[]> channels = null, Option<int> position = null)
         => ModifyServerCategoryAsync(category.Client.Rest, category.Server, category.Id, name, channels, position);
 
-    public static async Task ModifyServerCategoryAsync(this RevoltRestClient rest, Server server, string categoryId, Option<string> name = null, Option<string[]> channels = null, Option<int> position = null)
+    public static async Task ModifyServerCategoryAsync(this StoatRestClient rest, Server server, string categoryId, Option<string> name = null, Option<string[]> channels = null, Option<int> position = null)
     {
         Conditions.ServerIdLength(server.Id, nameof(ModifyServerCategoryAsync));
 
@@ -77,7 +77,7 @@ public static class CategoryHelper
         List<CategoryJson> Categories = new List<CategoryJson>();
 
         CategoryJson? SelectedCategory = null;
-        foreach (var i in server.Categories.OrderBy(x => x.Position))
+        foreach (ServerCategory? i in server.Categories.OrderBy(x => x.Position))
         {
             if (categoryId == i.Id)
             {
@@ -110,7 +110,7 @@ public static class CategoryHelper
                 Categories.Insert(position.Value, SelectedCategory);
             }
         }
-        foreach(var i in Categories)
+        foreach (CategoryJson i in Categories)
         {
             Console.WriteLine("Update: " + i.title);
         }

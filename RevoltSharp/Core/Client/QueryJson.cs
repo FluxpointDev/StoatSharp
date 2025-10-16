@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class QueryJson

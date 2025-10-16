@@ -1,5 +1,5 @@
 ﻿
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class MessageInteractionsJson

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 internal static class TimestampExtension
 {
     internal static long ToTimestamp(this DateTime date)

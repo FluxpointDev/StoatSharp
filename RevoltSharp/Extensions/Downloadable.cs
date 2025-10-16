@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Cached object or downloadable from the Revolt instance API.
+/// Cached object or downloadable from the Stoat instance API.
 /// </summary>
 public class Downloadable<TId, TDownload>
 {
@@ -20,7 +20,7 @@ public class Downloadable<TId, TDownload>
     }
 
     /// <summary>
-    /// Get the object from cache or download it from the Revolt instance API if not cached.
+    /// Get the object from cache or download it from the Stoat instance API if not cached.
     /// </summary>
     public Task<TDownload?> GetOrDownloadAsync()
     {

@@ -3,7 +3,7 @@ using Optionals;
 using System;
 using System.Collections.Generic;
 
-namespace RevoltSharp.Rest;
+namespace StoatSharp.Rest;
 
 
 internal class ModifySelfRequest

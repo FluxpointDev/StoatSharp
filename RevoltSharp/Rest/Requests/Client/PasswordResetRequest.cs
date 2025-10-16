@@ -1,9 +1,9 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
-internal class PasswordResetRequest : IRevoltRequest
+internal class PasswordResetRequest : IStoatRequest
 {
-    public string email {  get; set; }
+    public string email { get; set; }
     public string captcha { get; set; }
 }

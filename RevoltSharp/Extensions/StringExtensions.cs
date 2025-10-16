@@ -1,6 +1,6 @@
 ﻿using System.Buffers;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 internal static class StringExtensions
 {
     public static string Create<TState>(int length, TState state, SpanAction<char, TState> action)

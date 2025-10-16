@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 public static class Format

@@ -1,7 +1,7 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp.Requests;
-internal class AdminStrikeCreateRequest : IRevoltRequest
+namespace StoatSharp.Requests;
+internal class AdminStrikeCreateRequest : IStoatRequest
 {
     public string? user_id;
     public string? reason;

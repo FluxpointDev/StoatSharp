@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 public class SelfUser : User
@@ -18,7 +18,7 @@ public class SelfUser : User
 
     public Attachment? Background { get; internal set; }
 
-    internal SelfUser(RevoltClient client, UserJson model)
+    internal SelfUser(StoatClient client, UserJson model)
         : base(client, model)
     {
         if (model.Profile == null)

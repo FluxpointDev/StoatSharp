@@ -1,6 +1,6 @@
 using System;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 // Override public name of command/module
 /// <summary>

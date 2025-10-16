@@ -1,19 +1,19 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
 using System.Threading.Tasks;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
-namespace RevoltSharp;
+namespace StoatSharp;
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
 
 /// <summary>
-/// Revolt http/rest methods for server roles.
+/// Stoat http/rest methods for server roles.
 /// </summary>
 public static class RoleHelper
 {
-    /// <inheritdoc cref="CreateRoleAsync(RevoltRestClient, string, string, Option{int})" />
+    /// <inheritdoc cref="CreateRoleAsync(StoatRestClient, string, string, Option{int})" />
     public static Task<Role> CreateRoleAsync(this Server server, string name, Option<int>? rank = null)
         => CreateRoleAsync(server.Client.Rest, server.Id, name, rank);
 
@@ -23,9 +23,9 @@ public static class RoleHelper
     /// <returns>
     /// <see cref="Role"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Role> CreateRoleAsync(this RevoltRestClient rest, string serverId, string name, Option<int>? rank = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Role> CreateRoleAsync(this StoatRestClient rest, string serverId, string name, Option<int>? rank = null)
     {
         Conditions.ServerIdLength(serverId, nameof(CreateRoleAsync));
         Conditions.RoleNameLength(name, nameof(CreateRoleAsync));
@@ -40,15 +40,15 @@ public static class RoleHelper
         return new Role(rest.Client, Json, serverId, Json.Id);
     }
 
-    /// <inheritdoc cref="ModifyRoleAsync(RevoltRestClient, string, string, Option{string}, Option{string}, Option{bool}, Option{int})" />
+    /// <inheritdoc cref="ModifyRoleAsync(StoatRestClient, string, string, Option{string}, Option{string}, Option{bool}, Option{int})" />
     public static Task<Role> ModifyAsync(this Role role, Option<string?>? name = null, Option<string?>? color = null, Option<bool>? hoist = null, Option<int>? rank = null)
         => ModifyRoleAsync(role.Client.Rest, role.ServerId, role.Id, name, color, hoist, rank);
 
-    /// <inheritdoc cref="ModifyRoleAsync(RevoltRestClient, string, string, Option{string}, Option{string}, Option{bool}, Option{int})" />
+    /// <inheritdoc cref="ModifyRoleAsync(StoatRestClient, string, string, Option{string}, Option{string}, Option{bool}, Option{int})" />
     public static Task<Role> ModifyRoleAsync(this Server server, Role role, Option<string?>? name = null, Option<string?>? color = null, Option<bool>? hoist = null, Option<int>? rank = null)
         => ModifyRoleAsync(server.Client.Rest, server.Id, role.Id, name, color, hoist, rank);
 
-    /// <inheritdoc cref="ModifyRoleAsync(RevoltRestClient, string, string, Option{string}, Option{string}, Option{bool}, Option{int})" />
+    /// <inheritdoc cref="ModifyRoleAsync(StoatRestClient, string, string, Option{string}, Option{string}, Option{bool}, Option{int})" />
     public static Task<Role> ModifyRoleAsync(this Server server, string roleId, Option<string?>? name = null, Option<string?>? color = null, Option<bool>? hoist = null, Option<int>? rank = null)
         => ModifyRoleAsync(server.Client.Rest, server.Id, roleId, name, color, hoist, rank);
 
@@ -59,9 +59,9 @@ public static class RoleHelper
     /// <returns>
     /// <see cref="Role"/> 
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Role> ModifyRoleAsync(this RevoltRestClient rest, string serverId, string roleId, Option<string?>? name = null, Option<string?>? color = null, Option<bool>? hoist = null, Option<int>? rank = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Role> ModifyRoleAsync(this StoatRestClient rest, string serverId, string roleId, Option<string?>? name = null, Option<string?>? color = null, Option<bool>? hoist = null, Option<int>? rank = null)
     {
         Conditions.ServerIdLength(serverId, nameof(ModifyRoleAsync));
         Conditions.RoleIdLength(roleId, nameof(ModifyRoleAsync));
@@ -91,24 +91,24 @@ public static class RoleHelper
         return new Role(rest.Client, role, serverId, roleId);
     }
 
-    /// <inheritdoc cref="DeleteRoleAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="DeleteRoleAsync(StoatRestClient, string, string)" />
     public static Task DeleteAsync(this Role role)
       => DeleteRoleAsync(role.Client.Rest, role.ServerId, role.Id);
 
-    /// <inheritdoc cref="DeleteRoleAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="DeleteRoleAsync(StoatRestClient, string, string)" />
     public static Task DeleteRoleAsync(this Server server, string roleId)
         => DeleteRoleAsync(server.Client.Rest, server.Id, roleId);
 
-    /// <inheritdoc cref="DeleteRoleAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="DeleteRoleAsync(StoatRestClient, string, string)" />
     public static Task DeleteRoleAsync(this Server server, Role role)
        => DeleteRoleAsync(server.Client.Rest, server.Id, role.Id);
 
     /// <summary>
     /// Delete a role from a server.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task DeleteRoleAsync(this RevoltRestClient rest, string serverId, string roleId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task DeleteRoleAsync(this StoatRestClient rest, string serverId, string roleId)
     {
         Conditions.ServerIdLength(serverId, nameof(DeleteRoleAsync));
         Conditions.RoleIdLength(roleId, nameof(DeleteRoleAsync));

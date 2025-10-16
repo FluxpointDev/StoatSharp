@@ -1,9 +1,9 @@
 ﻿using Optionals;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
 
-internal class SendMessageRequest : IRevoltRequest
+internal class SendMessageRequest : IStoatRequest
 {
     public Optional<string> content { get; set; }
     public string? nonce { get; set; }

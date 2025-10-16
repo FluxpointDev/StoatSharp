@@ -1,6 +1,6 @@
-﻿namespace RevoltSharp.Rest.Requests;
+﻿namespace StoatSharp.Rest.Requests;
 
-internal class AccountLoginRequest : IRevoltRequest
+internal class AccountLoginRequest : IStoatRequest
 {
     public string email { get; set; }
     public string password { get; set; }

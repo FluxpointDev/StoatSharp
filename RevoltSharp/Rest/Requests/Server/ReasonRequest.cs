@@ -1,9 +1,9 @@
 ﻿using Optionals;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
 
-internal class ReasonRequest : IRevoltRequest
+internal class ReasonRequest : IStoatRequest
 {
     public Optional<string> reason { get; set; }
 

@@ -4,16 +4,16 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// A Revolt user with various data.
+/// A Stoat user with various data.
 /// </summary>
 public class User : CreatedEntity
 {
     internal static string SystemUserId = "00000000000000000000000000";
-    internal User(RevoltClient client, UserJson model) : base(client, model.Id)
+    internal User(StoatClient client, UserJson model) : base(client, model.Id)
     {
         Username = model.Username;
         DisplayName = model.DisplayName;
@@ -32,7 +32,7 @@ public class User : CreatedEntity
         IsPrivileged = model.Privileged;
     }
 
-    internal User(RevoltClient client, MessageWebhookJson model) : base(client, User.SystemUserId)
+    internal User(StoatClient client, MessageWebhookJson model) : base(client, User.SystemUserId)
     {
         Username = model.Name;
         Discriminator = "0000";
@@ -145,7 +145,7 @@ public class User : CreatedEntity
     public bool IsOnline => (Status.Type != UserStatusType.Offline && Status.Type != UserStatusType.Invisible);
 
     /// <summary>
-    /// Is the user a Revolt instance administrator.
+    /// Is the user a Stoat instance administrator.
     /// </summary>
     public bool IsPrivileged { get; internal set; }
 

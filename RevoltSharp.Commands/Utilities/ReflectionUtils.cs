@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal static class ReflectionUtils

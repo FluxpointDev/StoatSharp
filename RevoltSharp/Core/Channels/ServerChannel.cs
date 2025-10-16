@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -10,7 +10,7 @@ namespace RevoltSharp;
 /// </summary>
 public class ServerChannel : Channel
 {
-    internal ServerChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal ServerChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         ServerId = model.ServerId!;
         DefaultPermissions = new ChannelPermissions(Server, model.DefaultPermissions);

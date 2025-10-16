@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal static class PrimitiveTypeReader

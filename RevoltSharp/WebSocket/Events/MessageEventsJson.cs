@@ -2,7 +2,7 @@
 using Optionals;
 using System;
 
-namespace RevoltSharp.WebSocket;
+namespace StoatSharp.WebSocket;
 
 
 internal class MessageEventJson : MessageJson

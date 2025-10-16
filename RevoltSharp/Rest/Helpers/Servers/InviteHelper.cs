@@ -1,48 +1,48 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
-namespace RevoltSharp;
+namespace StoatSharp;
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
 
 /// <summary>
-/// Revolt http/rest methods for server invites.
+/// Stoat http/rest methods for server invites.
 /// </summary>
 public static class InviteHelper
 {
-    /// <inheritdoc cref="DeleteInviteAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="DeleteInviteAsync(StoatRestClient, string)" />
     public static Task DeleteAsync(this Invite invite)
         => DeleteInviteAsync(invite.Client.Rest, invite.ChannelId);
 
-    /// <inheritdoc cref="DeleteInviteAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="DeleteInviteAsync(StoatRestClient, string)" />
     public static Task DeleteInviteAsync(this Server server, Invite invite)
         => DeleteInviteAsync(server.Client.Rest, invite.Code);
 
-    /// <inheritdoc cref="DeleteInviteAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="DeleteInviteAsync(StoatRestClient, string)" />
     public static Task DeleteInviteAsync(this Server server, string inviteCode)
         => DeleteInviteAsync(server.Client.Rest, inviteCode);
 
-    /// <inheritdoc cref="DeleteInviteAsync(RevoltRestClient, string)" />
-    public static Task DeleteInviteAsync(this RevoltRestClient rest, Invite invite)
+    /// <inheritdoc cref="DeleteInviteAsync(StoatRestClient, string)" />
+    public static Task DeleteInviteAsync(this StoatRestClient rest, Invite invite)
         => DeleteInviteAsync(rest, invite.Code);
 
     /// <summary>
     /// Delete an invite.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task DeleteInviteAsync(this RevoltRestClient rest, string inviteCode)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task DeleteInviteAsync(this StoatRestClient rest, string inviteCode)
     {
         Conditions.InviteCodeEmpty(inviteCode, nameof(DeleteInviteAsync));
 
         await rest.DeleteAsync($"/invites/{inviteCode}");
     }
 
-    /// <inheritdoc cref="GetInvitesAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetInvitesAsync(StoatRestClient, string)" />
     public static Task<IReadOnlyCollection<Invite>?> GetInvitesAsync(this Server server)
         => GetInvitesAsync(server.Client.Rest, server.Id);
 
@@ -52,9 +52,9 @@ public static class InviteHelper
     /// <returns>
     /// List of <see cref="Invite"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<IReadOnlyCollection<Invite>?> GetInvitesAsync(this RevoltRestClient rest, string serverId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<IReadOnlyCollection<Invite>?> GetInvitesAsync(this StoatRestClient rest, string serverId)
     {
         Conditions.ServerIdLength(serverId, nameof(GetInvitesAsync));
 
@@ -65,7 +65,7 @@ public static class InviteHelper
         return Json.Select(x => new Invite(rest.Client, x)).ToImmutableArray();
     }
 
-    /// <inheritdoc cref="GetInviteAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetInviteAsync(StoatRestClient, string)" />
     public static Task<Invite?> GetInviteAsync(this Server server, string inviteCode)
         => GetInviteAsync(server.Client.Rest, inviteCode);
 
@@ -75,9 +75,9 @@ public static class InviteHelper
     /// <returns>
     /// <see cref="CreatedInvite"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Invite?> GetInviteAsync(this RevoltRestClient rest, string inviteCode)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Invite?> GetInviteAsync(this StoatRestClient rest, string inviteCode)
     {
         Conditions.InviteCodeEmpty(inviteCode, nameof(GetInviteAsync));
 
@@ -89,7 +89,7 @@ public static class InviteHelper
 
 
 
-    /// <inheritdoc cref="CreateInviteAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="CreateInviteAsync(StoatRestClient, string)" />
     public static Task<CreatedInvite> CreateInviteAsync(this TextChannel channel)
         => CreateInviteAsync(channel.Client.Rest, channel.Id);
 
@@ -99,9 +99,9 @@ public static class InviteHelper
     /// <returns>
     /// <see cref="CreatedInvite"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<CreatedInvite> CreateInviteAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<CreatedInvite> CreateInviteAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(CreateInviteAsync));
 

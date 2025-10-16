@@ -1,9 +1,9 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
+using StoatSharp.Rest;
 using System;
 
-namespace RevoltSharp.Requests;
-internal class AdminReportModifyRequest : IRevoltRequest
+namespace StoatSharp.Requests;
+internal class AdminReportModifyRequest : IStoatRequest
 {
     public AdminReportModifyStatusRequest? status;
 

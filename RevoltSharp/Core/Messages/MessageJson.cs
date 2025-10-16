@@ -3,7 +3,7 @@ using Optionals;
 using System;
 using System.Collections.Generic;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class MessageJson

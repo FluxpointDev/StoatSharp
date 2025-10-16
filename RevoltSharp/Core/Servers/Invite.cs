@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 /// <summary>
@@ -6,7 +6,7 @@
 /// </summary>
 public class Invite : Entity
 {
-    internal Invite(RevoltClient client, InviteJson model) : base(client)
+    internal Invite(StoatClient client, InviteJson model) : base(client)
     {
         Code = model.Code;
         ChannelId = model.ChannelId;
@@ -41,7 +41,7 @@ public class Invite : Entity
 
 public class CreatedInvite : Entity
 {
-    internal CreatedInvite(RevoltClient client, CreateInviteJson model) : base(client)
+    internal CreatedInvite(StoatClient client, CreateInviteJson model) : base(client)
     {
         Code = model.Code;
         CreatorId = model.CreatorId;

@@ -1,6 +1,6 @@
-﻿namespace RevoltSharp.Rest.Requests;
+﻿namespace StoatSharp.Rest.Requests;
 
-internal class ModifyDefaultPermissionsRequest : IRevoltRequest
+internal class ModifyDefaultPermissionsRequest : IStoatRequest
 {
     public ulong permissions { get; set; }
 }

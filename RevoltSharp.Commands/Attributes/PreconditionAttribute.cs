@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 /// <summary>
 ///     Requires the module or class to pass the specified precondition before execution can begin.

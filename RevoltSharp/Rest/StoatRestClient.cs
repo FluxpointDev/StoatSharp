@@ -8,29 +8,29 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Rest;
+namespace StoatSharp.Rest;
 
 
 /// <summary>
-/// The internal http client used for sending requests to the Revolt instance API and built-in extension methods.
+/// The internal http client used for sending requests to the Stoat instance API and built-in extension methods.
 /// </summary>
-public class RevoltRestClient
+public class StoatRestClient
 {
-    internal RevoltRestClient(RevoltClient client)
+    internal StoatRestClient(StoatClient client)
     {
         Client = client;
 
         if (string.IsNullOrEmpty(Client.Config.ApiUrl))
         {
-            Client.Logger.LogMessage("Client config ApiUrl can not be empty.", RevoltLogSeverity.Error);
-            throw new RevoltException("Client config ApiUrl can not be empty.");
+            Client.Logger.LogMessage("Client config ApiUrl can not be empty.", StoatLogSeverity.Error);
+            throw new StoatException("Client config ApiUrl can not be empty.");
         }
 
 
         if (!Uri.IsWellFormedUriString(client.Config.ApiUrl, UriKind.Absolute))
         {
-            Client.Logger.LogMessage("Client config ApiUrl is an invalid format.", RevoltLogSeverity.Error);
-            throw new RevoltException("Client config ApiUrl is an invalid format.");
+            Client.Logger.LogMessage("Client config ApiUrl is an invalid format.", StoatLogSeverity.Error);
+            throw new StoatException("Client config ApiUrl is an invalid format.");
         }
 
         if (!Client.Config.ApiUrl.EndsWith('/'))
@@ -38,15 +38,15 @@ public class RevoltRestClient
 
         if (string.IsNullOrEmpty(Client.Config.Debug.UploadUrl))
         {
-            Client.Logger.LogMessage("Client config UploadUrl can not be empty.", RevoltLogSeverity.Error);
-            throw new RevoltException("Client config UploadUrl can not be empty.");
+            Client.Logger.LogMessage("Client config UploadUrl can not be empty.", StoatLogSeverity.Error);
+            throw new StoatException("Client config UploadUrl can not be empty.");
         }
 
 
         if (!Uri.IsWellFormedUriString(client.Config.Debug.UploadUrl, UriKind.Absolute))
         {
-            Client.Logger.LogMessage("Client config UploadUrl is an invalid format.", RevoltLogSeverity.Error);
-            throw new RevoltException("Client config UploadUrl is an invalid format.");
+            Client.Logger.LogMessage("Client config UploadUrl is an invalid format.", StoatLogSeverity.Error);
+            throw new StoatException("Client config UploadUrl is an invalid format.");
         }
 
         if (!Client.Config.Debug.UploadUrl.EndsWith('/'))
@@ -78,24 +78,24 @@ public class RevoltRestClient
         }
     }
 
-    internal RevoltClient Client { get; private set; }
+    internal StoatClient Client { get; private set; }
     internal HttpClient Http;
     internal HttpClient FileHttpClient;
 
     /// <summary>
-    /// Send a custom request to the Revolt instance API.
+    /// Send a custom request to the Stoat instance API.
     /// </summary>
     /// <remarks>
     /// Optionally you can also send a C# class as the json body for the request, this is useful for POST/PUT requests.
     /// <para />
-    /// You need to interface your custom class using <see cref="IRevoltRequest"/><br/>
-    /// CustomClass : RevoltRequest<br/>
+    /// You need to interface your custom class using <see cref="IStoatRequest"/><br/>
+    /// CustomClass : StoatRequest<br/>
     /// {<br/>
     ///     public string option = "Hi"<br/>
     /// }
     /// </remarks>
     /// <returns><see cref="HttpResponseMessage"/></returns>
-    public Task<HttpResponseMessage> SendRequestAsync(RequestType method, string endpoint, IRevoltRequest? json = null)
+    public Task<HttpResponseMessage> SendRequestAsync(RequestType method, string endpoint, IStoatRequest? json = null)
     => InternalRequest(GetMethod(method), endpoint, json);
 
     internal Task<TResponse> SendRequestAsync<TResponse>(RequestType method, string endpoint, Dictionary<string, object> json) where TResponse : class
@@ -104,49 +104,49 @@ public class RevoltRestClient
     internal Task<TResponse> SendRequestAsync<TResponse>(RequestType method, string endpoint, Dictionary<string, string> json) where TResponse : class
         => InternalJsonRequest<TResponse>(GetMethod(method), endpoint, json);
 
-    internal Task<TResponse?> GetAsync<TResponse>(string endpoint, IRevoltRequest json = null, bool throwGetRequest = false) where TResponse : class
+    internal Task<TResponse?> GetAsync<TResponse>(string endpoint, IStoatRequest json = null, bool throwGetRequest = false) where TResponse : class
 #pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
         => SendRequestAsync<TResponse>(RequestType.Get, endpoint, json, throwGetRequest);
 #pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
 
-    internal Task DeleteAsync(string endpoint, IRevoltRequest json = null)
+    internal Task DeleteAsync(string endpoint, IStoatRequest json = null)
         => SendRequestAsync(RequestType.Delete, endpoint, json);
 
-    internal Task<TResponse> DeleteAsync<TResponse>(string endpoint, IRevoltRequest json = null) where TResponse : class
+    internal Task<TResponse> DeleteAsync<TResponse>(string endpoint, IStoatRequest json = null) where TResponse : class
         => SendRequestAsync<TResponse>(RequestType.Delete, endpoint, json);
 
-    internal Task<TResponse> PatchAsync<TResponse>(string endpoint, IRevoltRequest json = null) where TResponse : class
+    internal Task<TResponse> PatchAsync<TResponse>(string endpoint, IStoatRequest json = null) where TResponse : class
         => SendRequestAsync<TResponse>(RequestType.Patch, endpoint, json);
 
-    internal Task PatchAsync(string endpoint, IRevoltRequest json = null)
+    internal Task PatchAsync(string endpoint, IStoatRequest json = null)
         => SendRequestAsync(RequestType.Patch, endpoint, json);
 
-    internal Task<TResponse> PutAsync<TResponse>(string endpoint, IRevoltRequest json = null) where TResponse : class
+    internal Task<TResponse> PutAsync<TResponse>(string endpoint, IStoatRequest json = null) where TResponse : class
         => SendRequestAsync<TResponse>(RequestType.Put, endpoint, json);
 
-    internal Task PutAsync(string endpoint, IRevoltRequest json = null)
+    internal Task PutAsync(string endpoint, IStoatRequest json = null)
         => SendRequestAsync(RequestType.Put, endpoint, json);
 
-    internal Task<TResponse> PostAsync<TResponse>(string endpoint, IRevoltRequest json = null, bool isWebhookRequest = false) where TResponse : class
+    internal Task<TResponse> PostAsync<TResponse>(string endpoint, IStoatRequest json = null, bool isWebhookRequest = false) where TResponse : class
         => SendRequestAsync<TResponse>(RequestType.Post, endpoint, json, false, isWebhookRequest);
 
-    internal Task PostAsync(string endpoint, IRevoltRequest json = null)
+    internal Task PostAsync(string endpoint, IStoatRequest json = null)
         => SendRequestAsync(RequestType.Post, endpoint, json);
 
     /// <summary>
-    /// Send a custom request to the Revolt instance API.
+    /// Send a custom request to the Stoat instance API.
     /// </summary>
     /// <remarks>
     /// Optionally you can also send a C# class as the json body for the request, this is useful for POST/PUT requests.
     /// <para />
-    /// You need to interface your custom class using <see cref="IRevoltRequest"/><br/>
-    /// CustomClass : RevoltRequest<br/>
+    /// You need to interface your custom class using <see cref="IStoatRequest"/><br/>
+    /// CustomClass : StoatRequest<br/>
     /// {<br/>
     ///     public string option = "Hi"<br/>
     /// }
     /// </remarks>
     /// <returns>Input your own <see langword="class" /> object to parse the response data from json.</returns>
-    public Task<TResponse> SendRequestAsync<TResponse>(RequestType method, string endpoint, IRevoltRequest json = null, bool throwGetRequest = false, bool isWebhookRequest = false) where TResponse : class
+    public Task<TResponse> SendRequestAsync<TResponse>(RequestType method, string endpoint, IStoatRequest json = null, bool throwGetRequest = false, bool isWebhookRequest = false) where TResponse : class
         => InternalJsonRequest<TResponse>(GetMethod(method), endpoint, json, throwGetRequest, isWebhookRequest);
 
 
@@ -174,10 +174,10 @@ public class RevoltRestClient
 
 
     /// <summary>
-    /// Upload a file to the Revolt instance CDN that can be used for attachments, avatars, banners, ect.
+    /// Upload a file to the Stoat instance CDN that can be used for attachments, avatars, banners, ect.
     /// </summary>
     /// <returns>Created <see cref="FileAttachment"/></returns>
-    /// <exception cref="RevoltRestException"></exception>
+    /// <exception cref="StoatRestException"></exception>
     public async Task<FileAttachment> UploadFileAsync(byte[] bytes, string name, UploadFileType type)
     {
         Conditions.FileBytesEmpty(bytes, nameof(UploadFileAsync));
@@ -220,7 +220,7 @@ public class RevoltRestClient
         {
             Client.Logger.LogRestMessage(Req, HttpMethod.Post, "upload: " + GetUploadType(type));
 
-            if (Client.Config.LogMode == RevoltLogSeverity.Debug)
+            if (Client.Config.LogMode == StoatLogSeverity.Debug)
                 Client.Logger.LogJson("Rest Send", Req);
         }
 
@@ -241,12 +241,12 @@ public class RevoltRestClient
             if (Error != null)
             {
                 if (string.IsNullOrEmpty(Error.Permission))
-                    throw new RevoltRestException($"Request failed due to {Error.Type} ({(int)Req.StatusCode})", (int)Req.StatusCode, Error.Type) { Permission = Error.Permission };
+                    throw new StoatRestException($"Request failed due to {Error.Type} ({(int)Req.StatusCode})", (int)Req.StatusCode, Error.Type) { Permission = Error.Permission };
                 else
-                    throw new RevoltPermissionException(Error.Permission, (int)Req.StatusCode, Error.Type == RevoltErrorType.MissingUserPermission);
+                    throw new StoatPermissionException(Error.Permission, (int)Req.StatusCode, Error.Type == StoatErrorType.MissingUserPermission);
             }
             else
-                throw new RevoltRestException(Req.ReasonPhrase, (int)Req.StatusCode, RevoltErrorType.Unknown);
+                throw new StoatRestException(Req.ReasonPhrase, (int)Req.StatusCode, StoatErrorType.Unknown);
         }
 
         try
@@ -258,7 +258,7 @@ public class RevoltRestClient
         }
         catch (Exception ex)
         {
-            throw new RevoltRestException(ex.Message, 500, RevoltErrorType.Unknown);
+            throw new StoatRestException(ex.Message, 500, StoatErrorType.Unknown);
         }
     }
 
@@ -319,7 +319,7 @@ public class RevoltRestClient
         {
             Client.Logger.LogRestMessage(Req, method, endpoint);
 
-            if (Client.Config.LogMode == RevoltLogSeverity.Debug)
+            if (Client.Config.LogMode == StoatLogSeverity.Debug)
                 Client.Logger.LogJson("Rest Send", Req);
         }
 
@@ -341,12 +341,12 @@ public class RevoltRestClient
             if (Error != null)
             {
                 if (string.IsNullOrEmpty(Error.Permission))
-                    throw new RevoltRestException($"Request failed due to {Error.Type} ({(int)Req.StatusCode})", (int)Req.StatusCode, Error.Type) { Permission = Error.Permission };
+                    throw new StoatRestException($"Request failed due to {Error.Type} ({(int)Req.StatusCode})", (int)Req.StatusCode, Error.Type) { Permission = Error.Permission };
                 else
-                    throw new RevoltPermissionException(Error.Permission, (int)Req.StatusCode, Error.Type == RevoltErrorType.MissingUserPermission);
+                    throw new StoatPermissionException(Error.Permission, (int)Req.StatusCode, Error.Type == StoatErrorType.MissingUserPermission);
             }
             else
-                throw new RevoltRestException(Req.ReasonPhrase, (int)Req.StatusCode, RevoltErrorType.Unknown);
+                throw new StoatRestException(Req.ReasonPhrase, (int)Req.StatusCode, StoatErrorType.Unknown);
         }
 
         if (Req.IsSuccessStatusCode && Req.Content.Headers.ContentLength.HasValue && Client.Config.Debug.LogRestResponseJson)
@@ -385,7 +385,7 @@ public class RevoltRestClient
 
             if (Retry != null)
             {
-                Client.InvokeLog($"Retrying request: {endpoint} for {Retry.retry_after}s", RevoltLogSeverity.Warn);
+                Client.InvokeLog($"Retrying request: {endpoint} for {Retry.retry_after}s", StoatLogSeverity.Warn);
                 await Task.Delay(Retry.retry_after + 2);
                 HttpRequestMessage MesRetry = new HttpRequestMessage(method, Client.Config.ApiUrl + endpoint);
                 if (request != null)
@@ -399,15 +399,15 @@ public class RevoltRestClient
         {
             Client.Logger.LogRestMessage(Req, method, endpoint);
 
-            if (Client.Config.LogMode == RevoltLogSeverity.Debug)
+            if (Client.Config.LogMode == StoatLogSeverity.Debug)
                 Client.Logger.LogJson("Rest Send", Req);
         }
 
 
         if (endpoint == "/" && !Req.IsSuccessStatusCode)
         {
-            Client.InvokeLog("Revolt API is down", RevoltLogSeverity.Warn);
-            throw new RevoltRestException("The Revolt API is down. Please try again later.", 500, RevoltErrorType.Unknown);
+            Client.InvokeLog("Stoat API is down", StoatLogSeverity.Warn);
+            throw new StoatRestException("The Stoat API is down. Please try again later.", 500, StoatErrorType.Unknown);
         }
 
 
@@ -431,12 +431,12 @@ public class RevoltRestClient
             if (Error != null)
             {
                 if (string.IsNullOrEmpty(Error.Permission))
-                    throw new RevoltRestException($"Request failed due to {Error.Type} ({(int)Req.StatusCode})", (int)Req.StatusCode, Error.Type) { Permission = Error.Permission };
+                    throw new StoatRestException($"Request failed due to {Error.Type} ({(int)Req.StatusCode})", (int)Req.StatusCode, Error.Type) { Permission = Error.Permission };
                 else
-                    throw new RevoltPermissionException(Error.Permission, (int)Req.StatusCode, Error.Type == RevoltErrorType.MissingUserPermission);
+                    throw new StoatPermissionException(Error.Permission, (int)Req.StatusCode, Error.Type == StoatErrorType.MissingUserPermission);
             }
             else
-                throw new RevoltRestException(Req.ReasonPhrase, (int)Req.StatusCode, RevoltErrorType.Unknown);
+                throw new StoatRestException(Req.ReasonPhrase, (int)Req.StatusCode, StoatErrorType.Unknown);
         }
 
         TResponse Response = null;
@@ -452,8 +452,8 @@ public class RevoltRestClient
             }
             catch (Exception ex)
             {
-                Client.InvokeLog($"Failed to parse json for {endpoint}", RevoltLogSeverity.Error);
-                throw new RevoltRestException("Failed to parse json response: " + ex.Message, 500, RevoltErrorType.Unknown);
+                Client.InvokeLog($"Failed to parse json for {endpoint}", StoatLogSeverity.Error);
+                throw new StoatRestException("Failed to parse json response: " + ex.Message, 500, StoatErrorType.Unknown);
             }
 
             if (Response != null && Client.Config.Debug.LogRestResponseJson)
@@ -469,7 +469,7 @@ public class RevoltRestClient
         StringBuilder sb = new StringBuilder(256);
         using (TextWriter text = new StringWriter(sb, CultureInfo.InvariantCulture))
         using (JsonWriter writer = new JsonTextWriter(text))
-            RevoltClient.Serializer.Serialize(writer, value);
+            StoatClient.Serializer.Serialize(writer, value);
         return sb.ToString();
     }
 
@@ -478,7 +478,7 @@ public class RevoltRestClient
         StringBuilder sb = new StringBuilder(256);
         using (TextWriter text = new StringWriter(sb, CultureInfo.InvariantCulture))
         using (JsonWriter writer = new JsonTextWriter(text))
-            RevoltClient.SerializerPretty.Serialize(writer, value);
+            StoatClient.SerializerPretty.Serialize(writer, value);
         return sb.ToString();
     }
 
@@ -486,12 +486,12 @@ public class RevoltRestClient
     {
         using (TextReader text = new StreamReader(jsonStream))
         using (JsonReader reader = new JsonTextReader(text))
-            return RevoltClient.Deserializer.Deserialize<T>(reader);
+            return StoatClient.Deserializer.Deserialize<T>(reader);
     }
 }
 
 /// <summary>
-/// File type to upload to the Revolt instance CDN.
+/// File type to upload to the Stoat instance CDN.
 /// </summary>
 public enum UploadFileType
 {
@@ -522,7 +522,7 @@ public enum UploadFileType
 }
 
 /// <summary>
-/// The request method type to use for sending requests to the Revolt instance API.
+/// The request method type to use for sending requests to the Stoat instance API.
 /// </summary>
 public enum RequestType
 {

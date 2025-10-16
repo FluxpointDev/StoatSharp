@@ -1,8 +1,8 @@
 ﻿using Optionals;
 using System.Collections.Generic;
 
-namespace RevoltSharp.Rest.Requests;
-internal class ModifyServerRequest : IRevoltRequest
+namespace StoatSharp.Rest.Requests;
+internal class ModifyServerRequest : IStoatRequest
 {
     public Optional<string> name { get; set; }
 

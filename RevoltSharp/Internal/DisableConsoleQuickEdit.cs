@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class DisableConsoleQuickEdit

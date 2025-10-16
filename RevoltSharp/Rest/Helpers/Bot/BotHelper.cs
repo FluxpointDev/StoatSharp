@@ -1,25 +1,25 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt http/rest methods for current user/bot account.
+/// Stoat http/rest methods for current user/bot account.
 /// </summary>
 public static class BotHelper
 {
-    /// <inheritdoc cref="RevoltRestClient.UploadFileAsync(byte[], string, UploadFileType)" />
+    /// <inheritdoc cref="StoatRestClient.UploadFileAsync(byte[], string, UploadFileType)" />
     public static Task<FileAttachment> UploadFileAsync(this Channel channel, byte[] bytes, string name, UploadFileType type)
        => channel.Client.Rest.UploadFileAsync(bytes, name, type);
 
-    /// <inheritdoc cref="RevoltRestClient.UploadFileAsync(byte[], string, UploadFileType)" />
+    /// <inheritdoc cref="StoatRestClient.UploadFileAsync(byte[], string, UploadFileType)" />
     public static Task<FileAttachment> UploadFileAsync(this Channel channel, string path, UploadFileType type)
         => channel.Client.Rest.UploadFileAsync(File.ReadAllBytes(path), path.Split('.').Last(), type);
 
-    /// <inheritdoc cref="GetSavedMessagesChannelAsync(RevoltRestClient)" />
+    /// <inheritdoc cref="GetSavedMessagesChannelAsync(StoatRestClient)" />
     public static Task<SavedMessagesChannel?> GetSavedMessagesChannelAsync(this SelfUser user)
         => GetSavedMessagesChannelAsync(user.Client.Rest);
 
@@ -29,8 +29,8 @@ public static class BotHelper
     /// <returns>
     /// <see cref="SavedMessagesChannel" /> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<SavedMessagesChannel?> GetSavedMessagesChannelAsync(this RevoltRestClient rest)
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<SavedMessagesChannel?> GetSavedMessagesChannelAsync(this StoatRestClient rest)
     {
         if (rest.Client.SavedMessagesChannel != null)
             return rest.Client.SavedMessagesChannel;
@@ -47,8 +47,8 @@ public static class BotHelper
     /// <returns>
     /// <see cref="PublicBot"/> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<PublicBot?> GetPublicBotAsync(this RevoltRestClient rest, string id)
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<PublicBot?> GetPublicBotAsync(this StoatRestClient rest, string id)
     {
         Conditions.UserIdLength(id, nameof(GetPublicBotAsync));
 
@@ -60,13 +60,13 @@ public static class BotHelper
     }
 
     /// <summary>
-    /// Get the current query info of the connected Revolt instance.
+    /// Get the current query info of the connected Stoat instance.
     /// </summary>
     /// <returns>
     /// <see cref="Query"/> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Query?> GetQueryAsync(this RevoltRestClient rest, bool throwRequest = false)
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Query?> GetQueryAsync(this StoatRestClient rest, bool throwRequest = false)
     {
         QueryJson? Query = await rest.GetAsync<QueryJson>("/", null, throwRequest);
 

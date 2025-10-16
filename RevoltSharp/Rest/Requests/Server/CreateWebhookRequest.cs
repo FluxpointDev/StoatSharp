@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Optionals;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
-internal class CreateWebhookRequest : IRevoltRequest
+internal class CreateWebhookRequest : IStoatRequest
 {
     [JsonProperty("name")]
     public string Name { get; set; } = null!;

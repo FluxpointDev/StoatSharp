@@ -7,14 +7,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class Server : CreatedEntity
 {
-    internal Server(RevoltClient client, ServerJson model) : base(client, model.Id)
+    internal Server(StoatClient client, ServerJson model) : base(client, model.Id)
     {
-        if (Client.WebSocket != null && Client.TryGetServer(model.Id, out var cachedServer))
+        if (Client.WebSocket != null && Client.TryGetServer(model.Id, out Server? cachedServer))
             HasAllMembers = cachedServer.HasAllMembers;
 
         Name = model.Name;
@@ -25,7 +25,7 @@ public class Server : CreatedEntity
         ChannelIds = model.Channels != null ? model.Channels.ToHashSet() : new HashSet<string>();
         if (model.Categories != null)
         {
-            foreach(var cat in model.Categories)
+            foreach (CategoryJson cat in model.Categories)
             {
                 InternalCategories.TryAdd(cat.id, new ServerCategory(client, Id, cat, InternalCategories.Keys.Count));
             }
@@ -60,7 +60,7 @@ public class Server : CreatedEntity
         if (InternalMembers.TryGetValue(OwnerId, out ServerMember SM))
             return SM;
 
-        //we assume revolt will ALWAYS successfully return an owner. ownerless servers aren't possible on revolt even if the owner gets platform banned.
+        //we assume stoat will ALWAYS successfully return an owner. ownerless servers aren't possible on stoat even if the owner gets platform banned.
         return (await Client.Rest.GetMemberAsync(Id, OwnerId))!;
     }
 
@@ -246,7 +246,7 @@ public class Server : CreatedEntity
         if (json.Categories.HasValue)
         {
             int Position = 0;
-            foreach (var cat in json.Categories.Value)
+            foreach (CategoryJson cat in json.Categories.Value)
             {
                 if (InternalCategories.TryGetValue(cat.id, out ServerCategory Cat))
                 {
@@ -262,7 +262,7 @@ public class Server : CreatedEntity
                 Position += 1;
             }
 
-            foreach (var cat in Categories)
+            foreach (ServerCategory cat in Categories)
             {
                 if (!json.Categories.Value.Any(x => x.id == cat.Id))
                     InternalCategories.TryRemove(cat.Id, out _);
@@ -271,7 +271,7 @@ public class Server : CreatedEntity
 
         _ = Task.Run(() =>
         {
-            foreach (var sm in CachedMembers)
+            foreach (ServerMember sm in CachedMembers)
             {
                 sm.Permissions = new ServerPermissions(this, sm);
             }
@@ -300,7 +300,7 @@ public class Server : CreatedEntity
         }
     }
 
-    internal void RemoveMember(RevoltClient client, string userId)
+    internal void RemoveMember(StoatClient client, string userId)
     {
         InternalMembers.TryRemove(userId, out _);
         if (client.WebSocket.UserCache.TryGetValue(userId, out User User))

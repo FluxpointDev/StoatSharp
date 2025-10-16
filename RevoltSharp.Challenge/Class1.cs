@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp.Challenge;
+﻿namespace StoatSharp.Challenge;
 
 public class Class1
 {

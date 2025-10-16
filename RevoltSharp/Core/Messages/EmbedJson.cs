@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class EmbedJson

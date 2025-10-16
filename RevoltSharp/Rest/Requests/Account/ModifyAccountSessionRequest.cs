@@ -1,7 +1,7 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
-internal class ModifyAccountSessionRequest : IRevoltRequest
+namespace StoatSharp;
+internal class ModifyAccountSessionRequest : IStoatRequest
 {
     public string friendly_name { get; set; }
 }

@@ -1,39 +1,39 @@
 ﻿using Newtonsoft.Json;
 using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
-using RevoltSharp.WebSocket;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
+using StoatSharp.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt client used to connect to the Revolt chat API and WebSocket with a user or bot token.
+/// Stoat client used to connect to the Stoat Chat API and WebSocket with a user or bot token.
 /// </summary>
 /// <remarks>
-/// Docs: <see href="https://docs.fluxpoint.dev/revoltsharp"/>
+/// Docs: <see href="https://docs.fluxpoint.dev/stoatsharp"/>
 /// </remarks>
-public class RevoltClient : ClientEvents
+public class StoatClient : ClientEvents
 {
     /// <summary>
-    /// Version of the current RevoltSharp lib installed.
+    /// Version of the current StoatSharp lib installed.
     /// </summary>
     public static string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 
 
     /// <summary>
-    /// Create a Revolt client that can be used for user or bot accounts.
+    /// Create a Stoat client that can be used for user or bot accounts.
     /// </summary>
     /// <param name="token">Bot token to connect with.</param>
     /// <param name="mode">Use http for http requests only with no websocket.</param>
     /// <param name="config">Optional config stuff for the bot and lib.</param>
-    /// <exception cref="RevoltArgumentException"></exception>
-    public RevoltClient(ClientMode mode, ClientConfig? config = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    public StoatClient(ClientMode mode, ClientConfig? config = null)
     {
         Config = config ??= new ClientConfig();
         ConfigSafetyChecks();
@@ -47,38 +47,38 @@ public class RevoltClient : ClientEvents
             catch { }
         }
 
-        Logger = new RevoltLogger("RevoltSharp", config.LogMode);
+        Logger = new StoatLogger("StoatSharp", config.LogMode);
         Logger.AllowOptionals = true;
-        Rest = new RevoltRestClient(this);
-        Admin = new AdminClient(this);
+        Rest = new StoatRestClient(this);
+        Admin = new StoatAdminClient(this);
         Mode = mode;
         if (Mode == ClientMode.WebSocket)
-            WebSocket = new RevoltSocketClient(this);
+            WebSocket = new StoatSocketClient(this);
     }
 
     /// <summary>
     /// Set the voice client to use for the lib.
     /// </summary>
     /// <param name="client"></param>
-    /// <exception cref="RevoltArgumentException"></exception>
+    /// <exception cref="StoatArgumentException"></exception>
     public void SetVoiceClient(IVoiceClient client)
     {
         if (client == null)
         {
-            Logger.LogMessage("Voice client can't be empty.", RevoltLogSeverity.Error);
-            throw new RevoltArgumentException("Voice client can't be empty.");
+            Logger.LogMessage("Voice client can't be empty.", StoatLogSeverity.Error);
+            throw new StoatArgumentException("Voice client can't be empty.");
         }
 
         VoiceClient = client;
     }
 
     /// <summary>
-    /// The current voice client in use with RevoltSharp.
+    /// The current voice client in use with StoatSharp.
     /// </summary>
     public IVoiceClient VoiceClient { get; internal set; } = null;
 
     /// <summary>
-    /// The current client mode that RevoltSharp is using either Http or WebSocket
+    /// The current client mode that StoatSharp is using either Http or WebSocket
     /// </summary>
     public ClientMode Mode { get; internal set; }
 
@@ -86,54 +86,54 @@ public class RevoltClient : ClientEvents
     {
         if (string.IsNullOrEmpty(Config.ApiUrl))
         {
-            Logger.LogMessage("Config API Url is missing.", RevoltLogSeverity.Error);
-            throw new RevoltArgumentException("Config API Url is missing");
+            Logger.LogMessage("Config API Url is missing.", StoatLogSeverity.Error);
+            throw new StoatArgumentException("Config API Url is missing");
         }
 
         if (!Config.ApiUrl.EndsWith('/'))
             Config.ApiUrl += "/";
 
-        Config.UserAgent ??= $"RevoltSharp v{Version} ({Config.ClientName})";
+        Config.UserAgent ??= $"StoatSharp v{Version} ({Config.ClientName})";
         Config.Owners ??= Array.Empty<string>();
         Config.Debug ??= new ClientDebugConfig();
     }
 
 
     /// <summary>
-    /// Revolt bot token used for http requests and websocket.
+    /// Stoat bot token used for http requests and websocket.
     /// </summary>
     public string Token { get; internal set; }
 
     /// <summary>
-    /// The current version of the revolt instance connected to.
+    /// The current version of the stoat instance connected to.
     /// </summary>
     /// <remarks>
     /// This will be empty of you do not use <see cref="StartAsync" />.
     /// </remarks>
-    public string? RevoltVersion { get; internal set; }
+    public string? StoatVersion { get; internal set; }
 
     public bool IsUserAccount { get; internal set; }
     public bool IsLoginComplete => CurrentUser != null;
 
     /// <summary>
-    /// The json serializer that is used with RevoltSharp.
+    /// The json serializer that is used with StoatSharp.
     /// </summary>
     public static JsonSerializer Serializer { get; internal set; } = new JsonSerializer
     {
-        ContractResolver = new RevoltContractResolver()
+        ContractResolver = new StoatContractResolver()
     };
 
     /// <summary>
-    /// The json serializer that is used with RevoltSharp with pretty print formatting.
+    /// The json serializer that is used with StoatSharp with pretty print formatting.
     /// </summary>
     public static JsonSerializer SerializerPretty { get; internal set; } = new JsonSerializer
     {
-        ContractResolver = new RevoltContractResolver(),
+        ContractResolver = new StoatContractResolver(),
         Formatting = Formatting.Indented
     };
 
     /// <summary>
-    /// The json serializer that is used with RevoltSharp.
+    /// The json serializer that is used with StoatSharp.
     /// </summary>
     public static JsonSerializer Deserializer { get; internal set; } = CreateDes();
 
@@ -150,21 +150,21 @@ public class RevoltClient : ClientEvents
     public ClientConfig Config { get; internal set; }
 
     /// <summary>
-    /// Internal rest/http client used to connect to the Revolt API.
+    /// Internal rest/http client used to connect to the Stoat API.
     /// </summary>
     /// <remarks>
-    /// You can also make custom requests with <see cref="RevoltRestClient.SendRequestAsync(RequestType, string, IRevoltRequest)"/> and json class based on <see cref="IRevoltRequest"/>
+    /// You can also make custom requests with <see cref="StoatRestClient.SendRequestAsync(RequestType, string, IStoatRequest)"/> and json class based on <see cref="IStoatRequest"/>
     /// </remarks>
-    public RevoltRestClient Rest { get; internal set; }
+    public StoatRestClient Rest { get; internal set; }
 
-    internal RevoltSocketClient? WebSocket;
+    internal StoatSocketClient? WebSocket;
 
     /// <summary>
-    /// This is for self-hosted revolt instances that have global admin access.
+    /// This is for self-hosted Stoat instances that have global admin access.
     /// </summary>
-    public AdminClient Admin { get; internal set; }
+    public StoatAdminClient Admin { get; internal set; }
 
-    internal RevoltLogger Logger;
+    internal StoatLogger Logger;
 
     internal bool FirstConnection = true;
     internal bool IsConnected = false;
@@ -178,7 +178,7 @@ public class RevoltClient : ClientEvents
     public SelfUser? CurrentUser { get; internal set; }
 
     /// <summary>
-    /// The current query info of the connected Revolt instance.
+    /// The current query info of the connected Stoat instance.
     /// </summary>
     /// <remarks>
     /// This will be <see langword="null" /> of you do not use <see cref="StartAsync" />.
@@ -189,7 +189,7 @@ public class RevoltClient : ClientEvents
     /// The current user/bot account's private notes message channel.
     /// </summary>
     /// <remarks>
-    /// This will be <see langword="null" /> if you have not created the channel from <see cref="BotHelper.GetSavedMessagesChannelAsync(RevoltRestClient)" /> once.
+    /// This will be <see langword="null" /> if you have not created the channel from <see cref="BotHelper.GetSavedMessagesChannelAsync(StoatRestClient)" /> once.
     /// </remarks>
     public SavedMessagesChannel? SavedMessagesChannel { get; internal set; }
 
@@ -197,21 +197,21 @@ public class RevoltClient : ClientEvents
     /// Start the Rest and Websocket to be used for the lib.
     /// </summary>
     /// <remarks>
-    /// Will throw a <see cref="RevoltException"/> if the token is incorrect or failed to login for the current user/bot.
+    /// Will throw a <see cref="StoatException"/> if the token is incorrect or failed to login for the current user/bot.
     /// </remarks>
-    /// <exception cref="RevoltException"></exception>
-    /// <exception cref="RevoltArgumentException"></exception>
+    /// <exception cref="StoatException"></exception>
+    /// <exception cref="StoatArgumentException"></exception>
     public async Task StartAsync()
     {
         if (FirstConnection)
         {
             if (string.IsNullOrEmpty(Token))
-                throw new RevoltException("You need to login with the account first using LoginAsync()");
+                throw new StoatException("You need to login with the account first using LoginAsync()");
 
             if (!IsLoginComplete)
-                throw new RevoltException("This account has not properly logged in.");
+                throw new StoatException("This account has not properly logged in.");
 
-            InvokeLog("Starting...", RevoltLogSeverity.Debug);
+            InvokeLog("Starting...", StoatLogSeverity.Debug);
 
             FirstConnection = false;
             try
@@ -220,13 +220,13 @@ public class RevoltClient : ClientEvents
             }
             catch (Exception ex)
             {
-                InvokeLogAndThrowException($"Client failed to connect to the Revolt API at {Config.ApiUrl}. {ex.Message}");
+                InvokeLogAndThrowException($"Client failed to connect to the Stoat API at {Config.ApiUrl}. {ex.Message}");
             }
 
             if (!Uri.IsWellFormedUriString(CurrentQuery.ImageServerUrl, UriKind.Absolute))
                 InvokeLogAndThrowException("Image server url is an invalid format.");
 
-            RevoltVersion = CurrentQuery.RevoltVersion;
+            StoatVersion = CurrentQuery.StoatVersion;
             Config.Debug.WebsocketUrl = CurrentQuery.WebsocketUrl;
             Config.Debug.UploadUrl = CurrentQuery.ImageServerUrl;
             Rest.FileHttpClient.BaseAddress = new Uri(Config.Debug.UploadUrl);
@@ -234,7 +234,7 @@ public class RevoltClient : ClientEvents
             //Config.Debug.VoiceServerUrl = CurrentQuery.VoiceApiUrl;
             //Config.Debug.VoiceWebsocketUrl = CurrentQuery.VoiceWebsocketUrl;
 
-            InvokeLog($"Started: {CurrentUser.Username} ({CurrentUser.Id})", RevoltLogSeverity.Info);
+            InvokeLog($"Started: {CurrentUser.Username} ({CurrentUser.Id})", StoatLogSeverity.Info);
             InvokeStarted(CurrentUser);
 
             if (VoiceClient != null)
@@ -246,7 +246,7 @@ public class RevoltClient : ClientEvents
             TaskCompletionSource tcs = new TaskCompletionSource();
 
             void HandleConnected() => tcs.SetResult();
-            void HandleError(SocketError error) => tcs.SetException(new RevoltException(error.Message));
+            void HandleError(SocketError error) => tcs.SetException(new StoatException(error.Message));
 
             this.OnConnected += HandleConnected;
             this.OnWebSocketError += HandleError;
@@ -332,8 +332,8 @@ public class RevoltClient : ClientEvents
     {
         if (string.IsNullOrEmpty(token))
         {
-            Logger.LogMessage("Client token is missing!", RevoltLogSeverity.Error);
-            throw new RevoltArgumentException("Client token is missing!");
+            Logger.LogMessage("Client token is missing!", StoatLogSeverity.Error);
+            throw new StoatArgumentException("Client token is missing!");
         }
 
         Token = token;
@@ -358,10 +358,10 @@ public class RevoltClient : ClientEvents
         {
             SelfUser = await Rest.GetAsync<UserJson>("users/@me", null, true);
         }
-        catch (RevoltRestException re)
+        catch (StoatRestException re)
         {
             if (re.Code == 401)
-                throw new RevoltRestException("The token is invalid.", re.Code, re.Type);
+                throw new StoatRestException("The token is invalid.", re.Code, re.Type);
 
             throw;
         }
@@ -383,16 +383,16 @@ public class RevoltClient : ClientEvents
     }
 
     /// <summary>
-    /// Stop the WebSocket connection to Revolt.
+    /// Stop the WebSocket connection to Stoat.
     /// </summary>
     /// <remarks>
-    /// Will throw a <see cref="RevoltException"/> if <see cref="ClientMode.Http"/>.
+    /// Will throw a <see cref="StoatException"/> if <see cref="ClientMode.Http"/>.
     /// </remarks>
-    /// <exception cref="RevoltException"></exception>
+    /// <exception cref="StoatException"></exception>
     public async Task StopAsync()
     {
         if (Mode == ClientMode.Http)
-            throw new RevoltException("Client is in HTTP-only mode.");
+            throw new StoatException("Client is in HTTP-only mode.");
 
         if (WebSocket.WebSocket != null)
         {
@@ -450,16 +450,16 @@ public class RevoltClient : ClientEvents
     #region Log Event
 
     /// <summary>
-    /// Called to display information, events, and errors originating from the <see cref="RevoltClient"/>.
+    /// Called to display information, events, and errors originating from the <see cref="StoatClient"/>.
     /// </summary>
     /// <remarks>
-    /// By default, RevoltSharp will log its events to the <see cref="Console"/>. Adding a subscriber to this event overrides this behavior.
+    /// By default, StoatSharp will log its events to the <see cref="Console"/>. Adding a subscriber to this event overrides this behavior.
     /// </remarks>
     public event LogEvent? OnLog;
 
-    internal void InvokeLog(string message, RevoltLogSeverity severity)
+    internal void InvokeLog(string message, StoatLogSeverity severity)
     {
-        if (Config.LogMode != RevoltLogSeverity.None)
+        if (Config.LogMode != StoatLogSeverity.None)
             Logger.LogMessage(message, severity);
 
         OnLog?.Invoke(message, severity);
@@ -467,8 +467,8 @@ public class RevoltClient : ClientEvents
 
     internal void InvokeLogAndThrowException(string message)
     {
-        InvokeLog(message, RevoltLogSeverity.Error);
-        throw new RevoltException(message);
+        InvokeLog(message, StoatLogSeverity.Error);
+        throw new StoatException(message);
     }
 
     #endregion
@@ -483,7 +483,7 @@ public class RevoltClient : ClientEvents
 public enum ClientMode
 {
     /// <summary>
-    /// Client will only use the http/rest client of Revolt and removes any usage/memory of websocket stuff. 
+    /// Client will only use the http/rest client of Stoat and removes any usage/memory of websocket stuff. 
     /// </summary>
     Http,
     /// <summary>

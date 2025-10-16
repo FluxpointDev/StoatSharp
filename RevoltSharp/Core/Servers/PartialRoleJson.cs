@@ -2,7 +2,7 @@
 using Optionals;
 using System.Numerics;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class PartialRoleJson

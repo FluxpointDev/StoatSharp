@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1998
 
 using Newtonsoft.Json;
-using RevoltSharp;
-using RevoltSharp.Commands;
+using StoatSharp;
+using StoatSharp.Commands;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -394,7 +394,7 @@ public class CmdTest : ModuleBase
     public async Task TestEmoji(string emoji)
     {
         Console.WriteLine(emoji);
-        //await Context.Message.AddReactionAsync(new RevoltSharp.Emoji(UpdatedEmojis[emoji]));
+        //await Context.Message.AddReactionAsync(new StoatSharp.Emoji(UpdatedEmojis[emoji]));
     }
 
     [Command("testcontext")]
@@ -415,7 +415,7 @@ public class CmdTest : ModuleBase
     {
         Title = "T",
         Description = "L",
-        Color = new RevoltColor(0, 0, 1),
+        Color = new StoatColor(0, 0, 1),
         Url = "https://fluxpoint.dev"
     }.Build() }, masquerade: new MessageMasquerade("Ah"));
         Console.WriteLine("- Create");
@@ -515,12 +515,12 @@ public class CmdTest : ModuleBase
             IconUrl = "https://img.fluxpoint.dev/2531914271424512.png",
             Url = "https://fluxpoint.dev",
             Image = "https://img.fluxpoint.dev/2531914271424512.png",
-            Color = new RevoltColor(0, 1, 0)
+            Color = new StoatColor(0, 1, 0)
         }.Build(),
         new EmbedBuilder
         {
             Title = "Title Anime",
-            Color = new RevoltColor(0, 1, 0)
+            Color = new StoatColor(0, 1, 0)
         }.Build(),
         });
     }
@@ -619,7 +619,7 @@ public class CmdTest : ModuleBase
     {
         IReadOnlyCollection<ServerMember> Members = await Context.Server.GetMembersAsync();
         IEnumerable<string> List = Members.Where(x => x.RolesIds.Any(x => x == "01GZYQ9GCE14824E1HM10E49FP")).Select(x => $"<@{x.Id}>");
-        await Context.Channel.SendMessageAsync($"**RevoltSharp Notice**\n{string.Join(" | ", List)}");
+        await Context.Channel.SendMessageAsync($"**StoatSharp Notice**\n{string.Join(" | ", List)}");
     }
 
     [Command("blockme")]

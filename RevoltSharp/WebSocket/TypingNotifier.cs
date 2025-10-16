@@ -1,17 +1,17 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.WebSocket;
+namespace StoatSharp.WebSocket;
 
 public class TypingNotifier : IDisposable
 {
-    private readonly RevoltRestClient _client;
+    private readonly StoatRestClient _client;
     private readonly CancellationTokenSource _cancelToken;
     private readonly string _channel;
 
-    internal TypingNotifier(RevoltRestClient rest, string channel)
+    internal TypingNotifier(StoatRestClient rest, string channel)
     {
         _client = rest;
         _cancelToken = new CancellationTokenSource();

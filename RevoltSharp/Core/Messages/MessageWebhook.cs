@@ -1,8 +1,8 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 public class MessageWebhook
 {
-    internal MessageWebhook(RevoltClient client, MessageWebhookJson model)
+    internal MessageWebhook(StoatClient client, MessageWebhookJson model)
     {
         Name = model.Name;
         Avatar = Attachment.Create(client, model.Avatar);

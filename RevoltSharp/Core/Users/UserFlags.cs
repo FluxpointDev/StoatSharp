@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -30,28 +30,28 @@ public class UserFlags
 }
 
 /// <summary>
-/// System flags for the Revolt instance.
+/// System flags for the Stoat instance.
 /// </summary>
 [Flags]
 public enum UserFlagType
 {
     /// <summary>
-    /// User has been suspended from using the Revolt instance.
+    /// User has been suspended from using the Stoat instance.
     /// </summary>
     Suspended = 1,
 
     /// <summary>
-    /// User has deleted their account on the Revolt instance.
+    /// User has deleted their account on the Stoat instance.
     /// </summary>
     Deleted = 2,
 
     /// <summary>
-    /// User has been banned from the Revolt instance.
+    /// User has been banned from the Stoat instance.
     /// </summary>
     Banned = 4,
 
     /// <summary>
-    /// User has been banned for spam from the Revolt instance.
+    /// User has been banned for spam from the Stoat instance.
     /// </summary>
     Spam = 8
 }

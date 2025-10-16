@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 [Flags]
 public enum AvatarSources
 {
     /// <summary>
-    /// Default Revolt avatar given to the user.
+    /// Default Stoat avatar given to the user.
     /// </summary>
     Default = 1,
 

@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 /// <summary>
@@ -6,7 +6,7 @@
 /// </summary>
 public class TextChannel : ServerChannel
 {
-    internal TextChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal TextChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         Type = ChannelType.Text;
         LastMessageId = model.LastMessageId;

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class ServerBanInfo : CreatedEntity
 {
-    internal ServerBanInfo(RevoltClient client, ServerBanInfoJson jsonInfo) : base(client, jsonInfo.Id.UserId)
+    internal ServerBanInfo(StoatClient client, ServerBanInfoJson jsonInfo) : base(client, jsonInfo.Id.UserId)
     {
         UserId = jsonInfo.Id.UserId;
         Reason = jsonInfo.Reason;
@@ -16,7 +16,7 @@ public class ServerBanInfo : CreatedEntity
 }
 public class ServerBan : CreatedEntity
 {
-    internal ServerBan(RevoltClient client, ServerBanUserJson json, ServerBanInfoJson jsonInfo) : base(client, json.Id)
+    internal ServerBan(StoatClient client, ServerBanUserJson json, ServerBanInfoJson jsonInfo) : base(client, json.Id)
     {
         Username = json.Username;
         Discriminator = json.Discriminator;

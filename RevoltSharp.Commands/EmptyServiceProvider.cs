@@ -1,6 +1,6 @@
 using System;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal class EmptyServiceProvider : IServiceProvider

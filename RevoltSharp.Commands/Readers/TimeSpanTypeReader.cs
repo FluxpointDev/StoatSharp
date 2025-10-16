@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal class TimeSpanTypeReader : TypeReader

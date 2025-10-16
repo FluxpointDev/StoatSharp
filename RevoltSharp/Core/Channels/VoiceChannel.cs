@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 /// <summary>
@@ -6,7 +6,7 @@
 /// </summary>
 public class VoiceChannel : ServerChannel
 {
-    internal VoiceChannel(RevoltClient client, ChannelJson model)
+    internal VoiceChannel(StoatClient client, ChannelJson model)
         : base(client, model)
     {
         Type = ChannelType.Voice;

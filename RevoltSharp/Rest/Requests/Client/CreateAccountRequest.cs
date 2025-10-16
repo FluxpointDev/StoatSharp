@@ -1,8 +1,8 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
-internal class CreateAccountRequest : IRevoltRequest
+internal class CreateAccountRequest : IStoatRequest
 {
     public string email { get; set; }
     public string password { get; set; }

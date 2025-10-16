@@ -1,28 +1,28 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
-/// A Revolt object entity that has the client attached.
+/// A Stoat object entity that has the client attached.
 /// </summary>
 public abstract class Entity
 {
     [JsonIgnore]
-    internal RevoltClient Client { get; }
+    internal StoatClient Client { get; }
 
-    internal Entity(RevoltClient client)
+    internal Entity(StoatClient client)
     {
         Client = client;
     }
 }
 
 /// <summary>
-/// A Revolt object entity that has an ID, Created date and Client.
+/// A Stoat object entity that has an ID, Created date and Client.
 /// </summary>
 public abstract class CreatedEntity : Entity
 {
-    internal CreatedEntity(RevoltClient client, string id) : base(client)
+    internal CreatedEntity(StoatClient client, string id) : base(client)
     {
         Id = id;
         if (Id.Length > 3 && Ulid.TryParse(Id, out Ulid UID))

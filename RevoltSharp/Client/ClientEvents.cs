@@ -1,106 +1,106 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 /// <summary>
-/// Do not use this class! only used for <see cref="RevoltClient"/>
+/// Do not use this class! only used for <see cref="StoatClient"/>
 /// </summary>
 public class ClientEvents
 {
     /// <summary>
-    /// Event used for RevoltSharp lib.
+    /// Event used for StoatSharp lib.
     /// </summary>
-    public delegate void RevoltEvent();
+    public delegate void StoatEvent();
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void SelfUserEvent(SelfUser selfuser);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void SocketErrorEvent(SocketError error);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void MessageEvent(Message message);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void MessagesBulkDeletedEvent(Channel channel, string[] messages);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void UserEvent(User user);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void RoleEvent(Role role);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void RoleUpdatedEvent(Role old_role, Role new_role, RoleUpdatedProperties properties);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void UserUpdatedEvent(User old_user, User new_user, UserUpdatedProperties properties);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void SelfUserUpdatedEvent(SelfUser old_user, SelfUser new_user, SelfUserUpdatedProperties properties);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerEvent(Server server);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerEmojiEvent(Server server, Emoji emoji);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerUserEvent(Server server, User user);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerSelfEvent(Server server, SelfUser user);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerMemberEvent(Server server, ServerMember member);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerMemberLeftEvent(Server server, string userId, User? user, ServerMember? member);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void MessageUpdatedEvent(Downloadable<string, Message> message_cache, MessageUpdatedProperties message);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ChannelMessageIdEvent(Channel channel, string message_id);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ChannelEvent(Channel channel);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ChannelUserEvent(Channel channel, User user);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void GroupChannelSelfEvent(GroupChannel channel, SelfUser user);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void GroupChannelUserEvent(GroupChannel channel, User user);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ChannelUpdatedEvent(Channel old_channel, Channel new_channel, ChannelUpdatedProperties properties);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ServerUpdatedEvent(Server old_server, Server new_server, ServerUpdatedProperties properties);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ReactionEvent(Emoji emoji, Channel channel, Downloadable<string, User> user_cache, Downloadable<string, Message> message_cache);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void ReactionBulkRemovedEvent(Emoji emoji, Channel channel, Downloadable<string, Message> message_cache);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void UserPlatformRemovedEvent(string user_id, User user, UserFlags flags);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void WebhookEvent(Webhook webhook);
 
-    /// <inheritdoc cref="RevoltEvent" />
+    /// <inheritdoc cref="StoatEvent" />
     public delegate void UserRelationshipUpdated(User user, UserRelationship relationship);
 
-    /// <inheritdoc cref="RevoltEvent" />
-    public delegate void LogEvent(string message, RevoltLogSeverity severity);
+    /// <inheritdoc cref="StoatEvent" />
+    public delegate void LogEvent(string message, StoatLogSeverity severity);
 
     #region WebSocket Events
 
     /// <summary>
-    /// Event used when the <see cref="RevoltClient"/> WebSocket has fully loaded with cached data and <see cref="RevoltClient.CurrentUser"/> is set.
+    /// Event used when the <see cref="StoatClient"/> WebSocket has fully loaded with cached data and <see cref="StoatClient.CurrentUser"/> is set.
     /// </summary>
     public event SelfUserEvent? OnReady;
     internal void InvokeReady(SelfUser user)
@@ -110,18 +110,18 @@ public class ClientEvents
 
 
     /// <summary>
-    /// Event used when the <see cref="RevoltClient"/> WebSocket has encountered an error.
+    /// Event used when the <see cref="StoatClient"/> WebSocket has encountered an error.
     /// </summary>
     public event SocketErrorEvent? OnWebSocketError;
-    internal void InvokeWebSocketError(RevoltClient client, SocketError error)
+    internal void InvokeWebSocketError(StoatClient client, SocketError error)
     {
-        client.InvokeLog(error.Message, RevoltLogSeverity.Error);
+        client.InvokeLog(error.Message, StoatLogSeverity.Error);
         OnWebSocketError?.Invoke(error);
     }
 
 
     /// <summary>
-    /// Event used when the <see cref="RevoltClient"/> has loaded with the <see cref="RevoltClient.CurrentUser"/>.
+    /// Event used when the <see cref="StoatClient"/> has loaded with the <see cref="StoatClient.CurrentUser"/>.
     /// </summary>
     /// <remarks>
     /// You can use this with <see cref="ClientMode.Http" /> and <see cref="ClientMode.WebSocket" />
@@ -133,7 +133,7 @@ public class ClientEvents
     }
 
     /// <summary>
-    /// Event used when the <see cref="RevoltClient"/> has logged in with the <see cref="RevoltClient.CurrentUser"/>.
+    /// Event used when the <see cref="StoatClient"/> has logged in with the <see cref="StoatClient.CurrentUser"/>.
     /// </summary>
     /// <remarks>
     /// You can use this with <see cref="ClientMode.Http" /> and <see cref="ClientMode.WebSocket" />
@@ -145,9 +145,9 @@ public class ClientEvents
     }
 
     /// <summary>
-    /// Event used when the <see cref="RevoltClient"/> WebSocket has connected successfully.
+    /// Event used when the <see cref="StoatClient"/> WebSocket has connected successfully.
     /// </summary>
-    public event RevoltEvent? OnConnected;
+    public event StoatEvent? OnConnected;
     internal void InvokeConnected()
     {
         OnConnected?.Invoke();
@@ -392,7 +392,7 @@ public class ClientEvents
     }
 
     /// <summary>
-    /// A <see cref="User" /> has been banned from the Revolt instance.
+    /// A <see cref="User" /> has been banned from the Stoat instance.
     /// </summary>
     /// <remarks>
     /// <see cref="User" /> may be null if not cached.
@@ -422,7 +422,7 @@ public class ClientEvents
     /// <summary>
     /// The current client has logged out.
     /// </summary>
-    public event RevoltEvent? OnClientLogout;
+    public event StoatEvent? OnClientLogout;
 
     internal void InvokeLogout()
     {

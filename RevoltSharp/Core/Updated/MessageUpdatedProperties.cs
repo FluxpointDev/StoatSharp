@@ -1,14 +1,14 @@
 ﻿using Optionals;
-using RevoltSharp.WebSocket;
+using StoatSharp.WebSocket;
 using System;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class MessageUpdatedProperties : CreatedEntity
 {
-    internal MessageUpdatedProperties(RevoltClient client, MessageUpdateEventJson json) : base(client, json.MessageId)
+    internal MessageUpdatedProperties(StoatClient client, MessageUpdateEventJson json) : base(client, json.MessageId)
     {
         Content = json.Data.Content;
         EditedAt = json.Data.EditedAt;

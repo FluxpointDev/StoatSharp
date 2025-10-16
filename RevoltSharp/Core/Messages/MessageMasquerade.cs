@@ -1,24 +1,24 @@
 ﻿using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class MessageMasquerade
 {
-    public MessageMasquerade(string name, string avatar = "", RevoltColor color = null)
+    public MessageMasquerade(string name, string avatar = "", StoatColor color = null)
     {
         Name = name;
         AvatarUrl = avatar;
-        Color = color == null ? new RevoltColor("") : color;
+        Color = color == null ? new StoatColor("") : color;
     }
     private MessageMasquerade(MessageMasqueradeJson model)
     {
         Name = model.Name;
         AvatarUrl = model.AvatarUrl;
         if (model.Color.HasValue)
-            Color = new RevoltColor(model.Color.Value);
+            Color = new StoatColor(model.Color.Value);
         else
-            Color = new RevoltColor("");
+            Color = new StoatColor("");
     }
 
     internal static MessageMasquerade? Create(MessageMasqueradeJson model)
@@ -30,7 +30,7 @@ public class MessageMasquerade
 
     public string? Name { get; }
     public string? AvatarUrl { get; }
-    public RevoltColor Color { get; }
+    public StoatColor Color { get; }
 
     internal MessageMasqueradeJson ToJson()
     {

@@ -1,10 +1,10 @@
 ﻿using Optionals;
 using System.Collections.Generic;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
 
-internal class ModifyRoleRequest : IRevoltRequest
+internal class ModifyRoleRequest : IStoatRequest
 {
     public Optional<string> name { get; set; }
     public Optional<string> colour { get; set; }

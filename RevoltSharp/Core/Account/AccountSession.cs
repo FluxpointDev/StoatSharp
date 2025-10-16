@@ -1,8 +1,8 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 public class AccountSession : CreatedEntity
 {
-    public AccountSession(AccountSessionJson session, RevoltClient client) : base(client, session.Id)
+    public AccountSession(AccountSessionJson session, StoatClient client) : base(client, session.Id)
     {
         Id = session.Id;
         Name = session.Name;

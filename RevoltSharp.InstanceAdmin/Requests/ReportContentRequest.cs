@@ -1,8 +1,8 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
+using StoatSharp.Rest;
 
-namespace RevoltSharp.Requests;
-internal class ReportContentRequest : IRevoltRequest
+namespace StoatSharp.Requests;
+internal class ReportContentRequest : IStoatRequest
 {
     public SafetyReportedContentJson content { get; set; } = null!;
     public Optional<string> additional_context { get; set; }

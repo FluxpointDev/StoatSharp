@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RevoltSharp.WebSocket;
+namespace StoatSharp.WebSocket;
 
 internal class EndTypingSocketRequest
 {

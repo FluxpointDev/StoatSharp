@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal delegate bool TryParseDelegate<T>(string str, out T value);

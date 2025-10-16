@@ -1,10 +1,10 @@
 ﻿using Optionals;
 using System.Collections.Generic;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
 
-internal class ModifyChannelRequest : IRevoltRequest
+internal class ModifyChannelRequest : IStoatRequest
 {
     public Optional<string> name { get; set; }
     public Optional<string> description { get; set; }

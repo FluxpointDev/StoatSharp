@@ -1,9 +1,9 @@
 ﻿using Optionals;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
 
-internal class CreateChannelRequest : IRevoltRequest
+internal class CreateChannelRequest : IStoatRequest
 {
     public string? name { get; set; }
     public Optional<string> type { get; set; }

@@ -1,6 +1,6 @@
 using System;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 // Extension of the Cosmetic Summary, for Groups, Commands, and Parameters
 /// <summary>

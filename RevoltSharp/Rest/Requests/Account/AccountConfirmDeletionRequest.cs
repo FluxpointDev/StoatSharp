@@ -1,8 +1,8 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
-internal class AccountConfirmDeletionRequest : IRevoltRequest
+internal class AccountConfirmDeletionRequest : IStoatRequest
 {
     public string token { get; set; }
 }

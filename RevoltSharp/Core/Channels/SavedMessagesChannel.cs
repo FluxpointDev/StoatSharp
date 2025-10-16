@@ -1,11 +1,11 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 /// <summary>
 /// A private notes channel for the current user.
 /// </summary>
 public class SavedMessagesChannel : Channel
 {
-    internal SavedMessagesChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal SavedMessagesChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         Type = ChannelType.SavedMessages;
         LastMessageId = model.LastMessageId;

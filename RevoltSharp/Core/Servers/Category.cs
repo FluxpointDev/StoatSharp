@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public class ServerCategory : CreatedEntity
 {
-    internal ServerCategory(RevoltClient client, string serverId, CategoryJson model, int position) : base(client, model.id)
+    internal ServerCategory(StoatClient client, string serverId, CategoryJson model, int position) : base(client, model.id)
     {
         Name = model.title;
         ChannelIds = model.channels;
@@ -27,7 +27,7 @@ public class ServerCategory : CreatedEntity
     [JsonIgnore]
     public IReadOnlyList<ServerChannel> Channels { get; internal set; } = new List<ServerChannel>();
 
-    internal void Update(RevoltClient client, CategoryJson model, int position)
+    internal void Update(StoatClient client, CategoryJson model, int position)
     {
         Name = model.title;
         ChannelIds = model.channels;
@@ -35,7 +35,7 @@ public class ServerCategory : CreatedEntity
         UpdateChannels(client);
     }
 
-    internal void UpdateChannels(RevoltClient client)
+    internal void UpdateChannels(StoatClient client)
     {
         if (client.WebSocket != null)
         {

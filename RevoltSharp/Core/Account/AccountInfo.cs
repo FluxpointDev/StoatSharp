@@ -1,8 +1,8 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 public class AccountInfo : CreatedEntity
 {
-    internal AccountInfo(RevoltClient client, AccountInfoJson json) : base(client, json._id)
+    internal AccountInfo(StoatClient client, AccountInfoJson json) : base(client, json._id)
     {
         Email = json.email;
     }

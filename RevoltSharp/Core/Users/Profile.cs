@@ -1,9 +1,9 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 public class Profile : Entity
 {
-    internal Profile(RevoltClient client, ProfileJson model) : base(client)
+    internal Profile(StoatClient client, ProfileJson model) : base(client)
     {
         Bio = model.Content.Value;
         Background = Attachment.Create(client, model.Background.Value);

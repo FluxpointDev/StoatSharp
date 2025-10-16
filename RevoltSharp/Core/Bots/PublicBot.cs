@@ -1,11 +1,11 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 /// <summary>
-/// Info about a public bot on Revolt.
+/// Info about a public bot on Stoat.
 /// </summary>
 public class PublicBot : CreatedEntity
 {
-    internal PublicBot(RevoltClient client, PublicBotJson model) : base(client, model.Id)
+    internal PublicBot(StoatClient client, PublicBotJson model) : base(client, model.Id)
     {
         Username = model.Username!;
         AvatarId = model.AvatarId;

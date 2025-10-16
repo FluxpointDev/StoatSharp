@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Optionals;
-using RevoltSharp.WebSocket.Events;
+using StoatSharp.WebSocket.Events;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,22 +12,22 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.WebSocket;
+namespace StoatSharp.WebSocket;
 
 
-internal class RevoltSocketClient
+internal class StoatSocketClient
 {
-    internal RevoltSocketClient(RevoltClient client)
+    internal StoatSocketClient(StoatClient client)
     {
         Client = client;
         if (string.IsNullOrEmpty(client.Config.Debug.WebsocketUrl))
-            throw new RevoltException("Client config WebsocketUrl can not be empty.");
+            throw new StoatException("Client config WebsocketUrl can not be empty.");
 
         if (!Uri.IsWellFormedUriString(client.Config.Debug.WebsocketUrl, UriKind.Absolute))
-            throw new RevoltException("Client config WebsocketUrl is an invalid format.");
+            throw new StoatException("Client config WebsocketUrl is an invalid format.");
     }
 
-    internal RevoltClient Client { get; }
+    internal StoatClient Client { get; }
 
     private bool _firstConnected { get; set; } = true;
     private bool _firstError = true;
@@ -80,22 +80,22 @@ internal class RevoltSocketClient
                     if (_firstConnected)
                     {
                         if (we.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
-                            Client.InvokeLogAndThrowException("Failed to connect to Revolt, the instance may be down or having issues.");
+                            Client.InvokeLogAndThrowException("Failed to connect to Stoat, the instance may be down or having issues.");
 
-                        Client.InvokeLogAndThrowException("Failed to connect to Revolt.");
+                        Client.InvokeLogAndThrowException("Failed to connect to Stoat.");
                     }
                     else
                     {
                         if (we.WebSocketErrorCode != WebSocketError.ConnectionClosedPrematurely)
-                            Client.InvokeLog($"WebSocket Internal Error {we.ErrorCode} {we.WebSocketErrorCode}", RevoltLogSeverity.Error);
+                            Client.InvokeLog($"WebSocket Internal Error {we.ErrorCode} {we.WebSocketErrorCode}", StoatLogSeverity.Error);
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    Client.InvokeLog($"WebSocket Error {ex.Message}", RevoltLogSeverity.Error);
+                    Client.InvokeLog($"WebSocket Error {ex.Message}", StoatLogSeverity.Error);
                     if (_firstConnected)
-                        Client.InvokeLogAndThrowException("Failed to connect to Revolt.");
+                        Client.InvokeLogAndThrowException("Failed to connect to Stoat.");
                 }
                 await Task.Delay(_firstError ? 3000 : 10000, CancellationToken);
                 _firstError = false;
@@ -160,10 +160,10 @@ internal class RevoltSocketClient
                     if (_firstConnected)
                     {
                         Client.InvokeConnected();
-                        Client.InvokeLog("WebSocket Connected!", RevoltLogSeverity.Debug);
+                        Client.InvokeLog("WebSocket Connected!", StoatLogSeverity.Debug);
                     }
                     else
-                        Client.InvokeLog("WebSocket Reconnected!", RevoltLogSeverity.Debug);
+                        Client.InvokeLog("WebSocket Reconnected!", StoatLogSeverity.Debug);
 
                     _firstConnected = false;
                     await Send(WebSocket, JsonConvert.SerializeObject(new HeartbeatSocketRequest()), CancellationToken);
@@ -209,12 +209,12 @@ internal class RevoltSocketClient
                         if (Client.Config.Debug.LogWebSocketError)
                             Client.Logger.LogJson("WebSocket Error", json);
 
-                        if (@event.Error == RevoltErrorType.InvalidSession)
+                        if (@event.Error == StoatErrorType.InvalidSession)
                         {
                             if (_firstConnected)
-                                Client.InvokeLog("WebSocket session is invalid, check if your bot token is correct.", RevoltLogSeverity.Error);
+                                Client.InvokeLog("WebSocket session is invalid, check if your bot token is correct.", StoatLogSeverity.Error);
                             else
-                                Client.InvokeLog("WebSocket session was invalidated!", RevoltLogSeverity.Error);
+                                Client.InvokeLog("WebSocket session was invalidated!", StoatLogSeverity.Error);
 
                             await Client.StopAsync();
                         }
@@ -226,7 +226,7 @@ internal class RevoltSocketClient
                     {
                         try
                         {
-                            ReadyEventJson @event = payload.ToObject<ReadyEventJson>(RevoltClient.Deserializer);
+                            ReadyEventJson @event = payload.ToObject<ReadyEventJson>(StoatClient.Deserializer);
                             if (Client.Config.Debug.LogWebSocketReady)
                                 Client.Logger.LogJson("WebSocket Ready", json);
 
@@ -243,7 +243,7 @@ internal class RevoltSocketClient
                             if (SocketSelfUser == null)
                             {
                                 Client.InvokeLog("Fatal error, could not load bot user.\n" +
-                                    "WebSocket connection has been stopped.", RevoltLogSeverity.Error);
+                                    "WebSocket connection has been stopped.", StoatLogSeverity.Error);
                                 await Client.StopAsync();
                             }
 
@@ -288,7 +288,7 @@ internal class RevoltSocketClient
                                     s.InternalEmojis.TryAdd(m.Id, Emote);
                             }
 
-                            Client.InvokeLog("WebSocket Ready!", RevoltLogSeverity.Debug);
+                            Client.InvokeLog("WebSocket Ready!", StoatLogSeverity.Debug);
 
                             Client.InvokeReady(CurrentUser);
 
@@ -315,7 +315,7 @@ internal class RevoltSocketClient
                             {
                                 Message = "Fatal error, could not parse ready event.\n" +
                                 "WebSocket connection has been stopped.",
-                                Type = RevoltErrorType.Unknown
+                                Type = StoatErrorType.Unknown
                             });
                             await Client.StopAsync();
                         }
@@ -323,7 +323,7 @@ internal class RevoltSocketClient
                     break;
                 case "Message":
                     {
-                        MessageEventJson @event = payload.ToObject<MessageEventJson>(RevoltClient.Deserializer);
+                        MessageEventJson @event = payload.ToObject<MessageEventJson>(StoatClient.Deserializer);
                         User? User = null;
                         if (@event.AuthorId != User.SystemUserId && @event.Webhook == null && !UserCache.ContainsKey(@event.AuthorId))
                         {
@@ -368,7 +368,7 @@ internal class RevoltSocketClient
                     break;
                 case "MessageUpdate":
                     {
-                        MessageUpdateEventJson @event = payload.ToObject<MessageUpdateEventJson>(RevoltClient.Deserializer);
+                        MessageUpdateEventJson @event = payload.ToObject<MessageUpdateEventJson>(StoatClient.Deserializer);
 
                         if (!ChannelCache.ContainsKey(@event.ChannelId))
                         {
@@ -383,7 +383,7 @@ internal class RevoltSocketClient
                     break;
                 case "MessageDelete":
                     {
-                        MessageDeleteEventJson @event = payload.ToObject<MessageDeleteEventJson>(RevoltClient.Deserializer);
+                        MessageDeleteEventJson @event = payload.ToObject<MessageDeleteEventJson>(StoatClient.Deserializer);
 
                         if (!ChannelCache.TryGetValue(@event.ChannelId, out Channel channel))
                         {
@@ -397,7 +397,7 @@ internal class RevoltSocketClient
                     break;
                 case "BulkMessageDelete":
                     {
-                        MessageDeleteEventJson @event = payload.ToObject<MessageDeleteEventJson>(RevoltClient.Deserializer);
+                        MessageDeleteEventJson @event = payload.ToObject<MessageDeleteEventJson>(StoatClient.Deserializer);
 
                         if (!ChannelCache.TryGetValue(@event.ChannelId, out Channel channel))
                         {
@@ -412,7 +412,7 @@ internal class RevoltSocketClient
 
                 case "ChannelCreate":
                     {
-                        ChannelEventJson @event = payload.ToObject<ChannelEventJson>(RevoltClient.Deserializer);
+                        ChannelEventJson @event = payload.ToObject<ChannelEventJson>(StoatClient.Deserializer);
                         Channel chan = Channel.Create(Client, @event);
                         ChannelCache.TryAdd(chan.Id, chan);
 
@@ -463,7 +463,7 @@ internal class RevoltSocketClient
                     break;
                 case "ChannelUpdate":
                     {
-                        ChannelUpdateEventJson @event = payload.ToObject<ChannelUpdateEventJson>(RevoltClient.Deserializer);
+                        ChannelUpdateEventJson @event = payload.ToObject<ChannelUpdateEventJson>(StoatClient.Deserializer);
                         if (!ChannelCache.TryGetValue(@event.ChannelId, out Channel chan))
                         {
                             await Client.Rest.GetChannelAsync(@event.ChannelId);
@@ -491,7 +491,7 @@ internal class RevoltSocketClient
                     break;
                 case "ChannelDelete":
                     {
-                        ChannelDeleteEventJson @event = payload.ToObject<ChannelDeleteEventJson>(RevoltClient.Deserializer);
+                        ChannelDeleteEventJson @event = payload.ToObject<ChannelDeleteEventJson>(StoatClient.Deserializer);
                         if (!ChannelCache.TryRemove(@event.ChannelId, out Channel chan))
                             return;
 
@@ -505,7 +505,7 @@ internal class RevoltSocketClient
                     break;
                 case "ChannelGroupJoin":
                     {
-                        ChannelGroupJoinEventJson @event = payload.ToObject<ChannelGroupJoinEventJson>(RevoltClient.Deserializer);
+                        ChannelGroupJoinEventJson @event = payload.ToObject<ChannelGroupJoinEventJson>(StoatClient.Deserializer);
                         if (@event.UserId == CurrentUser.Id)
                         {
                             // Might be obsolete
@@ -533,14 +533,14 @@ internal class RevoltSocketClient
                     break;
                 case "ChannelGroupLeave":
                     {
-                        ChannelGroupLeaveEventJson @event = payload.ToObject<ChannelGroupLeaveEventJson>(RevoltClient.Deserializer);
+                        ChannelGroupLeaveEventJson @event = payload.ToObject<ChannelGroupLeaveEventJson>(StoatClient.Deserializer);
                         if (!ChannelCache.TryGetValue(@event.ChannelId, out Channel Channel))
                             return;
                         GroupChannel GC = Channel as GroupChannel;
 
                         if (@event.UserId == CurrentUser.Id)
                         {
-                            Client.InvokeLog("Left Group: " + GC.Name, RevoltLogSeverity.Debug);
+                            Client.InvokeLog("Left Group: " + GC.Name, StoatLogSeverity.Debug);
                             ChannelCache.TryRemove(@event.ChannelId, out Channel chan);
                             _ = Task.Run(() =>
                             {
@@ -569,7 +569,7 @@ internal class RevoltSocketClient
 
                 case "ServerCreate":
                     {
-                        ServerJoinEventJson @event = payload.ToObject<ServerJoinEventJson>(RevoltClient.Deserializer);
+                        ServerJoinEventJson @event = payload.ToObject<ServerJoinEventJson>(StoatClient.Deserializer);
                         Server server = new Server(Client, @event.ServerJson);
                         ServerCache.TryAdd(@event.ServerJson.Id, server);
                         if (UserCache.TryGetValue(server.OwnerId, out User Owner))
@@ -587,7 +587,7 @@ internal class RevoltSocketClient
                     break;
                 case "ServerUpdate":
                     {
-                        ServerUpdateEventJson @event = payload.ToObject<ServerUpdateEventJson>(RevoltClient.Deserializer);
+                        ServerUpdateEventJson @event = payload.ToObject<ServerUpdateEventJson>(StoatClient.Deserializer);
                         if (!ServerCache.TryGetValue(@event.ServerId, out Server server))
                             return;
 
@@ -616,7 +616,7 @@ internal class RevoltSocketClient
                     break;
                 case "ServerDelete":
                     {
-                        ServerDeleteEventJson @event = payload.ToObject<ServerDeleteEventJson>(RevoltClient.Deserializer);
+                        ServerDeleteEventJson @event = payload.ToObject<ServerDeleteEventJson>(StoatClient.Deserializer);
                         if (!ServerCache.TryRemove(@event.ServerId, out Server server))
                             return;
 
@@ -641,7 +641,7 @@ internal class RevoltSocketClient
                     break;
                 case "ServerMemberUpdate":
                     {
-                        ServerMemberUpdateEventJson @event = payload.ToObject<ServerMemberUpdateEventJson>(RevoltClient.Deserializer);
+                        ServerMemberUpdateEventJson @event = payload.ToObject<ServerMemberUpdateEventJson>(StoatClient.Deserializer);
                         if (!ServerCache.TryGetValue(@event.Id.Server, out Server Server))
                             return;
 
@@ -681,14 +681,14 @@ internal class RevoltSocketClient
                     break;
                 case "ServerMemberJoin":
                     {
-                        ServerMemberJoinEventJson @event = payload.ToObject<ServerMemberJoinEventJson>(RevoltClient.Deserializer);
+                        ServerMemberJoinEventJson @event = payload.ToObject<ServerMemberJoinEventJson>(StoatClient.Deserializer);
                         if (@event.UserId == CurrentUser.Id)
                         {
                             Server server = await Client.Rest.GetServerAsync(@event.ServerId);
                             if (server == null)
                                 return;
 
-                            Client.InvokeLog("Joined Server: " + server.Name, RevoltLogSeverity.Debug);
+                            Client.InvokeLog("Joined Server: " + server.Name, StoatLogSeverity.Debug);
 
                             ServerMember Member = new ServerMember(Client, new ServerMemberJson { Id = new ServerMemberIdsJson { Server = @event.ServerId, User = @event.UserId }, JoinedAt = DateTime.UtcNow }, null, CurrentUser);
                             server.AddMember(Member);
@@ -715,7 +715,7 @@ internal class RevoltSocketClient
                     break;
                 case "ServerMemberLeave":
                     {
-                        ServerMemberLeaveEventJson @event = payload.ToObject<ServerMemberLeaveEventJson>(RevoltClient.Deserializer);
+                        ServerMemberLeaveEventJson @event = payload.ToObject<ServerMemberLeaveEventJson>(StoatClient.Deserializer);
                         if (@event.UserId == CurrentUser.Id)
                         {
                             if (!ServerCache.TryRemove(@event.ServerId, out Server server))
@@ -724,7 +724,7 @@ internal class RevoltSocketClient
                                 return;
                             }
 
-                            Client.InvokeLog("Left Server: " + server.Name, RevoltLogSeverity.Debug);
+                            Client.InvokeLog("Left Server: " + server.Name, StoatLogSeverity.Debug);
                             _ = Task.Run(() =>
                             {
                                 foreach (string c in server.ChannelIds)
@@ -780,7 +780,7 @@ internal class RevoltSocketClient
                     break;
                 case "ServerRoleUpdate":
                     {
-                        ServerRoleUpdateEventJson @event = payload.ToObject<ServerRoleUpdateEventJson>(RevoltClient.Deserializer);
+                        ServerRoleUpdateEventJson @event = payload.ToObject<ServerRoleUpdateEventJson>(StoatClient.Deserializer);
                         if (!ServerCache.TryGetValue(@event.ServerId, out Server server))
                             return;
 
@@ -813,7 +813,7 @@ internal class RevoltSocketClient
                     break;
                 case "ServerRoleDelete":
                     {
-                        ServerRoleEventsJson @event = payload.ToObject<ServerRoleEventsJson>(RevoltClient.Deserializer);
+                        ServerRoleEventsJson @event = payload.ToObject<ServerRoleEventsJson>(StoatClient.Deserializer);
                         if (!ServerCache.TryGetValue(@event.Id, out Server server))
                             return;
 
@@ -841,7 +841,7 @@ internal class RevoltSocketClient
                     break;
                 case "UserUpdate":
                     {
-                        UserUpdateEventJson @event = payload.ToObject<UserUpdateEventJson>(RevoltClient.Deserializer);
+                        UserUpdateEventJson @event = payload.ToObject<UserUpdateEventJson>(StoatClient.Deserializer);
                         if (!UserCache.TryGetValue(@event.Id, out User user))
                             return;
                         if (@event.Clear.HasValue)
@@ -882,7 +882,7 @@ internal class RevoltSocketClient
                     break;
                 case "UserRelationship":
                     {
-                        UserRelationshipEventJson @event = payload.ToObject<UserRelationshipEventJson>(RevoltClient.Deserializer);
+                        UserRelationshipEventJson @event = payload.ToObject<UserRelationshipEventJson>(StoatClient.Deserializer);
                         Client.Logger.LogJson("Relationship", @event);
 
                         if (UserCache.TryGetValue(@event.User.Id, out User user))
@@ -906,7 +906,7 @@ internal class RevoltSocketClient
                     break;
                 case "EmojiCreate":
                     {
-                        ServerEmojiCreatedEventJson @event = payload.ToObject<ServerEmojiCreatedEventJson>(RevoltClient.Deserializer);
+                        ServerEmojiCreatedEventJson @event = payload.ToObject<ServerEmojiCreatedEventJson>(StoatClient.Deserializer);
                         Emoji AddedEmoji = new Emoji(Client, @event);
                         EmojiCache.TryAdd(AddedEmoji.Id, AddedEmoji);
 
@@ -919,7 +919,7 @@ internal class RevoltSocketClient
                     break;
                 case "EmojiDelete":
                     {
-                        ServerEmojiDeleteEventJson @event = payload.ToObject<ServerEmojiDeleteEventJson>(RevoltClient.Deserializer);
+                        ServerEmojiDeleteEventJson @event = payload.ToObject<ServerEmojiDeleteEventJson>(StoatClient.Deserializer);
                         if (!EmojiCache.TryRemove(@event.EmojiId, out Emoji Emoji))
                             return;
 
@@ -934,7 +934,7 @@ internal class RevoltSocketClient
                 case "MessageReact":
                     {
 
-                        ReactionAddedEventJson @event = payload.ToObject<ReactionAddedEventJson>(RevoltClient.Deserializer);
+                        ReactionAddedEventJson @event = payload.ToObject<ReactionAddedEventJson>(StoatClient.Deserializer);
 
                         ChannelCache.TryGetValue(@event.ChannelId, out Channel channel);
                         if (channel == null)
@@ -974,7 +974,7 @@ internal class RevoltSocketClient
                     break;
                 case "MessageUnreact":
                     {
-                        ReactionRemovedEventJson @event = payload.ToObject<ReactionRemovedEventJson>(RevoltClient.Deserializer);
+                        ReactionRemovedEventJson @event = payload.ToObject<ReactionRemovedEventJson>(StoatClient.Deserializer);
 
                         ChannelCache.TryGetValue(@event.ChannelId, out Channel channel);
                         if (channel == null)
@@ -1014,7 +1014,7 @@ internal class RevoltSocketClient
                     break;
                 case "MessageRemoveReaction":
                     {
-                        ReactionRemovedEventJson @event = payload.ToObject<ReactionRemovedEventJson>(RevoltClient.Deserializer);
+                        ReactionRemovedEventJson @event = payload.ToObject<ReactionRemovedEventJson>(StoatClient.Deserializer);
 
                         ChannelCache.TryGetValue(@event.ChannelId, out Channel channel);
                         if (channel == null)
@@ -1045,7 +1045,7 @@ internal class RevoltSocketClient
                     break;
                 case "UserPlatformWipe":
                     {
-                        UserPlatformWipedEventJson @event = payload.ToObject<UserPlatformWipedEventJson>(RevoltClient.Deserializer);
+                        UserPlatformWipedEventJson @event = payload.ToObject<UserPlatformWipedEventJson>(StoatClient.Deserializer);
                         if (!UserCache.Remove(@event.UserId, out User User))
                         {
                             User = await Client.Rest.GetUserAsync(@event.UserId);
@@ -1087,13 +1087,13 @@ internal class RevoltSocketClient
                     break;
                 case "WebhookCreate":
                     {
-                        WebhookCreateEventJson @event = payload.ToObject<WebhookCreateEventJson>(RevoltClient.Deserializer);
+                        WebhookCreateEventJson @event = payload.ToObject<WebhookCreateEventJson>(StoatClient.Deserializer);
                         Client.InvokeWebhookCreated(new Webhook(Client, @event));
                     }
                     break;
                 case "Logout":
                     {
-                        Client.Logger.LogMessage("Client has been logged out by the server, this may be an expired session or the bot token has been reset.", RevoltLogSeverity.Warn);
+                        Client.Logger.LogMessage("Client has been logged out by the server, this may be an expired session or the bot token has been reset.", StoatLogSeverity.Warn);
 
                         Client.InvokeLogout();
 
@@ -1114,7 +1114,7 @@ internal class RevoltSocketClient
         }
         catch (Exception ex)
         {
-            Client.InvokeLog($"WebSocket Event {payload["type"].ToString()} Error ", RevoltLogSeverity.Error);
+            Client.InvokeLog($"WebSocket Event {payload["type"].ToString()} Error ", StoatLogSeverity.Error);
             Console.WriteLine(ex);
         }
     }

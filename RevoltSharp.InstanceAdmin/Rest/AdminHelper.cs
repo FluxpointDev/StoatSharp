@@ -1,15 +1,15 @@
 ﻿using Optionals;
-using RevoltSharp.Requests;
+using StoatSharp.Requests;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 public static class AdminHelper
 {
-    public static async Task<IReadOnlyCollection<UserMessage>> GetMessagesAsync(this AdminClient admin, string channelId = null, string userId = null, string query = null, int messageCount = 100, bool includeAuthor = false, string nearbyMessageId = null, string beforeMessageId = null, string afterMessageId = null)
+    public static async Task<IReadOnlyCollection<UserMessage>> GetMessagesAsync(this StoatAdminClient admin, string channelId = null, string userId = null, string query = null, int messageCount = 100, bool includeAuthor = false, string nearbyMessageId = null, string beforeMessageId = null, string afterMessageId = null)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(GetMessagesAsync));
         Conditions.ChannelIdLength(channelId, nameof(GetMessagesAsync));

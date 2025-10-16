@@ -1,5 +1,5 @@
 using Optionals;
-using RevoltSharp.Commands.Builders;
+using StoatSharp.Commands.Builders;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -9,15 +9,15 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 /// <summary>
-///     Provides a framework for building RevoltSharp bot commands.
+///     Provides a framework for building StoatSharp bot commands.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service provides a framework for building RevoltSharp bot commands both dynamically via runtime builders or
+///         The service provides a framework for building StoatSharp bot commands both dynamically via runtime builders or
 ///         statically via compile-time modules. To create a command module at compile-time, see
 ///         <see cref="ModuleBase" /> (most common); otherwise, see <see cref="ModuleBuilder" />.
 ///     </para>
@@ -30,7 +30,7 @@ namespace RevoltSharp.Commands;
 public class CommandService : IDisposable
 {
     /// <summary>
-    /// Version of the current RevoltSharp.Commands lib installed.
+    /// Version of the current StoatSharp.Commands lib installed.
     /// </summary>
     public static string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 

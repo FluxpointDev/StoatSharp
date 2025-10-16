@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp.WebSocket;
+﻿namespace StoatSharp.WebSocket;
 internal class WebhookCreateEventJson : WebhookJson
 {
 

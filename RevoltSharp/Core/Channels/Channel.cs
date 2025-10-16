@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
-/// Revolt channel that can be casted to types <see cref="GroupChannel"/>, <see cref="TextChannel"/>, <see cref="VoiceChannel"/> <see cref="ServerChannel" /> <see cref="UnknownServerChannel" /> or <see cref="UnknownChannel"/>
+/// Stoat channel that can be casted to types <see cref="GroupChannel"/>, <see cref="TextChannel"/>, <see cref="VoiceChannel"/> <see cref="ServerChannel" /> <see cref="UnknownServerChannel" /> or <see cref="UnknownChannel"/>
 /// </summary>
 public abstract class Channel : CreatedEntity
 {
@@ -22,7 +22,7 @@ public abstract class Channel : CreatedEntity
     /// </summary>
     public ChannelType Type { get; internal set; }
 
-    internal Channel(RevoltClient client, ChannelJson model)
+    internal Channel(StoatClient client, ChannelJson model)
         : base(client, model?.Id)
     { }
 
@@ -33,7 +33,7 @@ public abstract class Channel : CreatedEntity
         return (Channel)this.MemberwiseClone();
     }
 
-    internal static Channel Create(RevoltClient client, ChannelJson model)
+    internal static Channel Create(StoatClient client, ChannelJson model)
     {
         switch (model.ChannelType)
         {

@@ -1,19 +1,19 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt http/rest methods for current user/bot account.
+/// Stoat http/rest methods for current user/bot account.
 /// </summary>
 public static class SelfUserHelper
 {
-    /// <inheritdoc cref="ModifySelfAsync(RevoltRestClient, Option{string}, Option{string}, Option{UserStatusType}, Option{string}, Option{string})" />
+    /// <inheritdoc cref="ModifySelfAsync(StoatRestClient, Option{string}, Option{string}, Option{UserStatusType}, Option{string}, Option{string})" />
     public static Task<SelfUser> ModifySelfAsync(this SelfUser user, Option<string> avatar = null, Option<string> statusText = null, Option<UserStatusType> statusType = null, Option<string> profileBio = null, Option<string> profileBackground = null)
        => ModifySelfAsync(user.Client.Rest, avatar, statusText, statusType, profileBio, profileBackground);
 
@@ -23,8 +23,8 @@ public static class SelfUserHelper
     /// <returns>
     /// Modified <see cref="SelfUser"/>
     /// </returns>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<SelfUser> ModifySelfAsync(this RevoltRestClient rest, Option<string> avatar = null, Option<string> statusText = null, Option<UserStatusType> statusType = null, Option<string> profileBio = null, Option<string> profileBackground = null)
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<SelfUser> ModifySelfAsync(this StoatRestClient rest, Option<string> avatar = null, Option<string> statusText = null, Option<UserStatusType> statusType = null, Option<string> profileBio = null, Option<string> profileBackground = null)
     {
         if (avatar != null)
             Conditions.AvatarIdLength(avatar.Value, nameof(ModifySelfAsync));
@@ -42,7 +42,7 @@ public static class SelfUserHelper
         return new SelfUser(rest.Client, Json);
     }
 
-    /// <inheritdoc cref="GetPrivateChannelsAsync(RevoltRestClient)"/>
+    /// <inheritdoc cref="GetPrivateChannelsAsync(StoatRestClient)"/>
     public static Task<IReadOnlyCollection<Channel>?> GetPrivateChannelsAsync(SelfUser user)
         => GetPrivateChannelsAsync(user.Client.Rest);
 
@@ -52,8 +52,8 @@ public static class SelfUserHelper
     /// <returns>
     /// List of <see cref="Channel"/> that can be cast to <see cref="DMChannel"/> or <see cref="GroupChannel"/>
     /// </returns>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<IReadOnlyCollection<Channel>?> GetPrivateChannelsAsync(this RevoltRestClient rest)
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<IReadOnlyCollection<Channel>?> GetPrivateChannelsAsync(this StoatRestClient rest)
     {
         HashSet<ChannelJson>? Channels = await rest.GetAsync<HashSet<ChannelJson>>("users/dms");
         if (Channels == null)

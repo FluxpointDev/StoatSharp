@@ -1,8 +1,8 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
-internal class AccountVerificationRequest : IRevoltRequest
+internal class AccountVerificationRequest : IStoatRequest
 {
     public string email { get; set; }
     public string captcha { get; set; }

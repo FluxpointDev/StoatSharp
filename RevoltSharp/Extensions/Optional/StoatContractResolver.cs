@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using RevoltSharp;
+using StoatSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,10 @@ using System.Reflection;
 
 namespace Optionals;
 
-public class RevoltContractResolver : DefaultContractResolver
+public class StoatContractResolver : DefaultContractResolver
 {
     private static readonly TypeInfo _ienumerable = typeof(IEnumerable<ulong[]>).GetTypeInfo();
-    private static readonly MethodInfo _shouldSerialize = typeof(RevoltContractResolver).GetTypeInfo().GetDeclaredMethod("ShouldSerialize");
+    private static readonly MethodInfo _shouldSerialize = typeof(StoatContractResolver).GetTypeInfo().GetDeclaredMethod("ShouldSerialize");
 
     protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
     {

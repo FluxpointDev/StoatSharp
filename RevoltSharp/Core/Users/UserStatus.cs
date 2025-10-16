@@ -1,7 +1,7 @@
 ﻿using Optionals;
 using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -55,12 +55,12 @@ public class UserStatus
 public enum UserStatusType
 {
     /// <summary>
-    /// User is not online on Revolt.
+    /// User is not online on Stoat.
     /// </summary>
     Offline,
 
     /// <summary>
-    /// User is online and using Revolt.
+    /// User is online and using Stoat.
     /// </summary>
     Online,
 

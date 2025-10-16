@@ -1,6 +1,6 @@
 using System;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 /// <summary>
 ///     Prevents the marked module from being loaded automatically.

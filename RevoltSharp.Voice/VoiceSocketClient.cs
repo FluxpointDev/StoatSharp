@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class VoiceSocketClient
 {
-    public VoiceSocketClient(RevoltClient client, string channelId, string token)
+    public VoiceSocketClient(StoatClient client, string channelId, string token)
     {
-        RevoltClient = client;
+        StoatClient = client;
         Token = token;
         ChannelId = channelId;
     }
@@ -22,7 +22,7 @@ public class VoiceSocketClient
     internal string ChannelId;
     internal bool StopWebSocket = false;
 
-    internal RevoltClient RevoltClient;
+    internal StoatClient StoatClient;
     internal ClientWebSocket? WebSocket;
     internal CancellationToken CancellationToken = new CancellationToken();
 
@@ -38,12 +38,12 @@ public class VoiceSocketClient
                 {
                     Uri uri = new Uri($"test");
 
-                    if (!string.IsNullOrEmpty(RevoltClient.Config.CfClearance))
+                    if (!string.IsNullOrEmpty(StoatClient.Config.CfClearance))
                     {
                         WebSocket.Options.Cookies = new System.Net.CookieContainer();
-                        WebSocket.Options.Cookies.SetCookies(uri, $"cf_clearance={RevoltClient.Config.CfClearance}");
+                        WebSocket.Options.Cookies.SetCookies(uri, $"cf_clearance={StoatClient.Config.CfClearance}");
                     }
-                    WebSocket.Options.SetRequestHeader("User-Agent", RevoltClient.Config.UserAgent);
+                    WebSocket.Options.SetRequestHeader("User-Agent", StoatClient.Config.UserAgent);
 
                     await WebSocket.ConnectAsync(uri, CancellationToken);
                     Console.WriteLine("SEND AUTH");
@@ -69,9 +69,9 @@ public class VoiceSocketClient
                     //if (_firstConnected)
                     //{
                     //	if (we.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
-                    //		Client.InvokeLogAndThrowException("Failed to connect to Revolt, the instance may be down or having issues.");
+                    //		Client.InvokeLogAndThrowException("Failed to connect to Stoat, the instance may be down or having issues.");
 
-                    //	Client.InvokeLogAndThrowException("Failed to connect to Revolt.");
+                    //	Client.InvokeLogAndThrowException("Failed to connect to Stoat.");
                     //}
                     //else
                     //{
@@ -84,7 +84,7 @@ public class VoiceSocketClient
                     Console.WriteLine("VOICE FAILED");
                     Console.WriteLine("--- WebSocket Exception ---\n" + $"{ex}");
                     //if (_firstConnected)
-                    //	Client.InvokeLogAndThrowException("Failed to connect to Revolt.");
+                    //	Client.InvokeLogAndThrowException("Failed to connect to Stoat.");
                 }
                 Console.WriteLine("VOICE FAILED");
                 StopWebSocket = true;

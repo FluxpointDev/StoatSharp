@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RevoltSharp.WebSocket.Events;
+namespace StoatSharp.WebSocket.Events;
 
 internal class BulkEventsJson
 {

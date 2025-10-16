@@ -1,16 +1,16 @@
 ﻿using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public class StoatWebhookClient
 {
     public static readonly Regex WebhookUrlRegex = new Regex(@"^(https|http)\:\/\/[a-zA-Z\d-]+\.[a-zA-Z\d-]+\/api\/webhooks\/([0-7][0-9A-HJKMNP-TV-Z]{25})\/(.*)$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
-    public StoatWebhookClient(RevoltClient client, string webhookUrl)
+    public StoatWebhookClient(StoatClient client, string webhookUrl)
     {
         if (client == null)
-            throw new RevoltArgumentException("Revolt client for webhook is missing.");
+            throw new StoatArgumentException("Stoat client for webhook is missing.");
         ParseWebhookUrl(webhookUrl, out string id, out string token);
 
         Client = client;
@@ -20,7 +20,7 @@ public class StoatWebhookClient
     }
 
     [JsonIgnore]
-    internal RevoltClient Client { get; }
+    internal StoatClient Client { get; }
 
     public string Url { get; internal set; }
 
@@ -31,11 +31,11 @@ public class StoatWebhookClient
     public static void ParseWebhookUrl(string webhookUrl, out string webhookId, out string webhookToken)
     {
         if (string.IsNullOrEmpty(webhookUrl))
-            throw new RevoltArgumentException("Webhook url is missing.");
+            throw new StoatArgumentException("Webhook url is missing.");
 
 
-        RevoltArgumentException ex(string reason = null)
-            => new RevoltArgumentException($"The webhook url format is invalid. {reason}");
+        StoatArgumentException ex(string reason = null)
+            => new StoatArgumentException($"The webhook url format is invalid. {reason}");
 
         Match match = WebhookUrlRegex.Match(webhookUrl);
 

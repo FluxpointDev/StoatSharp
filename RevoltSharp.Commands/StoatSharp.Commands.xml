@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>RevoltSharp.Commands</name>
+        <name>StoatSharp.Commands</name>
     </assembly>
     <members>
-        <member name="T:RevoltSharp.Commands.AliasAttribute">
+        <member name="T:StoatSharp.Commands.AliasAttribute">
             <summary>
                 Marks the aliases for a command.
             </summary>
@@ -26,60 +26,60 @@
                 </code>
             </example>
         </member>
-        <member name="P:RevoltSharp.Commands.AliasAttribute.Aliases">
+        <member name="P:StoatSharp.Commands.AliasAttribute.Aliases">
             <summary>
                 Gets the aliases which have been defined for the command.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.AliasAttribute.#ctor(System.String[])">
+        <member name="M:StoatSharp.Commands.AliasAttribute.#ctor(System.String[])">
             <summary>
-                Creates a new <see cref="T:RevoltSharp.Commands.AliasAttribute" /> with the given aliases.
+                Creates a new <see cref="T:StoatSharp.Commands.AliasAttribute" /> with the given aliases.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandAttribute">
+        <member name="T:StoatSharp.Commands.CommandAttribute">
             <summary>
                 Marks the execution information for a command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandAttribute.Text">
+        <member name="P:StoatSharp.Commands.CommandAttribute.Text">
             <summary>
                 Gets the text that has been set to be recognized as a command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandAttribute.IgnoreExtraArgs">
+        <member name="P:StoatSharp.Commands.CommandAttribute.IgnoreExtraArgs">
             <summary>
             Ignore extra arguments passed instead of erroring.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandAttribute.#ctor">
+        <member name="M:StoatSharp.Commands.CommandAttribute.#ctor">
             <summary>
-            Initializes a new <see cref="T:RevoltSharp.Commands.CommandAttribute" /> attribute with the specified name.
+            Initializes a new <see cref="T:StoatSharp.Commands.CommandAttribute" /> attribute with the specified name.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandAttribute.#ctor(System.String)">
+        <member name="M:StoatSharp.Commands.CommandAttribute.#ctor(System.String)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.CommandAttribute" /> attribute with the specified name.
+                Initializes a new <see cref="T:StoatSharp.Commands.CommandAttribute" /> attribute with the specified name.
             </summary>
             <param name="text">The name of the command.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandAttribute.#ctor(System.String,System.Boolean)">
+        <member name="M:StoatSharp.Commands.CommandAttribute.#ctor(System.String,System.Boolean)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.CommandAttribute" /> attribute with the specified name.
+                Initializes a new <see cref="T:StoatSharp.Commands.CommandAttribute" /> attribute with the specified name.
             </summary>
             <param name="text">The name of the command.</param>
             <param name="ignoreExtraArgs">Ignore extra arguments passed.</param>
         </member>
-        <member name="T:RevoltSharp.Commands.DontAutoLoadAttribute">
+        <member name="T:StoatSharp.Commands.DontAutoLoadAttribute">
             <summary>
                 Prevents the marked module from being loaded automatically.
             </summary>
             <remarks>
-                This attribute tells <see cref="T:RevoltSharp.Commands.CommandService" /> to ignore the marked module from being loaded
-                automatically (e.g. the <see cref="M:RevoltSharp.Commands.CommandService.AddModulesAsync(System.Reflection.Assembly,System.IServiceProvider)" /> method). If a non-public module marked
+                This attribute tells <see cref="T:StoatSharp.Commands.CommandService" /> to ignore the marked module from being loaded
+                automatically (e.g. the <see cref="M:StoatSharp.Commands.CommandService.AddModulesAsync(System.Reflection.Assembly,System.IServiceProvider)" /> method). If a non-public module marked
                 with this attribute is attempted to be loaded manually, the loading process will also fail.
             </remarks>
         </member>
-        <member name="T:RevoltSharp.Commands.DontInjectAttribute">
+        <member name="T:StoatSharp.Commands.DontInjectAttribute">
             <summary>
                 Prevents the marked property from being injected into a module.
             </summary>
@@ -103,65 +103,65 @@
                 </code>
             </example>
         </member>
-        <member name="T:RevoltSharp.Commands.GroupAttribute">
+        <member name="T:StoatSharp.Commands.GroupAttribute">
             <summary>
                 Marks the module as a command group.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.GroupAttribute.Prefix">
+        <member name="P:StoatSharp.Commands.GroupAttribute.Prefix">
             <summary>
                 Gets the prefix set for the module.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.GroupAttribute.#ctor">
+        <member name="M:StoatSharp.Commands.GroupAttribute.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.GroupAttribute.#ctor(System.String)">
+        <member name="M:StoatSharp.Commands.GroupAttribute.#ctor(System.String)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.GroupAttribute" /> with the provided prefix.
+                Initializes a new <see cref="T:StoatSharp.Commands.GroupAttribute" /> with the provided prefix.
             </summary>
             <param name="prefix">The prefix of the module group.</param>
         </member>
-        <member name="T:RevoltSharp.Commands.NameAttribute">
+        <member name="T:StoatSharp.Commands.NameAttribute">
             <summary>
                 Marks the public name of a command, module, or parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.NameAttribute.Text">
+        <member name="P:StoatSharp.Commands.NameAttribute.Text">
             <summary>
                 Gets the name of the command.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.NameAttribute.#ctor(System.String)">
+        <member name="M:StoatSharp.Commands.NameAttribute.#ctor(System.String)">
             <summary>
                 Marks the public name of a command, module, or parameter with the provided name.
             </summary>
             <param name="text">The public name of the object.</param>
         </member>
-        <member name="T:RevoltSharp.Commands.NamedArgumentTypeAttribute">
+        <member name="T:StoatSharp.Commands.NamedArgumentTypeAttribute">
             <summary>
             Instructs the command system to treat command parameters of this type
             as a collection of named arguments matching to its properties.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.OverrideTypeReaderAttribute">
+        <member name="T:StoatSharp.Commands.OverrideTypeReaderAttribute">
             <summary>
-                Marks the <see cref="T:System.Type"/> to be read by the specified <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>.
+                Marks the <see cref="T:System.Type"/> to be read by the specified <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>.
             </summary>
             <remarks>
-                This attribute will override the <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> to be used when parsing for the
+                This attribute will override the <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> to be used when parsing for the
                 desired type in the command. This is useful when one wishes to use a particular 
-                <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> without affecting other commands that are using the same target
+                <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> without affecting other commands that are using the same target
                 type.
                 <note type="warning">
-                    If the given type reader does not inherit from <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>, an 
+                    If the given type reader does not inherit from <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>, an 
                     <see cref="T:System.ArgumentException"/> will be thrown.
                 </note>
             </remarks>
             <example>
                 In this example, the <see cref="T:System.TimeSpan"/> will be read by a custom 
-                <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>, <c>FriendlyTimeSpanTypeReader</c>, instead of the 
-                <see cref="T:RevoltSharp.Commands.TimeSpanTypeReader"/>.
+                <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>, <c>FriendlyTimeSpanTypeReader</c>, instead of the 
+                <see cref="T:StoatSharp.Commands.TimeSpanTypeReader"/>.
                 <code language="cs">
                 [Command("time")]
                 public Task GetTimeAsync([OverrideTypeReader(typeof(FriendlyTimeSpanTypeReader))]TimeSpan time)
@@ -169,23 +169,23 @@
                 </code>
             </example>
         </member>
-        <member name="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader">
+        <member name="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader">
             <summary> 
-                Gets the specified <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> of the parameter. 
+                Gets the specified <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> of the parameter. 
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.OverrideTypeReaderAttribute.#ctor(System.Type)">
+        <member name="M:StoatSharp.Commands.OverrideTypeReaderAttribute.#ctor(System.Type)">
             <inheritdoc/>
-            <param name="overridenTypeReader">The <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> to be used with the parameter. </param>
-            <exception cref="T:System.ArgumentException">The given <paramref name="overridenTypeReader"/> does not inherit from <see cref="P:RevoltSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>.</exception>
+            <param name="overridenTypeReader">The <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/> to be used with the parameter. </param>
+            <exception cref="T:System.ArgumentException">The given <paramref name="overridenTypeReader"/> does not inherit from <see cref="P:StoatSharp.Commands.OverrideTypeReaderAttribute.TypeReader"/>.</exception>
         </member>
-        <member name="T:RevoltSharp.Commands.ParameterPreconditionAttribute">
+        <member name="T:StoatSharp.Commands.ParameterPreconditionAttribute">
             <summary>
                 Requires the parameter to pass the specified precondition before execution can begin.
             </summary>
-            <seealso cref="T:RevoltSharp.Commands.PreconditionAttribute"/>
+            <seealso cref="T:StoatSharp.Commands.PreconditionAttribute"/>
         </member>
-        <member name="M:RevoltSharp.Commands.ParameterPreconditionAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.ParameterInfo,System.Object,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.ParameterPreconditionAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.ParameterInfo,System.Object,System.IServiceProvider)">
             <summary>
                 Checks whether the condition is met before execution of the command.
             </summary>
@@ -194,23 +194,23 @@
             <param name="value">The raw value of the parameter.</param>
             <param name="services">The service collection used for dependency injection.</param>
         </member>
-        <member name="T:RevoltSharp.Commands.PreconditionAttribute">
+        <member name="T:StoatSharp.Commands.PreconditionAttribute">
             <summary>
                 Requires the module or class to pass the specified precondition before execution can begin.
             </summary>
-            <seealso cref="T:RevoltSharp.Commands.ParameterPreconditionAttribute"/>
+            <seealso cref="T:StoatSharp.Commands.ParameterPreconditionAttribute"/>
         </member>
-        <member name="P:RevoltSharp.Commands.PreconditionAttribute.Group">
+        <member name="P:StoatSharp.Commands.PreconditionAttribute.Group">
             <summary>
                 Specifies a group that this precondition belongs to.
             </summary>
             <remarks>
-                <see cref="T:RevoltSharp.Commands.PreconditionAttribute" /> of the same group require only one of the preconditions to pass in order to
-                be successful (A || B). Specifying <see cref="P:RevoltSharp.Commands.PreconditionAttribute.Group" /> = <c>null</c> or not at all will
+                <see cref="T:StoatSharp.Commands.PreconditionAttribute" /> of the same group require only one of the preconditions to pass in order to
+                be successful (A || B). Specifying <see cref="P:StoatSharp.Commands.PreconditionAttribute.Group" /> = <c>null</c> or not at all will
                 require *all* preconditions to pass, just like normal (A &amp;&amp; B).
             </remarks>
         </member>
-        <member name="P:RevoltSharp.Commands.PreconditionAttribute.ErrorMessage">
+        <member name="P:StoatSharp.Commands.PreconditionAttribute.ErrorMessage">
             <summary>
             When overridden in a derived class, uses the supplied string
             as the error message if the precondition doesn't pass.
@@ -218,7 +218,7 @@
             this property is a no-op.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.PreconditionAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.PreconditionAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <summary>
                 Checks if the <paramref name="command"/> has the sufficient permission to be executed.
             </summary>
@@ -226,43 +226,43 @@
             <param name="command">The command being executed.</param>
             <param name="services">The service collection used for dependency injection.</param>
         </member>
-        <member name="F:RevoltSharp.Commands.RequireBotPermissionAttribute.Server">
+        <member name="F:StoatSharp.Commands.RequireBotPermissionAttribute.Server">
             <summary>
             Server/group permission to check for.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.RequireBotPermissionAttribute.Channel">
+        <member name="F:StoatSharp.Commands.RequireBotPermissionAttribute.Channel">
             <summary>
             Channel permission to check for.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.RequireBotPermissionAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireBotPermissionAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="P:RevoltSharp.Commands.RequireContextAttribute.Contexts">
+        <member name="P:StoatSharp.Commands.RequireContextAttribute.Contexts">
             <summary>
             Gets the context required to execute the command.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.RequireContextAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireContextAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.RequireDMttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireDMttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.RequireGroupAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireGroupAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.RequireGroupOwnerAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireGroupOwnerAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="T:RevoltSharp.Commands.RequireOwnerAttribute">
+        <member name="T:StoatSharp.Commands.RequireOwnerAttribute">
             <summary>
                 Requires the command to be invoked by the owner of the bot.
             </summary>
             <remarks>
-                This precondition will restrict the access of the command or module to the owner of the RevoltSharp bot.
-                If the precondition fails to be met, an erroneous <see cref="T:RevoltSharp.Commands.PreconditionResult"/> will be returned with the
+                This precondition will restrict the access of the command or module to the owner of the StoatSharp bot.
+                If the precondition fails to be met, an erroneous <see cref="T:StoatSharp.Commands.PreconditionResult"/> will be returned with the
                 message "Command can only be run by the owner of the bot."
             </remarks>
             <example>
@@ -282,152 +282,152 @@
                 </code>
             </example>
         </member>
-        <member name="M:RevoltSharp.Commands.RequireOwnerAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireOwnerAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.RequireServerAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireServerAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.RequireServerOwnerAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireServerOwnerAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="F:RevoltSharp.Commands.RequireUserPermissionAttribute.Server">
+        <member name="F:StoatSharp.Commands.RequireUserPermissionAttribute.Server">
             <summary>
             Server/group permission to check for.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.RequireUserPermissionAttribute.Channel">
+        <member name="F:StoatSharp.Commands.RequireUserPermissionAttribute.Channel">
             <summary>
             Channel permission to check for.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.RequireUserPermissionAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.RequireUserPermissionAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.TemplateAttribute.CheckPermissionsAsync(RevoltSharp.Commands.CommandContext,RevoltSharp.Commands.CommandInfo,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.TemplateAttribute.CheckPermissionsAsync(StoatSharp.Commands.CommandContext,StoatSharp.Commands.CommandInfo,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="T:RevoltSharp.Commands.PriorityAttribute">
+        <member name="T:StoatSharp.Commands.PriorityAttribute">
             <summary>
                 Sets priority of commands.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.PriorityAttribute.Priority">
+        <member name="P:StoatSharp.Commands.PriorityAttribute.Priority">
             <summary>
                 Gets the priority which has been set for the command.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.PriorityAttribute.#ctor(System.Int32)">
+        <member name="M:StoatSharp.Commands.PriorityAttribute.#ctor(System.Int32)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.PriorityAttribute" /> attribute with the given priority.
+                Initializes a new <see cref="T:StoatSharp.Commands.PriorityAttribute" /> attribute with the given priority.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.RemainderAttribute">
+        <member name="T:StoatSharp.Commands.RemainderAttribute">
             <summary>
                 Marks the input to not be parsed by the parser.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.RemarksAttribute">
+        <member name="T:StoatSharp.Commands.RemarksAttribute">
             <summary>
                 Attaches remarks to your commands.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.SummaryAttribute">
+        <member name="T:StoatSharp.Commands.SummaryAttribute">
             <summary>
                 Attaches a summary to your command.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.Builders.CommandBuilder.Build(RevoltSharp.Commands.ModuleInfo,RevoltSharp.Commands.CommandService)">
+        <member name="M:StoatSharp.Commands.Builders.CommandBuilder.Build(StoatSharp.Commands.ModuleInfo,StoatSharp.Commands.CommandService)">
             <exception cref="T:System.InvalidOperationException">Only the last parameter in a command may have the Remainder or Multiple flag.</exception>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandContext">
+        <member name="T:StoatSharp.Commands.CommandContext">
             <summary> The context of a command which may contain the client, user, guild, channel, and message. </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.Client">
+        <member name="P:StoatSharp.Commands.CommandContext.Client">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.Server">
+        <member name="P:StoatSharp.Commands.CommandContext.Server">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.Channel">
+        <member name="P:StoatSharp.Commands.CommandContext.Channel">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.User">
+        <member name="P:StoatSharp.Commands.CommandContext.User">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.Member">
+        <member name="P:StoatSharp.Commands.CommandContext.Member">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.Message">
+        <member name="P:StoatSharp.Commands.CommandContext.Message">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandContext.IsPrivate">
+        <member name="P:StoatSharp.Commands.CommandContext.IsPrivate">
             <summary> Indicates whether the channel that the command is executed in is a private channel. </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandContext.#ctor(RevoltSharp.RevoltClient,RevoltSharp.UserMessage)">
+        <member name="M:StoatSharp.Commands.CommandContext.#ctor(StoatSharp.StoatClient,StoatSharp.UserMessage)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.CommandContext" /> class with the provided client and message.
+                Initializes a new <see cref="T:StoatSharp.Commands.CommandContext" /> class with the provided client and message.
             </summary>
             <param name="client">The underlying client.</param>
             <param name="msg">The underlying message.</param>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandError">
+        <member name="T:StoatSharp.Commands.CommandError">
             <summary> Defines the type of error a command can throw. </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.UnknownCommand">
+        <member name="F:StoatSharp.Commands.CommandError.UnknownCommand">
             <summary>
             Thrown when the command is unknown.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.ParseFailed">
+        <member name="F:StoatSharp.Commands.CommandError.ParseFailed">
             <summary>
             Thrown when the command fails to be parsed.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.BadArgCount">
+        <member name="F:StoatSharp.Commands.CommandError.BadArgCount">
             <summary>
             Thrown when the input text has too few or too many arguments.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.ObjectNotFound">
+        <member name="F:StoatSharp.Commands.CommandError.ObjectNotFound">
             <summary>
-            Thrown when the object cannot be found by the <see cref="T:RevoltSharp.Commands.TypeReader"/>.
+            Thrown when the object cannot be found by the <see cref="T:StoatSharp.Commands.TypeReader"/>.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.MultipleMatches">
+        <member name="F:StoatSharp.Commands.CommandError.MultipleMatches">
             <summary>
-            Thrown when more than one object is matched by <see cref="T:RevoltSharp.Commands.TypeReader"/>.
+            Thrown when more than one object is matched by <see cref="T:StoatSharp.Commands.TypeReader"/>.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.UnmetPrecondition">
+        <member name="F:StoatSharp.Commands.CommandError.UnmetPrecondition">
             <summary>
-            Thrown when the command fails to meet a <see cref="T:RevoltSharp.Commands.PreconditionAttribute"/>'s conditions.
+            Thrown when the command fails to meet a <see cref="T:StoatSharp.Commands.PreconditionAttribute"/>'s conditions.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.Exception">
+        <member name="F:StoatSharp.Commands.CommandError.Exception">
             <summary>
             Thrown when an exception occurs mid-command execution.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.CommandError.Unsuccessful">
+        <member name="F:StoatSharp.Commands.CommandError.Unsuccessful">
             <summary>
             Thrown when the command is not successfully executed on runtime.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandException">
+        <member name="T:StoatSharp.Commands.CommandException">
             <summary>
                 The exception that is thrown if another exception occurs during a command execution.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandException.Command">
+        <member name="P:StoatSharp.Commands.CommandException.Command">
             <summary> Gets the command that caused the exception. </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandException.Context">
+        <member name="P:StoatSharp.Commands.CommandException.Context">
             <summary> Gets the command context of the exception. </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandException.#ctor(RevoltSharp.Commands.CommandInfo,RevoltSharp.Commands.CommandContext,System.Exception)">
+        <member name="M:StoatSharp.Commands.CommandException.#ctor(StoatSharp.Commands.CommandInfo,StoatSharp.Commands.CommandContext,System.Exception)">
             <summary>
-                Initializes a new instance of the <see cref="T:RevoltSharp.Commands.CommandException" /> class using a
+                Initializes a new instance of the <see cref="T:StoatSharp.Commands.CommandException" /> class using a
                 <paramref name="command"/> information, a <paramref name="command"/> context, and the exception that
                 interrupted the execution.
             </summary>
@@ -435,68 +435,68 @@
             <param name="context">The context of the command.</param>
             <param name="ex">The exception that interrupted the command execution.</param>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandMatch.Command">
+        <member name="P:StoatSharp.Commands.CommandMatch.Command">
             <summary> The command that matches the search result. </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandMatch.Alias">
+        <member name="P:StoatSharp.Commands.CommandMatch.Alias">
             <summary> The alias of the command. </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandService">
+        <member name="T:StoatSharp.Commands.CommandService">
             <summary>
-                Provides a framework for building RevoltSharp bot commands.
+                Provides a framework for building StoatSharp bot commands.
             </summary>
             <remarks>
                 <para>
-                    The service provides a framework for building RevoltSharp bot commands both dynamically via runtime builders or
+                    The service provides a framework for building StoatSharp bot commands both dynamically via runtime builders or
                     statically via compile-time modules. To create a command module at compile-time, see
-                    <see cref="T:RevoltSharp.Commands.ModuleBase" /> (most common); otherwise, see <see cref="T:RevoltSharp.Commands.Builders.ModuleBuilder" />.
+                    <see cref="T:StoatSharp.Commands.ModuleBase" /> (most common); otherwise, see <see cref="T:StoatSharp.Commands.Builders.ModuleBuilder" />.
                 </para>
                 <para>
                     This service also provides several events for monitoring command usages; such as
-                    <see cref="E:RevoltSharp.Commands.CommandService.OnCommandExecuted" /> for information about commands that have
+                    <see cref="E:StoatSharp.Commands.CommandService.OnCommandExecuted" /> for information about commands that have
                     been successfully executed.
                 </para>
             </remarks>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandService.Version">
+        <member name="P:StoatSharp.Commands.CommandService.Version">
             <summary>
-            Version of the current RevoltSharp.Commands lib installed.
+            Version of the current StoatSharp.Commands lib installed.
             </summary>
         </member>
-        <member name="E:RevoltSharp.Commands.CommandService.OnCommandExecuted">
+        <member name="E:StoatSharp.Commands.CommandService.OnCommandExecuted">
             <summary>
             A command has been executed and will return back success or failed
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandService.Modules">
+        <member name="P:StoatSharp.Commands.CommandService.Modules">
             <summary>
-                Represents all modules loaded within <see cref="T:RevoltSharp.Commands.CommandService"/>.
+                Represents all modules loaded within <see cref="T:StoatSharp.Commands.CommandService"/>.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandService.Commands">
+        <member name="P:StoatSharp.Commands.CommandService.Commands">
             <summary>
-                Represents all commands loaded within <see cref="T:RevoltSharp.Commands.CommandService"/>.
+                Represents all commands loaded within <see cref="T:StoatSharp.Commands.CommandService"/>.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandService.TypeReaders">
+        <member name="P:StoatSharp.Commands.CommandService.TypeReaders">
             <summary>
-                Represents all <see cref="T:RevoltSharp.Commands.TypeReader" /> loaded within <see cref="T:RevoltSharp.Commands.CommandService"/>.
+                Represents all <see cref="T:StoatSharp.Commands.TypeReader" /> loaded within <see cref="T:StoatSharp.Commands.CommandService"/>.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.#ctor">
+        <member name="M:StoatSharp.Commands.CommandService.#ctor">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.CommandService"/> class.
+                Initializes a new <see cref="T:StoatSharp.Commands.CommandService"/> class.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.#ctor(RevoltSharp.Commands.CommandServiceConfig)">
+        <member name="M:StoatSharp.Commands.CommandService.#ctor(StoatSharp.Commands.CommandServiceConfig)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.CommandService"/> class with the provided configuration.
+                Initializes a new <see cref="T:StoatSharp.Commands.CommandService"/> class with the provided configuration.
             </summary>
             <param name="config">The configuration class.</param>
             <exception cref="T:System.InvalidOperationException">
             </exception>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddModuleAsync``1(System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.CommandService.AddModuleAsync``1(System.IServiceProvider)">
             <summary>
                 Add a command module from a <see cref="T:System.Type" />.
             </summary>
@@ -510,14 +510,14 @@
             <param name="services">The <see cref="T:System.IServiceProvider"/> for your dependency injection solution if using one; otherwise, pass <c>null</c>.</param>
             <exception cref="T:System.ArgumentException">This module has already been added.</exception>
             <exception cref="T:System.InvalidOperationException">
-            The <see cref="T:RevoltSharp.Commands.ModuleInfo"/> fails to be built; an invalid type may have been provided.
+            The <see cref="T:StoatSharp.Commands.ModuleInfo"/> fails to be built; an invalid type may have been provided.
             </exception>
             <returns>
                 A task that represents the asynchronous operation for adding the module. The task result contains the
                 built module.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddModuleAsync(System.Type,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.CommandService.AddModuleAsync(System.Type,System.IServiceProvider)">
             <summary>
                 Adds a command module from a <see cref="T:System.Type" />.
             </summary>
@@ -525,14 +525,14 @@
             <param name="services">The <see cref="T:System.IServiceProvider" /> for your dependency injection solution if using one; otherwise, pass <c>null</c> .</param>
             <exception cref="T:System.ArgumentException">This module has already been added.</exception>
             <exception cref="T:System.InvalidOperationException">
-            The <see cref="T:RevoltSharp.Commands.ModuleInfo"/> fails to be built; an invalid type may have been provided.
+            The <see cref="T:StoatSharp.Commands.ModuleInfo"/> fails to be built; an invalid type may have been provided.
             </exception>
             <returns>
                 A task that represents the asynchronous operation for adding the module. The task result contains the
                 built module.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddModulesAsync(System.Reflection.Assembly,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.CommandService.AddModulesAsync(System.Reflection.Assembly,System.IServiceProvider)">
             <summary>
                 Add command modules from an <see cref="T:System.Reflection.Assembly"/>.
             </summary>
@@ -543,17 +543,17 @@
                 contains an enumerable collection of modules added.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.RemoveModuleAsync(RevoltSharp.Commands.ModuleInfo)">
+        <member name="M:StoatSharp.Commands.CommandService.RemoveModuleAsync(StoatSharp.Commands.ModuleInfo)">
             <summary>
                 Removes the command module.
             </summary>
-            <param name="module">The <see cref="T:RevoltSharp.Commands.ModuleInfo" /> to be removed from the service.</param>
+            <param name="module">The <see cref="T:StoatSharp.Commands.ModuleInfo" /> to be removed from the service.</param>
             <returns>
                 A task that represents the asynchronous removal operation. The task result contains a value that
                 indicates whether the <paramref name="module"/> is successfully removed.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.RemoveModuleAsync``1">
+        <member name="M:StoatSharp.Commands.CommandService.RemoveModuleAsync``1">
             <summary>
                 Removes the command module.
             </summary>
@@ -563,7 +563,7 @@
                 indicates whether the module is successfully removed.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.RemoveModuleAsync(System.Type)">
+        <member name="M:StoatSharp.Commands.CommandService.RemoveModuleAsync(System.Type)">
             <summary>
                 Removes the command module.
             </summary>
@@ -573,59 +573,59 @@
                 indicates whether the module is successfully removed.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddTypeReader``1(RevoltSharp.Commands.TypeReader)">
+        <member name="M:StoatSharp.Commands.CommandService.AddTypeReader``1(StoatSharp.Commands.TypeReader)">
             <summary>
-                Adds a custom <see cref="T:RevoltSharp.Commands.TypeReader" /> to this <see cref="T:RevoltSharp.Commands.CommandService" /> for the supplied object
+                Adds a custom <see cref="T:StoatSharp.Commands.TypeReader" /> to this <see cref="T:StoatSharp.Commands.CommandService" /> for the supplied object
                 type.
-                If <typeparamref name="T" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:RevoltSharp.Commands.TypeReader" /> will
+                If <typeparamref name="T" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:StoatSharp.Commands.TypeReader" /> will
                 also be added.
-                If a default <see cref="T:RevoltSharp.Commands.TypeReader" /> exists for <typeparamref name="T" />, a warning will be logged
-                and the default <see cref="T:RevoltSharp.Commands.TypeReader" /> will be replaced.
+                If a default <see cref="T:StoatSharp.Commands.TypeReader" /> exists for <typeparamref name="T" />, a warning will be logged
+                and the default <see cref="T:StoatSharp.Commands.TypeReader" /> will be replaced.
             </summary>
-            <typeparam name="T">The object type to be read by the <see cref="T:RevoltSharp.Commands.TypeReader"/>.</typeparam>
-            <param name="reader">An instance of the <see cref="T:RevoltSharp.Commands.TypeReader" /> to be added.</param>
+            <typeparam name="T">The object type to be read by the <see cref="T:StoatSharp.Commands.TypeReader"/>.</typeparam>
+            <param name="reader">An instance of the <see cref="T:StoatSharp.Commands.TypeReader" /> to be added.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddTypeReader(System.Type,RevoltSharp.Commands.TypeReader)">
+        <member name="M:StoatSharp.Commands.CommandService.AddTypeReader(System.Type,StoatSharp.Commands.TypeReader)">
             <summary>
-                Adds a custom <see cref="T:RevoltSharp.Commands.TypeReader" /> to this <see cref="T:RevoltSharp.Commands.CommandService" /> for the supplied object
+                Adds a custom <see cref="T:StoatSharp.Commands.TypeReader" /> to this <see cref="T:StoatSharp.Commands.CommandService" /> for the supplied object
                 type.
-                If <paramref name="type" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:RevoltSharp.Commands.TypeReader" /> for the
+                If <paramref name="type" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:StoatSharp.Commands.TypeReader" /> for the
                 value type will also be added.
-                If a default <see cref="T:RevoltSharp.Commands.TypeReader" /> exists for <paramref name="type" />, a warning will be logged and
-                the default <see cref="T:RevoltSharp.Commands.TypeReader" /> will be replaced.
+                If a default <see cref="T:StoatSharp.Commands.TypeReader" /> exists for <paramref name="type" />, a warning will be logged and
+                the default <see cref="T:StoatSharp.Commands.TypeReader" /> will be replaced.
             </summary>
             <param name="type">A <see cref="T:System.Type" /> instance for the type to be read.</param>
-            <param name="reader">An instance of the <see cref="T:RevoltSharp.Commands.TypeReader" /> to be added.</param>
+            <param name="reader">An instance of the <see cref="T:StoatSharp.Commands.TypeReader" /> to be added.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddTypeReader``1(RevoltSharp.Commands.TypeReader,System.Boolean)">
+        <member name="M:StoatSharp.Commands.CommandService.AddTypeReader``1(StoatSharp.Commands.TypeReader,System.Boolean)">
             <summary>
-                Adds a custom <see cref="T:RevoltSharp.Commands.TypeReader" /> to this <see cref="T:RevoltSharp.Commands.CommandService" /> for the supplied object
+                Adds a custom <see cref="T:StoatSharp.Commands.TypeReader" /> to this <see cref="T:StoatSharp.Commands.CommandService" /> for the supplied object
                 type.
-                If <typeparamref name="T" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:RevoltSharp.Commands.TypeReader" /> will
+                If <typeparamref name="T" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:StoatSharp.Commands.TypeReader" /> will
                 also be added.
             </summary>
-            <typeparam name="T">The object type to be read by the <see cref="T:RevoltSharp.Commands.TypeReader"/>.</typeparam>
-            <param name="reader">An instance of the <see cref="T:RevoltSharp.Commands.TypeReader" /> to be added.</param>
+            <typeparam name="T">The object type to be read by the <see cref="T:StoatSharp.Commands.TypeReader"/>.</typeparam>
+            <param name="reader">An instance of the <see cref="T:StoatSharp.Commands.TypeReader" /> to be added.</param>
             <param name="replaceDefault">
-                Defines whether the <see cref="T:RevoltSharp.Commands.TypeReader"/> should replace the default one for
+                Defines whether the <see cref="T:StoatSharp.Commands.TypeReader"/> should replace the default one for
                 <see cref="T:System.Type" /> if it exists.
             </param>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.AddTypeReader(System.Type,RevoltSharp.Commands.TypeReader,System.Boolean)">
+        <member name="M:StoatSharp.Commands.CommandService.AddTypeReader(System.Type,StoatSharp.Commands.TypeReader,System.Boolean)">
             <summary>
-                Adds a custom <see cref="T:RevoltSharp.Commands.TypeReader" /> to this <see cref="T:RevoltSharp.Commands.CommandService" /> for the supplied object
+                Adds a custom <see cref="T:StoatSharp.Commands.TypeReader" /> to this <see cref="T:StoatSharp.Commands.CommandService" /> for the supplied object
                 type.
-                If <paramref name="type" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:RevoltSharp.Commands.TypeReader" /> for the
+                If <paramref name="type" /> is a <see cref="T:System.ValueType" />, a nullable <see cref="T:StoatSharp.Commands.TypeReader" /> for the
                 value type will also be added.
             </summary>
             <param name="type">A <see cref="T:System.Type" /> instance for the type to be read.</param>
-            <param name="reader">An instance of the <see cref="T:RevoltSharp.Commands.TypeReader" /> to be added.</param>
+            <param name="reader">An instance of the <see cref="T:StoatSharp.Commands.TypeReader" /> to be added.</param>
             <param name="replaceDefault">
-                Defines whether the <see cref="T:RevoltSharp.Commands.TypeReader"/> should replace the default one for <see cref="T:System.Type" /> if
+                Defines whether the <see cref="T:StoatSharp.Commands.TypeReader"/> should replace the default one for <see cref="T:System.Type" /> if
                 it exists.
             </param>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.Search(RevoltSharp.Commands.CommandContext,System.Int32)">
+        <member name="M:StoatSharp.Commands.CommandService.Search(StoatSharp.Commands.CommandContext,System.Int32)">
             <summary>
                 Searches for the command.
             </summary>
@@ -633,7 +633,7 @@
             <param name="argPos">The position of which the command starts at.</param>
             <returns>The result containing the matching commands.</returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.Search(RevoltSharp.Commands.CommandContext,System.String)">
+        <member name="M:StoatSharp.Commands.CommandService.Search(StoatSharp.Commands.CommandContext,System.String)">
             <summary>
                 Searches for the command.
             </summary>
@@ -641,7 +641,7 @@
             <param name="input">The command string.</param>
             <returns>The result containing the matching commands.</returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.ExecuteAsync(RevoltSharp.Commands.CommandContext,System.Int32,System.IServiceProvider,RevoltSharp.Commands.MultiMatchHandling)">
+        <member name="M:StoatSharp.Commands.CommandService.ExecuteAsync(StoatSharp.Commands.CommandContext,System.Int32,System.IServiceProvider,StoatSharp.Commands.MultiMatchHandling)">
             <summary>
                 Executes the command.
             </summary>
@@ -654,7 +654,7 @@
                 command execution.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandService.ExecuteAsync(RevoltSharp.Commands.CommandContext,System.String,System.Int32,System.IServiceProvider,RevoltSharp.Commands.MultiMatchHandling)">
+        <member name="M:StoatSharp.Commands.CommandService.ExecuteAsync(StoatSharp.Commands.CommandContext,System.String,System.Int32,System.IServiceProvider,StoatSharp.Commands.MultiMatchHandling)">
             <summary>
                 Executes the command.
             </summary>
@@ -668,26 +668,26 @@
                 command execution.
             </returns>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandServiceConfig">
+        <member name="T:StoatSharp.Commands.CommandServiceConfig">
             <summary>
-                Represents a configuration class for <see cref="T:RevoltSharp.Commands.CommandService"/>.
+                Represents a configuration class for <see cref="T:StoatSharp.Commands.CommandService"/>.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandServiceConfig.SeparatorChar">
+        <member name="P:StoatSharp.Commands.CommandServiceConfig.SeparatorChar">
             <summary>
                 Gets or sets the <see cref="T:System.Char"/> that separates an argument with another.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandServiceConfig.CaseSensitiveCommands">
+        <member name="P:StoatSharp.Commands.CommandServiceConfig.CaseSensitiveCommands">
             <summary>
                 Gets or sets whether commands should be case-sensitive.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandServiceConfig.QuotationMarkAliasMap">
+        <member name="P:StoatSharp.Commands.CommandServiceConfig.QuotationMarkAliasMap">
             <summary>
             Collection of aliases for matching pairs of string delimiters.
             The dictionary stores the opening delimiter as a key, and the matching closing delimiter as the value.
-            If no value is supplied <see cref="P:RevoltSharp.Commands.QuotationAliasUtils.GetDefaultAliasMap"/> will be used, which contains
+            If no value is supplied <see cref="P:StoatSharp.Commands.QuotationAliasUtils.GetDefaultAliasMap"/> will be used, which contains
             many regional equivalents.
             Only values that are specified in this map will be used as string delimiters, so if " is removed then
             it won't be used.
@@ -704,17 +704,17 @@
             </code>
             </example>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandServiceConfig.IgnoreExtraArgs">
+        <member name="P:StoatSharp.Commands.CommandServiceConfig.IgnoreExtraArgs">
             <summary>
                 Gets or sets a value that indicates whether extra parameters should be ignored.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandServiceExtensions">
+        <member name="T:StoatSharp.Commands.CommandServiceExtensions">
             <summary>
-                Provides extension methods for the <see cref="T:RevoltSharp.Commands.CommandService"/> class.
+                Provides extension methods for the <see cref="T:StoatSharp.Commands.CommandService"/> class.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandServiceExtensions.GetExecutableCommandsAsync(System.Collections.Generic.ICollection{RevoltSharp.Commands.CommandInfo},RevoltSharp.Commands.CommandContext,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.CommandServiceExtensions.GetExecutableCommandsAsync(System.Collections.Generic.ICollection{StoatSharp.Commands.CommandInfo},StoatSharp.Commands.CommandContext,System.IServiceProvider)">
             <summary>
                 Returns commands that can be executed under the current context.
             </summary>
@@ -725,7 +725,7 @@
                 A read-only collection of commands that can be executed under the current context.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandServiceExtensions.GetExecutableCommandsAsync(RevoltSharp.Commands.CommandService,RevoltSharp.Commands.CommandContext,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.CommandServiceExtensions.GetExecutableCommandsAsync(StoatSharp.Commands.CommandService,StoatSharp.Commands.CommandContext,System.IServiceProvider)">
             <summary>
                 Returns commands that can be executed under the current context.
             </summary>
@@ -736,7 +736,7 @@
                 A read-only collection of commands that can be executed under the current context.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandServiceExtensions.GetExecutableCommandsAsync(RevoltSharp.Commands.ModuleInfo,RevoltSharp.Commands.CommandContext,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.CommandServiceExtensions.GetExecutableCommandsAsync(StoatSharp.Commands.ModuleInfo,StoatSharp.Commands.CommandContext,System.IServiceProvider)">
             <summary>
                 Returns commands that can be executed under the current context.
             </summary>
@@ -747,12 +747,12 @@
                 A read-only collection of commands that can be executed under the current context.
             </returns>
         </member>
-        <member name="T:RevoltSharp.Commands.MessageExtensions">
+        <member name="T:StoatSharp.Commands.MessageExtensions">
             <summary>
-                Provides extension methods for <see cref="T:RevoltSharp.UserMessage" /> that relates to commands.
+                Provides extension methods for <see cref="T:StoatSharp.UserMessage" /> that relates to commands.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.MessageExtensions.HasCharPrefix(RevoltSharp.UserMessage,System.Char,System.Int32@)">
+        <member name="M:StoatSharp.Commands.MessageExtensions.HasCharPrefix(StoatSharp.UserMessage,System.Char,System.Int32@)">
             <summary>
                 Gets whether the message starts with the provided character.
             </summary>
@@ -763,17 +763,17 @@
                 <c>true</c> if the message begins with the char <paramref name="c"/>; otherwise <c>false</c>.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.MessageExtensions.HasStringPrefix(RevoltSharp.UserMessage,System.String,System.Int32@,System.StringComparison)">
+        <member name="M:StoatSharp.Commands.MessageExtensions.HasStringPrefix(StoatSharp.UserMessage,System.String,System.Int32@,System.StringComparison)">
             <summary>
                 Gets whether the message starts with the provided string.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.MessageExtensions.HasMentionPrefix(RevoltSharp.UserMessage,RevoltSharp.SelfUser,System.Int32@)">
+        <member name="M:StoatSharp.Commands.MessageExtensions.HasMentionPrefix(StoatSharp.UserMessage,StoatSharp.SelfUser,System.Int32@)">
             <summary>
                 Gets whether the message starts with the user's mention string.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.CommandInfo">
+        <member name="T:StoatSharp.Commands.CommandInfo">
             <summary>
                 Provides the information of a command.
             </summary>
@@ -782,199 +782,199 @@
                 descriptions regarding the command.
             </remarks>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Module">
+        <member name="P:StoatSharp.Commands.CommandInfo.Module">
             <summary>
                 Gets the module that the command belongs in.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Name">
+        <member name="P:StoatSharp.Commands.CommandInfo.Name">
             <summary>
                 Gets the name of the command. If none is set, the first alias is used.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Summary">
+        <member name="P:StoatSharp.Commands.CommandInfo.Summary">
             <summary>
                 Gets the summary of the command.
             </summary>
             <remarks>
-                This field returns the summary of the command. <see cref="P:RevoltSharp.Commands.CommandInfo.Summary"/> and <see cref="P:RevoltSharp.Commands.CommandInfo.Remarks"/> can be
+                This field returns the summary of the command. <see cref="P:StoatSharp.Commands.CommandInfo.Summary"/> and <see cref="P:StoatSharp.Commands.CommandInfo.Remarks"/> can be
                 useful in help commands and various implementation that fetches details of the command for the user.
             </remarks>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Remarks">
+        <member name="P:StoatSharp.Commands.CommandInfo.Remarks">
             <summary>
                 Gets the remarks of the command.
             </summary>
             <remarks>
-                This field returns the summary of the command. <see cref="P:RevoltSharp.Commands.CommandInfo.Summary"/> and <see cref="P:RevoltSharp.Commands.CommandInfo.Remarks"/> can be
+                This field returns the summary of the command. <see cref="P:StoatSharp.Commands.CommandInfo.Summary"/> and <see cref="P:StoatSharp.Commands.CommandInfo.Remarks"/> can be
                 useful in help commands and various implementation that fetches details of the command for the user.
             </remarks>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Priority">
+        <member name="P:StoatSharp.Commands.CommandInfo.Priority">
             <summary>
                 Gets the priority of the command. This is used when there are multiple overloads of the command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.HasVarArgs">
+        <member name="P:StoatSharp.Commands.CommandInfo.HasVarArgs">
             <summary>
                 Indicates whether the command accepts a <see langword="params"/> <see cref="T:System.Type"/>[] for its
                 parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.IgnoreExtraArgs">
+        <member name="P:StoatSharp.Commands.CommandInfo.IgnoreExtraArgs">
             <summary>
                 Indicates whether extra arguments should be ignored for this command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Aliases">
+        <member name="P:StoatSharp.Commands.CommandInfo.Aliases">
             <summary>
-                Gets a list of aliases defined by the <see cref="T:RevoltSharp.Commands.AliasAttribute" /> of the command.
+                Gets a list of aliases defined by the <see cref="T:StoatSharp.Commands.AliasAttribute" /> of the command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Parameters">
+        <member name="P:StoatSharp.Commands.CommandInfo.Parameters">
             <summary>
                 Gets a list of information about the parameters of the command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Preconditions">
+        <member name="P:StoatSharp.Commands.CommandInfo.Preconditions">
             <summary>
-                Gets a list of preconditions defined by the <see cref="T:RevoltSharp.Commands.PreconditionAttribute" /> of the command.
+                Gets a list of preconditions defined by the <see cref="T:StoatSharp.Commands.PreconditionAttribute" /> of the command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.CommandInfo.Attributes">
+        <member name="P:StoatSharp.Commands.CommandInfo.Attributes">
             <summary>
                 Gets a list of attributes of the command.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.ModuleInfo">
+        <member name="T:StoatSharp.Commands.ModuleInfo">
             <summary>
                 Provides the information of a module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Service">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Service">
             <summary>
                 Gets the command service associated with this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Name">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Name">
             <summary>
                 Gets the name of this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Summary">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Summary">
             <summary>
                 Gets the summary of this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Remarks">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Remarks">
             <summary>
                 Gets the remarks of this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Group">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Group">
             <summary>
                 Gets the group name (main prefix) of this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Aliases">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Aliases">
             <summary>
                 Gets a read-only list of aliases associated with this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Commands">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Commands">
             <summary>
                 Gets a read-only list of commands associated with this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Preconditions">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Preconditions">
             <summary>
                 Gets a read-only list of preconditions that apply to this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Attributes">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Attributes">
             <summary>
                 Gets a read-only list of attributes that apply to this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Submodules">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Submodules">
             <summary>
                 Gets a read-only list of submodules associated with this module.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.Parent">
+        <member name="P:StoatSharp.Commands.ModuleInfo.Parent">
             <summary>
                 Gets the parent module of this submodule if applicable.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleInfo.IsSubmodule">
+        <member name="P:StoatSharp.Commands.ModuleInfo.IsSubmodule">
             <summary>
                 Gets a value that indicates whether this module is a submodule or not.
             </summary>
         </member>
-        <member name="T:RevoltSharp.Commands.ParameterInfo">
+        <member name="T:StoatSharp.Commands.ParameterInfo">
             <summary>
                 Provides the information of a parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.Command">
+        <member name="P:StoatSharp.Commands.ParameterInfo.Command">
             <summary>
                 Gets the command that associates with this parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.Name">
+        <member name="P:StoatSharp.Commands.ParameterInfo.Name">
             <summary>
                 Gets the name of this parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.Summary">
+        <member name="P:StoatSharp.Commands.ParameterInfo.Summary">
             <summary>
                 Gets the summary of this parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.IsOptional">
+        <member name="P:StoatSharp.Commands.ParameterInfo.IsOptional">
             <summary>
                 Gets a value that indicates whether this parameter is optional or not.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.IsRemainder">
+        <member name="P:StoatSharp.Commands.ParameterInfo.IsRemainder">
             <summary>
                 Gets a value that indicates whether this parameter is a remainder parameter or not.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.Type">
+        <member name="P:StoatSharp.Commands.ParameterInfo.Type">
             <summary>
                 Gets the type of the parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.DefaultValue">
+        <member name="P:StoatSharp.Commands.ParameterInfo.DefaultValue">
             <summary>
                 Gets the default value for this optional parameter if applicable.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.Preconditions">
+        <member name="P:StoatSharp.Commands.ParameterInfo.Preconditions">
             <summary>
                 Gets a read-only list of precondition that apply to this parameter.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParameterInfo.Attributes">
+        <member name="P:StoatSharp.Commands.ParameterInfo.Attributes">
             <summary>
                 Gets a read-only list of attributes that apply to this parameter.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.CommandMapNode.AddCommand(RevoltSharp.Commands.CommandService,System.String,System.Int32,RevoltSharp.Commands.CommandInfo)">
+        <member name="M:StoatSharp.Commands.CommandMapNode.AddCommand(StoatSharp.Commands.CommandService,System.String,System.Int32,StoatSharp.Commands.CommandInfo)">
             <exception cref="T:System.InvalidOperationException">Cannot add commands to the root node.</exception>
         </member>
-        <member name="T:RevoltSharp.Commands.ModuleBase">
+        <member name="T:StoatSharp.Commands.ModuleBase">
             <summary>
-                Provides a base class for a command module to inherit from with a <see cref="T:RevoltSharp.Commands.CommandContext"/>.
+                Provides a base class for a command module to inherit from with a <see cref="T:StoatSharp.Commands.CommandContext"/>.
              </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ModuleBase.Context">
+        <member name="P:StoatSharp.Commands.ModuleBase.Context">
             <summary>
                 The underlying context of the command.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.ModuleBase.ReplyAsync(System.String,RevoltSharp.Embed[],System.String[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
+        <member name="M:StoatSharp.Commands.ModuleBase.ReplyAsync(System.String,StoatSharp.Embed[],System.String[],StoatSharp.MessageMasquerade,StoatSharp.MessageInteractions,StoatSharp.MessageReply[],System.Nullable{StoatSharp.MessageFlag})">
             <summary>
                 Sends a message to the source channel.
             </summary>
@@ -988,69 +988,69 @@
             <param name="replies"></param>
             <param name="flags"></param>
         </member>
-        <member name="M:RevoltSharp.Commands.ModuleBase.ReplyFileAsync(System.String,System.String,RevoltSharp.Embed[],RevoltSharp.MessageMasquerade,RevoltSharp.MessageInteractions,RevoltSharp.MessageReply[],System.Nullable{RevoltSharp.MessageFlag})">
+        <member name="M:StoatSharp.Commands.ModuleBase.ReplyFileAsync(System.String,System.String,StoatSharp.Embed[],StoatSharp.MessageMasquerade,StoatSharp.MessageInteractions,StoatSharp.MessageReply[],System.Nullable{StoatSharp.MessageFlag})">
             <summary>
                 Sends a file to this message channel with an optional caption.
             </summary>
             <param name="filePath">The file path of the file.</param>
             <param name="text">The message to be sent.</param>
-            <param name="embeds">The <see cref="T:RevoltSharp.Embed" /> to be sent.</param>
+            <param name="embeds">The <see cref="T:StoatSharp.Embed" /> to be sent.</param>
             <param name="masquerade"></param>
             <param name="interactions"></param>
             <param name="replies"></param>
             <param name="flags"></param>
         </member>
-        <member name="M:RevoltSharp.Commands.ModuleBase.BeforeExecute(RevoltSharp.Commands.CommandInfo)">
+        <member name="M:StoatSharp.Commands.ModuleBase.BeforeExecute(StoatSharp.Commands.CommandInfo)">
             <summary>
                 The method to execute before executing the command.
             </summary>
-            <param name="command">The <see cref="T:RevoltSharp.Commands.CommandInfo"/> of the command to be executed.</param>
+            <param name="command">The <see cref="T:StoatSharp.Commands.CommandInfo"/> of the command to be executed.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.ModuleBase.AfterExecute(RevoltSharp.Commands.CommandInfo)">
+        <member name="M:StoatSharp.Commands.ModuleBase.AfterExecute(StoatSharp.Commands.CommandInfo)">
             <summary>
                 The method to execute after executing the command.
             </summary>
-            <param name="command">The <see cref="T:RevoltSharp.Commands.CommandInfo"/> of the command to be executed.</param>
+            <param name="command">The <see cref="T:StoatSharp.Commands.CommandInfo"/> of the command to be executed.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.ModuleBase.OnModuleBuilding(RevoltSharp.Commands.CommandService,RevoltSharp.Commands.Builders.ModuleBuilder)">
+        <member name="M:StoatSharp.Commands.ModuleBase.OnModuleBuilding(StoatSharp.Commands.CommandService,StoatSharp.Commands.Builders.ModuleBuilder)">
             <summary>
                 The method to execute when building the module.
             </summary>
-            <param name="commandService">The <see cref="T:RevoltSharp.Commands.CommandService"/> used to create the module.</param>
+            <param name="commandService">The <see cref="T:StoatSharp.Commands.CommandService"/> used to create the module.</param>
             <param name="builder">The builder used to build the module.</param>
         </member>
-        <member name="T:RevoltSharp.Commands.MultiMatchHandling">
+        <member name="T:StoatSharp.Commands.MultiMatchHandling">
             <summary>
             Specifies the behavior when multiple matches are found during the command parsing stage.
             </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.MultiMatchHandling.Exception">
+        <member name="F:StoatSharp.Commands.MultiMatchHandling.Exception">
             <summary> Indicates that when multiple results are found, an exception should be thrown. </summary>
         </member>
-        <member name="F:RevoltSharp.Commands.MultiMatchHandling.Best">
+        <member name="F:StoatSharp.Commands.MultiMatchHandling.Best">
             <summary> Indicates that when multiple results are found, the best result should be chosen. </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.EnumTypeReader`1.ReadAsync(RevoltSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.EnumTypeReader`1.ReadAsync(StoatSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.NullableTypeReader`1.ReadAsync(RevoltSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.NullableTypeReader`1.ReadAsync(StoatSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.PrimitiveTypeReader`1.#ctor">
+        <member name="M:StoatSharp.Commands.PrimitiveTypeReader`1.#ctor">
             <exception cref="T:System.ArgumentOutOfRangeException"><typeparamref name="T"/> must be within the range [0, 1].</exception>
         </member>
-        <member name="M:RevoltSharp.Commands.PrimitiveTypeReader`1.#ctor(RevoltSharp.Commands.TryParseDelegate{`0},System.Single)">
+        <member name="M:StoatSharp.Commands.PrimitiveTypeReader`1.#ctor(StoatSharp.Commands.TryParseDelegate{`0},System.Single)">
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="score"/> must be within the range [0, 1].</exception>
         </member>
-        <member name="M:RevoltSharp.Commands.TimeSpanTypeReader.ReadAsync(RevoltSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.TimeSpanTypeReader.ReadAsync(StoatSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
             <inheritdoc />
         </member>
-        <member name="T:RevoltSharp.Commands.TypeReader">
+        <member name="T:StoatSharp.Commands.TypeReader">
             <summary>
                 Defines a reader class that parses user input into a specified type.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.TypeReader.ReadAsync(RevoltSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
+        <member name="M:StoatSharp.Commands.TypeReader.ReadAsync(StoatSharp.Commands.CommandContext,System.String,System.IServiceProvider)">
             <summary>
                 Attempts to parse the <paramref name="input"/> into the desired type.
             </summary>
@@ -1061,91 +1061,91 @@
                 A task that represents the asynchronous parsing operation. The task result contains the parsing result.
             </returns>
         </member>
-        <member name="T:RevoltSharp.Commands.ExecuteResult">
+        <member name="T:StoatSharp.Commands.ExecuteResult">
             <summary>
                 Contains information of the command's overall execution result.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ExecuteResult.Exception">
+        <member name="P:StoatSharp.Commands.ExecuteResult.Exception">
             <summary>
                 Gets the exception that may have occurred during the command execution.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ExecuteResult.Error">
+        <member name="P:StoatSharp.Commands.ExecuteResult.Error">
             <inheritdoc />
         </member>
-        <member name="P:RevoltSharp.Commands.ExecuteResult.ErrorReason">
+        <member name="P:StoatSharp.Commands.ExecuteResult.ErrorReason">
             <inheritdoc />
         </member>
-        <member name="P:RevoltSharp.Commands.ExecuteResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.ExecuteResult.IsSuccess">
             <inheritdoc />
         </member>
-        <member name="M:RevoltSharp.Commands.ExecuteResult.FromSuccess">
+        <member name="M:StoatSharp.Commands.ExecuteResult.FromSuccess">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.ExecuteResult" /> with no error, indicating a successful execution.
+                Initializes a new <see cref="T:StoatSharp.Commands.ExecuteResult" /> with no error, indicating a successful execution.
             </summary>
             <returns>
-                A <see cref="T:RevoltSharp.Commands.ExecuteResult" /> that does not contain any errors.
+                A <see cref="T:StoatSharp.Commands.ExecuteResult" /> that does not contain any errors.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.ExecuteResult.FromError(RevoltSharp.Commands.CommandError,System.String)">
+        <member name="M:StoatSharp.Commands.ExecuteResult.FromError(StoatSharp.Commands.CommandError,System.String)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.ExecuteResult" /> with a specified <see cref="T:RevoltSharp.Commands.CommandError" /> and its
+                Initializes a new <see cref="T:StoatSharp.Commands.ExecuteResult" /> with a specified <see cref="T:StoatSharp.Commands.CommandError" /> and its
                 reason, indicating an unsuccessful execution.
             </summary>
             <param name="error">The type of error.</param>
             <param name="reason">The reason behind the error.</param>
             <returns>
-                A <see cref="T:RevoltSharp.Commands.ExecuteResult" /> that contains a <see cref="T:RevoltSharp.Commands.CommandError" /> and reason.
+                A <see cref="T:StoatSharp.Commands.ExecuteResult" /> that contains a <see cref="T:StoatSharp.Commands.CommandError" /> and reason.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.ExecuteResult.FromError(System.Exception)">
+        <member name="M:StoatSharp.Commands.ExecuteResult.FromError(System.Exception)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.ExecuteResult" /> with a specified exception, indicating an unsuccessful
+                Initializes a new <see cref="T:StoatSharp.Commands.ExecuteResult" /> with a specified exception, indicating an unsuccessful
                 execution.
             </summary>
             <param name="ex">The exception that caused the command execution to fail.</param>
             <returns>
-                A <see cref="T:RevoltSharp.Commands.ExecuteResult" /> that contains the exception that caused the unsuccessful execution, along
-                with a <see cref="T:RevoltSharp.Commands.CommandError" /> of type <c>Exception</c> as well as the exception message as the
+                A <see cref="T:StoatSharp.Commands.ExecuteResult" /> that contains the exception that caused the unsuccessful execution, along
+                with a <see cref="T:StoatSharp.Commands.CommandError" /> of type <c>Exception</c> as well as the exception message as the
                 reason.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.ExecuteResult.FromError(RevoltSharp.Commands.IResult)">
+        <member name="M:StoatSharp.Commands.ExecuteResult.FromError(StoatSharp.Commands.IResult)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.ExecuteResult" /> with a specified result; this may or may not be an
-                successful execution depending on the <see cref="P:RevoltSharp.Commands.IResult.Error" /> and
-                <see cref="P:RevoltSharp.Commands.IResult.ErrorReason" /> specified.
+                Initializes a new <see cref="T:StoatSharp.Commands.ExecuteResult" /> with a specified result; this may or may not be an
+                successful execution depending on the <see cref="P:StoatSharp.Commands.IResult.Error" /> and
+                <see cref="P:StoatSharp.Commands.IResult.ErrorReason" /> specified.
             </summary>
             <param name="result">The result to inherit from.</param>
             <returns>
-                A <see cref="T:RevoltSharp.Commands.ExecuteResult"/> that inherits the <see cref="T:RevoltSharp.Commands.IResult"/> error type and reason.
+                A <see cref="T:StoatSharp.Commands.ExecuteResult"/> that inherits the <see cref="T:StoatSharp.Commands.IResult"/> error type and reason.
             </returns>
         </member>
-        <member name="M:RevoltSharp.Commands.ExecuteResult.ToString">
+        <member name="M:StoatSharp.Commands.ExecuteResult.ToString">
             <summary>
                 Gets a string that indicates the execution result.
             </summary>
             <returns>
-                <c>Success</c> if <see cref="P:RevoltSharp.Commands.ExecuteResult.IsSuccess"/> is <c>true</c>; otherwise "<see cref="P:RevoltSharp.Commands.ExecuteResult.Error"/>: 
-                <see cref="P:RevoltSharp.Commands.ExecuteResult.ErrorReason"/>".
+                <c>Success</c> if <see cref="P:StoatSharp.Commands.ExecuteResult.IsSuccess"/> is <c>true</c>; otherwise "<see cref="P:StoatSharp.Commands.ExecuteResult.Error"/>: 
+                <see cref="P:StoatSharp.Commands.ExecuteResult.ErrorReason"/>".
             </returns>
         </member>
-        <member name="T:RevoltSharp.Commands.IResult">
+        <member name="T:StoatSharp.Commands.IResult">
             <summary>
                 Contains information of the result related to a command.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.IResult.Error">
+        <member name="P:StoatSharp.Commands.IResult.Error">
             <summary>
                 Describes the error type that may have occurred during the operation.
             </summary>
             <returns>
-                A <see cref="T:RevoltSharp.Commands.CommandError" /> indicating the type of error that may have occurred during the operation; 
+                A <see cref="T:StoatSharp.Commands.CommandError" /> indicating the type of error that may have occurred during the operation; 
                 <c>null</c> if the operation was successful.
             </returns>
         </member>
-        <member name="P:RevoltSharp.Commands.IResult.ErrorReason">
+        <member name="P:StoatSharp.Commands.IResult.ErrorReason">
             <summary>
                 Describes the reason for the error.
             </summary>
@@ -1153,7 +1153,7 @@
                 A string containing the error reason.
             </returns>
         </member>
-        <member name="P:RevoltSharp.Commands.IResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.IResult.IsSuccess">
             <summary>
                 Indicates whether the operation was successful or not.
             </summary>
@@ -1161,126 +1161,126 @@
                 <c>true</c> if the result is positive; otherwise <c>false</c>.
             </returns>
         </member>
-        <member name="T:RevoltSharp.Commands.ParseResult">
+        <member name="T:StoatSharp.Commands.ParseResult">
             <summary>
                 Contains information for the parsing result from the command service's parser.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.ParseResult.Error">
+        <member name="P:StoatSharp.Commands.ParseResult.Error">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.ParseResult.ErrorReason">
+        <member name="P:StoatSharp.Commands.ParseResult.ErrorReason">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.ParseResult.ErrorParameter">
+        <member name="P:StoatSharp.Commands.ParseResult.ErrorParameter">
             <summary>
                 Provides information about the parameter that caused the parsing error.
             </summary>
             <returns>
-                A <see cref="T:RevoltSharp.Commands.ParameterInfo" /> indicating the parameter info of the error that may have occurred during parsing; 
+                A <see cref="T:StoatSharp.Commands.ParameterInfo" /> indicating the parameter info of the error that may have occurred during parsing; 
                 <c>null</c> if the parsing was successful or the parsing error is not specific to a single parameter.
             </returns>
         </member>
-        <member name="P:RevoltSharp.Commands.ParseResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.ParseResult.IsSuccess">
             <inheritdoc/>
         </member>
-        <member name="T:RevoltSharp.Commands.PreconditionResult">
+        <member name="T:StoatSharp.Commands.PreconditionResult">
             <summary>
                 Represents a result type for command preconditions.
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.PreconditionResult.Error">
+        <member name="P:StoatSharp.Commands.PreconditionResult.Error">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.PreconditionResult.ErrorReason">
+        <member name="P:StoatSharp.Commands.PreconditionResult.ErrorReason">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.PreconditionResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.PreconditionResult.IsSuccess">
             <inheritdoc/>
         </member>
-        <member name="M:RevoltSharp.Commands.PreconditionResult.#ctor(System.Nullable{RevoltSharp.Commands.CommandError},System.String)">
+        <member name="M:StoatSharp.Commands.PreconditionResult.#ctor(System.Nullable{StoatSharp.Commands.CommandError},System.String)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.PreconditionResult" /> class with the command <paramref name="error"/> type
+                Initializes a new <see cref="T:StoatSharp.Commands.PreconditionResult" /> class with the command <paramref name="error"/> type
                 and reason.
             </summary>
             <param name="error">The type of failure.</param>
             <param name="errorReason">The reason of failure.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.PreconditionResult.FromSuccess">
+        <member name="M:StoatSharp.Commands.PreconditionResult.FromSuccess">
             <summary>
-                Returns a <see cref="T:RevoltSharp.Commands.PreconditionResult" /> with no errors.
+                Returns a <see cref="T:StoatSharp.Commands.PreconditionResult" /> with no errors.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.PreconditionResult.FromError(System.String)">
+        <member name="M:StoatSharp.Commands.PreconditionResult.FromError(System.String)">
             <summary>
-                Returns a <see cref="T:RevoltSharp.Commands.PreconditionResult" /> with <see cref="F:RevoltSharp.Commands.CommandError.UnmetPrecondition" /> and the
+                Returns a <see cref="T:StoatSharp.Commands.PreconditionResult" /> with <see cref="F:StoatSharp.Commands.CommandError.UnmetPrecondition" /> and the
                 specified reason.
             </summary>
             <param name="reason">The reason of failure.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.PreconditionResult.FromError(RevoltSharp.Commands.IResult)">
+        <member name="M:StoatSharp.Commands.PreconditionResult.FromError(StoatSharp.Commands.IResult)">
             <summary>
-                Returns a <see cref="T:RevoltSharp.Commands.PreconditionResult" /> with the specified <paramref name="result"/> type.
+                Returns a <see cref="T:StoatSharp.Commands.PreconditionResult" /> with the specified <paramref name="result"/> type.
             </summary>
             <param name="result">The result of failure.</param>
         </member>
-        <member name="M:RevoltSharp.Commands.PreconditionResult.ToString">
+        <member name="M:StoatSharp.Commands.PreconditionResult.ToString">
             <summary>
-            Returns a string indicating whether the <see cref="T:RevoltSharp.Commands.PreconditionResult"/> is successful.
+            Returns a string indicating whether the <see cref="T:StoatSharp.Commands.PreconditionResult"/> is successful.
             </summary>
         </member>
-        <member name="M:RevoltSharp.Commands.RuntimeResult.#ctor(System.Nullable{RevoltSharp.Commands.CommandError},System.String)">
+        <member name="M:StoatSharp.Commands.RuntimeResult.#ctor(System.Nullable{StoatSharp.Commands.CommandError},System.String)">
             <summary>
-                Initializes a new <see cref="T:RevoltSharp.Commands.RuntimeResult" /> class with the type of error and reason.
+                Initializes a new <see cref="T:StoatSharp.Commands.RuntimeResult" /> class with the type of error and reason.
             </summary>
             <param name="error">The type of failure, or <c>null</c> if none.</param>
             <param name="reason">The reason of failure.</param>
         </member>
-        <member name="P:RevoltSharp.Commands.RuntimeResult.Error">
+        <member name="P:StoatSharp.Commands.RuntimeResult.Error">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.RuntimeResult.Reason">
+        <member name="P:StoatSharp.Commands.RuntimeResult.Reason">
             <summary> Describes the execution reason or result. </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.RuntimeResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.RuntimeResult.IsSuccess">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.RuntimeResult.RevoltSharp#Commands#IResult#ErrorReason">
+        <member name="P:StoatSharp.Commands.RuntimeResult.StoatSharp#Commands#IResult#ErrorReason">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.SearchResult.Error">
+        <member name="P:StoatSharp.Commands.SearchResult.Error">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.SearchResult.ErrorReason">
+        <member name="P:StoatSharp.Commands.SearchResult.ErrorReason">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.SearchResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.SearchResult.IsSuccess">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.TypeReaderResult.Error">
+        <member name="P:StoatSharp.Commands.TypeReaderResult.Error">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.TypeReaderResult.ErrorReason">
+        <member name="P:StoatSharp.Commands.TypeReaderResult.ErrorReason">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.TypeReaderResult.IsSuccess">
+        <member name="P:StoatSharp.Commands.TypeReaderResult.IsSuccess">
             <inheritdoc/>
         </member>
-        <member name="P:RevoltSharp.Commands.TypeReaderResult.BestMatch">
+        <member name="P:StoatSharp.Commands.TypeReaderResult.BestMatch">
             <exception cref="T:System.InvalidOperationException">TypeReaderResult was not successful.</exception>
         </member>
-        <member name="T:RevoltSharp.Commands.QuotationAliasUtils">
+        <member name="T:StoatSharp.Commands.QuotationAliasUtils">
             <summary>
             Utility class which contains the default matching pairs of quotation marks for CommandServiceConfig
             </summary>
         </member>
-        <member name="P:RevoltSharp.Commands.QuotationAliasUtils.GetDefaultAliasMap">
+        <member name="P:StoatSharp.Commands.QuotationAliasUtils.GetDefaultAliasMap">
             <summary>
             A default map of open-close pairs of quotation marks.
             Contains many regional and Unicode equivalents.
-            Used in the <see cref="T:RevoltSharp.Commands.CommandServiceConfig"/>.
+            Used in the <see cref="T:StoatSharp.Commands.CommandServiceConfig"/>.
             </summary>
-            <seealso cref="P:RevoltSharp.Commands.CommandServiceConfig.QuotationMarkAliasMap"/>
+            <seealso cref="P:StoatSharp.Commands.CommandServiceConfig.QuotationMarkAliasMap"/>
         </member>
     </members>
 </doc>

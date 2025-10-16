@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class MessageInteractions

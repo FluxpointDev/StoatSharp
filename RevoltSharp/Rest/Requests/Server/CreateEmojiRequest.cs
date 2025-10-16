@@ -1,7 +1,7 @@
-﻿namespace RevoltSharp.Rest.Requests;
+﻿namespace StoatSharp.Rest.Requests;
 
 
-internal class CreateEmojiRequest : IRevoltRequest
+internal class CreateEmojiRequest : IStoatRequest
 {
     public string? name { get; set; }
     public CreateEmojiParent? parent { get; set; }

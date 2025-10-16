@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -12,7 +12,7 @@ namespace RevoltSharp;
 /// </summary>
 public class GroupChannel : Channel
 {
-    internal GroupChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal GroupChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         Type = ChannelType.Group;
         Recipents = model.Recipients != null ? model.Recipients : Array.Empty<string>();
@@ -143,7 +143,7 @@ public class GroupChannel : Channel
         }
     }
 
-    internal void RemoveUser(RevoltClient client, string userId)
+    internal void RemoveUser(StoatClient client, string userId)
     {
         CachedUsers.TryRemove(userId, out _);
         Recipents = Recipents.Where(x => x != userId).ToArray();

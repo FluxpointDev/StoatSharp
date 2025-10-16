@@ -1,6 +1,6 @@
 using System;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 /// <summary>
 ///     Marks the input to not be parsed by the parser.

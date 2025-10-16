@@ -2,12 +2,12 @@
 using System;
 using System.Numerics;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class RoleUpdatedProperties : CreatedEntity
 {
-    internal RoleUpdatedProperties(RevoltClient client, Role role, PartialRoleJson json) : base(client, role.Id)
+    internal RoleUpdatedProperties(StoatClient client, Role role, PartialRoleJson json) : base(client, role.Id)
     {
         Name = json.Name;
         if (json.Permissions.HasValue)
@@ -16,7 +16,7 @@ public class RoleUpdatedProperties : CreatedEntity
         Hoist = json.Hoist;
         Rank = json.Rank;
         if (json.Colour.HasValue)
-            Color = Optional.Some(new RevoltColor(json.Colour.Value));
+            Color = Optional.Some(new StoatColor(json.Colour.Value));
     }
 
     /// <summary>
@@ -37,5 +37,5 @@ public class RoleUpdatedProperties : CreatedEntity
 
     public Optional<BigInteger> Rank { get; private set; }
 
-    public Optional<RevoltColor> Color { get; private set; }
+    public Optional<StoatColor> Color { get; private set; }
 }

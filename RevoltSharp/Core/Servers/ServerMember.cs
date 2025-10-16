@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -218,7 +218,7 @@ public class ServerMember : Entity
     #endregion
 
 
-    internal ServerMember(RevoltClient client, ServerMemberJson sModel, UserJson? uModel, User? user) : base(client)
+    internal ServerMember(StoatClient client, ServerMemberJson sModel, UserJson? uModel, User? user) : base(client)
     {
         User = user;
         if (user == null && uModel != null)

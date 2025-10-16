@@ -1,15 +1,15 @@
 ﻿using Optionals;
-using RevoltSharp.Requests;
+using StoatSharp.Requests;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 public static class SafetyHelper
 {
-    public static async Task<SafetyReport?> GetReportAsync(this AdminClient admin, string reportId)
+    public static async Task<SafetyReport?> GetReportAsync(this StoatAdminClient admin, string reportId)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(GetReportAsync));
         AdminConditions.ReportIdLength(reportId, nameof(GetReportAsync));
@@ -24,7 +24,7 @@ public static class SafetyHelper
     public static Task<IReadOnlyCollection<SafetyReport>> GetReportsMadeAsync(this User user, Option<SafetyReportType> type = null)
         => GetReportsAsync(user.Client.Admin, authorId: user.Id, type: type);
 
-    public static Task<IReadOnlyCollection<SafetyReport>> GetReportsMadeAsync(this AdminClient admin, string userId, Option<SafetyReportType> type = null)
+    public static Task<IReadOnlyCollection<SafetyReport>> GetReportsMadeAsync(this StoatAdminClient admin, string userId, Option<SafetyReportType> type = null)
         => GetReportsAsync(admin, authorId: userId, type: type);
 
     public static Task<IReadOnlyCollection<SafetyReport>> GetReportsAsync(this User user, Option<SafetyReportType> type = null)
@@ -36,7 +36,7 @@ public static class SafetyHelper
     public static Task<IReadOnlyCollection<SafetyReport>> GetReportsAsync(this UserMessage message, Option<SafetyReportType> type = null)
         => GetReportsAsync(message.Client.Admin, message.Id, type: type);
 
-    public static async Task<IReadOnlyCollection<SafetyReport>> GetReportsAsync(this AdminClient admin, string contentId = null, string authorId = null, Option<SafetyReportType> type = null)
+    public static async Task<IReadOnlyCollection<SafetyReport>> GetReportsAsync(this StoatAdminClient admin, string contentId = null, string authorId = null, Option<SafetyReportType> type = null)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(GetReportsAsync));
 
@@ -56,7 +56,7 @@ public static class SafetyHelper
     public static Task<SafetyReport> RejectAsync(this SafetyReport report, string rejectReason, Option<string> note = null)
         => RejectReportAsync(report.Client.Admin, report.Id, rejectReason, note);
 
-    public static Task<SafetyReport> RejectReportAsync(this AdminClient admin, string reportId, string rejectReason, Option<string> note = null)
+    public static Task<SafetyReport> RejectReportAsync(this StoatAdminClient admin, string reportId, string rejectReason, Option<string> note = null)
         => InternalModifyReportAsync(admin, reportId, nameof(RejectReportAsync), new AdminReportModifyRequest
         {
             status = new AdminReportModifyStatusRequest
@@ -71,7 +71,7 @@ public static class SafetyHelper
     public static Task<SafetyReport> ResolveAsync(this SafetyReport report, Option<string> note = null)
         => ResolveReportAsync(report.Client.Admin, report.Id, note);
 
-    public static Task<SafetyReport> ResolveReportAsync(this AdminClient admin, string reportId, Option<string> note = null)
+    public static Task<SafetyReport> ResolveReportAsync(this StoatAdminClient admin, string reportId, Option<string> note = null)
         => InternalModifyReportAsync(admin, reportId, nameof(ResolveReportAsync), new AdminReportModifyRequest
         {
             status = new AdminReportModifyStatusRequest
@@ -85,7 +85,7 @@ public static class SafetyHelper
     public static Task<SafetyReport> ResetStatusAsync(this SafetyReport report, Option<string> note = null)
         => ResetReportStatusAsync(report.Client.Admin, report.Id, note);
 
-    public static Task<SafetyReport> ResetReportStatusAsync(this AdminClient admin, string reportId, Option<string> note = null)
+    public static Task<SafetyReport> ResetReportStatusAsync(this StoatAdminClient admin, string reportId, Option<string> note = null)
         => InternalModifyReportAsync(admin, reportId, nameof(ResetReportStatusAsync), new AdminReportModifyRequest
         {
             status = new AdminReportModifyStatusRequest
@@ -120,7 +120,7 @@ public static class SafetyHelper
             Reason = reason.ToString()
         }, additionalContext);
 
-    internal static async Task InternalReportContentAsync(this AdminClient admin, SafetyReportedContentJson content, string additionalContext)
+    internal static async Task InternalReportContentAsync(this StoatAdminClient admin, SafetyReportedContentJson content, string additionalContext)
     {
         await admin.Client.Rest.PostAsync<dynamic>("safety/report", new ReportContentRequest
         {
@@ -129,7 +129,7 @@ public static class SafetyHelper
         });
     }
 
-    internal static async Task<SafetyReport> InternalModifyReportAsync(this AdminClient admin, string reportId, string Obj, AdminReportModifyRequest req)
+    internal static async Task<SafetyReport> InternalModifyReportAsync(this StoatAdminClient admin, string reportId, string Obj, AdminReportModifyRequest req)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, Obj);
         AdminConditions.ReportIdLength(reportId, Obj);
@@ -145,7 +145,7 @@ public static class SafetyHelper
         => GetStrikesAsync(user.Client.Admin, user.Id);
 
 
-    public static async Task<IReadOnlyCollection<SafetyUserStrike>> GetStrikesAsync(this AdminClient admin, string userId)
+    public static async Task<IReadOnlyCollection<SafetyUserStrike>> GetStrikesAsync(this StoatAdminClient admin, string userId)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(GetStrikesAsync));
         Conditions.UserIdLength(userId, nameof(GetStrikesAsync));
@@ -160,7 +160,7 @@ public static class SafetyHelper
     public static Task<SafetyUserStrike> AddStrikeAsync(this User user, string reason)
         => CreateStrikeAsync(user.Client.Admin, user.Id, reason);
 
-    public static async Task<SafetyUserStrike> CreateStrikeAsync(this AdminClient admin, string userId, string reason)
+    public static async Task<SafetyUserStrike> CreateStrikeAsync(this StoatAdminClient admin, string userId, string reason)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(CreateStrikeAsync));
         Conditions.UserIdLength(userId, nameof(CreateStrikeAsync));
@@ -179,7 +179,7 @@ public static class SafetyHelper
     public static Task ModifyAsync(this SafetyUserStrike strike, string reason)
         => ModifyStrikeAsync(strike.Client.Admin, strike.Id, reason);
 
-    public static async Task ModifyStrikeAsync(this AdminClient admin, string strikeId, string reason)
+    public static async Task ModifyStrikeAsync(this StoatAdminClient admin, string strikeId, string reason)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(ModifyStrikeAsync));
         AdminConditions.StrikeIdLength(strikeId, nameof(ModifyStrikeAsync));
@@ -194,7 +194,7 @@ public static class SafetyHelper
     public static Task DeleteAsync(this SafetyUserStrike strike)
         => DeleteStrikeAsync(strike.Client.Admin, strike.Id);
 
-    public static async Task DeleteStrikeAsync(this AdminClient admin, string strikeId)
+    public static async Task DeleteStrikeAsync(this StoatAdminClient admin, string strikeId)
     {
         AdminConditions.CheckIsPrivileged(admin.Client, nameof(DeleteStrikeAsync));
         AdminConditions.StrikeIdLength(strikeId, nameof(DeleteStrikeAsync));

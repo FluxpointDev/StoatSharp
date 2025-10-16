@@ -1,11 +1,11 @@
-using RevoltSharp.Commands.Builders;
+using StoatSharp.Commands.Builders;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 /// <summary>

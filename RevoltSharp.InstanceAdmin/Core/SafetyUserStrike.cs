@@ -1,7 +1,7 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 public class SafetyUserStrike : CreatedEntity
 {
-    internal SafetyUserStrike(RevoltClient client, SafetyUserStrikeJson model) : base(client, model.Id)
+    internal SafetyUserStrike(StoatClient client, SafetyUserStrikeJson model) : base(client, model.Id)
     {
         UserId = model.Id;
         Reason = model.Reason;

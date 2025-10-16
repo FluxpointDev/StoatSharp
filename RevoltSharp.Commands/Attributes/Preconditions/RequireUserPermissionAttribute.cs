@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public class RequireUserPermissionAttribute : PreconditionAttribute
@@ -31,7 +31,7 @@ public class RequireUserPermissionAttribute : PreconditionAttribute
     public override Task<PreconditionResult> CheckPermissionsAsync(CommandContext context, CommandInfo command, IServiceProvider services)
     {
         if (context.Server == null && context.Channel.Type != ChannelType.Group)
-            return Task.FromResult(PreconditionResult.FromError("You need to run this command in a Revolt server or group."));
+            return Task.FromResult(PreconditionResult.FromError("You need to run this command in a Stoat server or group."));
 
         if (Server.HasValue)
         {

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -95,7 +95,7 @@ public struct Ulid
             else
             {
                 //Use Crypto random
-                using (var rng = new RNGCryptoServiceProvider())
+                using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
                 {
                     rng.GetBytes(randomness);
                 }
@@ -137,7 +137,7 @@ public struct Ulid
 
     internal static Ulid Create(ReadOnlySpan<char> base32)
     {
-        var UID = new Ulid();
+        Ulid UID = new Ulid();
 
         // unroll-code is based on NUlid.
         UID.TimeStamp_0 = (byte)((CharToBase32[base32[0]] << 5) | CharToBase32[base32[1]]);
@@ -150,7 +150,7 @@ public struct Ulid
     }
 
     /// <summary>
-    /// Parse a Revolt id to Ulid class.
+    /// Parse a Stoat id to Ulid class.
     /// </summary>
     /// <param name="base32"></param>
     /// <returns><see cref="Ulid"/></returns>
@@ -167,7 +167,7 @@ public struct Ulid
     }
 
     /// <summary>
-    /// Check if the Revolt id is valid.
+    /// Check if the Stoat id is valid.
     /// </summary>
     /// <param name="base32"></param>
     /// <returns><see langword="bool"/></returns>
@@ -177,7 +177,7 @@ public struct Ulid
     }
 
     /// <summary>
-    /// Try parse a Revolt id to Ulid class.
+    /// Try parse a Stoat id to Ulid class.
     /// </summary>
     /// <param name="base32"></param>
     /// <param name="ulid"></param>

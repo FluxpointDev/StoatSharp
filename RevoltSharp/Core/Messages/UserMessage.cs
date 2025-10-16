@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -60,7 +60,7 @@ public class UserMessage : Message
     /// </summary>
     public MessageWebhook? Webhook { get; internal set; }
 
-    internal UserMessage(RevoltClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
+    internal UserMessage(StoatClient client, MessageJson model, UserJson[]? users = null, ServerMemberJson[]? members = null)
         : base(client, model, users, members)
     {
         Content = model.Content;

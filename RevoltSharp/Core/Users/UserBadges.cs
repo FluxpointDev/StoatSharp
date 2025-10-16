@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -36,12 +36,12 @@ public class UserBadges
 public enum UserBadgeType
 {
     /// <summary>
-    /// User is a Revolt developer that works on Revolt magic
+    /// User is a Stoat developer that works on Stoat magic
     /// </summary>
     Developer = 1,
 
     /// <summary>
-    /// User has helped translate Revolt or other Revolt related stuff.
+    /// User has helped translate Stoat or other Stoat related stuff.
     /// </summary>
     Translator = 2,
 
@@ -61,12 +61,12 @@ public enum UserBadgeType
     Founder = 16,
 
     /// <summary>
-    /// User has the power to moderate the Revolt instance.
+    /// User has the power to moderate the Stoat instance.
     /// </summary>
     PlatformModeration = 32,
 
     /// <summary>
-    /// Active support for the Revolt project.
+    /// Active support for the Stoat project.
     /// </summary>
     ActiveSupporter = 64,
 
@@ -76,7 +76,7 @@ public enum UserBadgeType
     Paw = 128,
 
     /// <summary>
-    /// User was an early member/tester of the Revolt project.
+    /// User was an early member/tester of the Stoat project.
     /// </summary>
     EarlyAdopter = 256,
 

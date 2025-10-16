@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace RevoltSharp.WebSocket.Events;
+namespace StoatSharp.WebSocket.Events;
 
 
 internal class ErrorEventJson
 {
     [JsonProperty("error")]
-    public RevoltErrorType Error { get; set; }
+    public StoatErrorType Error { get; set; }
 
     [JsonProperty("msg")]
     public string? Message { get; set; }

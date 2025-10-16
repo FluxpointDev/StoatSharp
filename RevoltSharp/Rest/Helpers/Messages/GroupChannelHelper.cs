@@ -1,17 +1,17 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt http/rest methods for group channels.
+/// Stoat http/rest methods for group channels.
 /// </summary>
 public static class GroupChannelHelper
 {
@@ -21,9 +21,9 @@ public static class GroupChannelHelper
     /// <returns>
     /// <see cref="GroupChannel"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<GroupChannel> CreateGroupChannelAsync(this RevoltRestClient rest, string name, Option<string> description = null, bool isNsfw = false)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<GroupChannel> CreateGroupChannelAsync(this StoatRestClient rest, string name, Option<string> description = null, bool isNsfw = false)
     {
         Conditions.NotAllowedForBots(rest, nameof(CreateGroupChannelAsync));
         Conditions.ChannelNameLength(name, nameof(CreateGroupChannelAsync));
@@ -45,12 +45,12 @@ public static class GroupChannelHelper
     }
 
 
-    /// <inheritdoc cref="GetGroupChannelUsersAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetGroupChannelUsersAsync(StoatRestClient, string)" />
     public static Task<IReadOnlyCollection<User>?> GetUsersAsync(this GroupChannel channel)
       => GetGroupChannelUsersAsync(channel.Client.Rest, channel.Id);
 
-    /// <inheritdoc cref="GetGroupChannelUsersAsync(RevoltRestClient, string)" />
-    public static Task<IReadOnlyCollection<User>?> GetGroupChannelUsersAsync(this RevoltRestClient rest, GroupChannel channel)
+    /// <inheritdoc cref="GetGroupChannelUsersAsync(StoatRestClient, string)" />
+    public static Task<IReadOnlyCollection<User>?> GetGroupChannelUsersAsync(this StoatRestClient rest, GroupChannel channel)
       => GetGroupChannelUsersAsync(rest, channel.Id);
 
     /// <summary>
@@ -59,9 +59,9 @@ public static class GroupChannelHelper
     /// <returns>
     /// List of <see cref="User"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<IReadOnlyCollection<User>?> GetGroupChannelUsersAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<IReadOnlyCollection<User>?> GetGroupChannelUsersAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(GetGroupChannelUsersAsync));
 
@@ -78,9 +78,9 @@ public static class GroupChannelHelper
     /// <returns>
     /// <see cref="GroupChannel"/> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static Task<GroupChannel?> GetGroupChannelAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static Task<GroupChannel?> GetGroupChannelAsync(this StoatRestClient rest, string channelId)
         => ChannelHelper.InternalGetChannelAsync<GroupChannel>(rest, channelId);
 
     /// <summary>
@@ -89,8 +89,8 @@ public static class GroupChannelHelper
     /// <returns>
     /// List of <see cref="GroupChannel"/>
     /// </returns>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<IReadOnlyCollection<GroupChannel>?> GetGroupChannelsAsync(this RevoltRestClient rest)
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<IReadOnlyCollection<GroupChannel>?> GetGroupChannelsAsync(this StoatRestClient rest)
     {
         if (rest.Client.WebSocket != null)
             return rest.Client.WebSocket.ChannelCache.Values.Where(x => x.Type == ChannelType.Group).Select(x => (GroupChannel)x).ToArray();
@@ -102,36 +102,36 @@ public static class GroupChannelHelper
         return Channels.Select(x => new GroupChannel(rest.Client, x)).ToImmutableArray();
     }
 
-    /// <inheritdoc cref="LeaveGroupChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="LeaveGroupChannelAsync(StoatRestClient, string)" />
     public static Task LeaveAsync(this GroupChannel channel)
       => LeaveGroupChannelAsync(channel.Client.Rest, channel.Id);
 
     /// <summary>
     /// Leave a group channel or delete if you are the last user.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task LeaveGroupChannelAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task LeaveGroupChannelAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(LeaveGroupChannelAsync));
 
         await rest.DeleteAsync($"/channels/{channelId}");
     }
 
-    /// <inheritdoc cref="AddUserToGroupChannelAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="AddUserToGroupChannelAsync(StoatRestClient, string, string)" />
     public static Task AddUserAsync(this GroupChannel channel, User user)
         => AddUserToGroupChannelAsync(channel.Client.Rest, channel.Id, user.Id);
 
-    /// <inheritdoc cref="AddUserToGroupChannelAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="AddUserToGroupChannelAsync(StoatRestClient, string, string)" />
     public static Task AddUserAsync(this GroupChannel channel, string userId)
         => AddUserToGroupChannelAsync(channel.Client.Rest, channel.Id, userId);
 
     /// <summary>
     /// Add a user to the group channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task AddUserToGroupChannelAsync(this RevoltRestClient rest, string channelId, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task AddUserToGroupChannelAsync(this StoatRestClient rest, string channelId, string userId)
     {
         Conditions.NotAllowedForBots(rest, nameof(AddUserToGroupChannelAsync));
         Conditions.ChannelIdLength(channelId, nameof(AddUserToGroupChannelAsync));
@@ -140,20 +140,20 @@ public static class GroupChannelHelper
         await rest.PutAsync<HttpResponseMessage>($"channels/{channelId}/recipients/{userId}");
     }
 
-    /// <inheritdoc cref="RemoveUserFromGroupChannelAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="RemoveUserFromGroupChannelAsync(StoatRestClient, string, string)" />
     public static Task RemoveUserAsync(this GroupChannel channel, User user)
         => RemoveUserFromGroupChannelAsync(channel.Client.Rest, channel.Id, user.Id);
 
-    /// <inheritdoc cref="RemoveUserFromGroupChannelAsync(RevoltRestClient, string, string)" />
+    /// <inheritdoc cref="RemoveUserFromGroupChannelAsync(StoatRestClient, string, string)" />
     public static Task RemoveUserAsync(this GroupChannel channel, string userId)
         => RemoveUserFromGroupChannelAsync(channel.Client.Rest, channel.Id, userId);
 
     /// <summary>
     /// Remove a user from the group channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task RemoveUserFromGroupChannelAsync(this RevoltRestClient rest, string channelId, string userId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task RemoveUserFromGroupChannelAsync(this StoatRestClient rest, string channelId, string userId)
     {
         Conditions.NotAllowedForBots(rest, nameof(RemoveUserFromGroupChannelAsync));
         Conditions.ChannelIdLength(channelId, nameof(RemoveUserFromGroupChannelAsync));
@@ -168,8 +168,8 @@ public static class GroupChannelHelper
     /// <returns>
     /// <see cref="GroupChannel"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
     public static Task<GroupChannel> ModifyAsync(this GroupChannel channel, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
         => ChannelHelper.InternalModifyChannelAsync<GroupChannel>(channel.Client.Rest, channel.Id, name, desc, iconId, nsfw, owner);
 

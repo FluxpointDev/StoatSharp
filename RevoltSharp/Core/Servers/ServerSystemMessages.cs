@@ -1,11 +1,11 @@
 ﻿using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class ServerSystemMessages : Entity
 {
-    internal ServerSystemMessages(RevoltClient client, ServerSystemMessagesJson json) : base(client)
+    internal ServerSystemMessages(StoatClient client, ServerSystemMessagesJson json) : base(client)
     {
         if (json == null)
             return;

@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 /// <summary>
 ///     Requires the command to be invoked by the owner of the bot.
 /// </summary>
 /// <remarks>
-///     This precondition will restrict the access of the command or module to the owner of the RevoltSharp bot.
+///     This precondition will restrict the access of the command or module to the owner of the StoatSharp bot.
 ///     If the precondition fails to be met, an erroneous <see cref="PreconditionResult"/> will be returned with the
 ///     message "Command can only be run by the owner of the bot."
 /// </remarks>

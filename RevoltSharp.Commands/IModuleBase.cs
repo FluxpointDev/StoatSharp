@@ -1,6 +1,6 @@
-using RevoltSharp.Commands.Builders;
+using StoatSharp.Commands.Builders;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 internal interface IModuleBase

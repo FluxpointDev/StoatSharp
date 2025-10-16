@@ -1,16 +1,16 @@
 ﻿using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt http/rest methods for servers.
+/// Stoat http/rest methods for servers.
 /// </summary>
 public static class ServerHelper
 {
@@ -20,9 +20,9 @@ public static class ServerHelper
     /// <returns>
     /// <see cref="Server"/> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Server?> GetServerAsync(this RevoltRestClient rest, string serverId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Server?> GetServerAsync(this StoatRestClient rest, string serverId)
     {
         Conditions.ServerIdLength(serverId, nameof(GetServerAsync));
 
@@ -41,11 +41,11 @@ public static class ServerHelper
         return Server;
     }
 
-    /// <inheritdoc cref="GetBansAsync(RevoltRestClient, string)" />
-    public static Task<IReadOnlyCollection<ServerBan>?> GetBansAsync(this RevoltRestClient rest, Server server)
+    /// <inheritdoc cref="GetBansAsync(StoatRestClient, string)" />
+    public static Task<IReadOnlyCollection<ServerBan>?> GetBansAsync(this StoatRestClient rest, Server server)
         => GetBansAsync(rest, server.Id);
 
-    /// <inheritdoc cref="GetBansAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetBansAsync(StoatRestClient, string)" />
     public static Task<IReadOnlyCollection<ServerBan>?> GetBansAsync(this Server server)
         => GetBansAsync(server.Client.Rest, server.Id);
 
@@ -55,9 +55,9 @@ public static class ServerHelper
     /// <returns>
     /// List of <see cref="ServerBan"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<IReadOnlyCollection<ServerBan>?> GetBansAsync(this RevoltRestClient rest, string serverId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<IReadOnlyCollection<ServerBan>?> GetBansAsync(this StoatRestClient rest, string serverId)
     {
         Conditions.ServerIdLength(serverId, nameof(GetBansAsync));
 
@@ -69,40 +69,40 @@ public static class ServerHelper
 
     }
 
-    /// <inheritdoc cref="LeaveServerAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="LeaveServerAsync(StoatRestClient, string)" />
     public static Task LeaveAsync(this Server server)
         => LeaveServerAsync(server.Client.Rest, server.Id);
 
-    /// <inheritdoc cref="LeaveServerAsync(RevoltRestClient, string)" />
-    public static Task LeaveAsync(this RevoltRestClient rest, Server server)
+    /// <inheritdoc cref="LeaveServerAsync(StoatRestClient, string)" />
+    public static Task LeaveAsync(this StoatRestClient rest, Server server)
         => LeaveServerAsync(rest, server.Id);
 
     /// <summary>
     /// Leave server or delete it if owned.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task LeaveServerAsync(this RevoltRestClient rest, string serverId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task LeaveServerAsync(this StoatRestClient rest, string serverId)
     {
         Conditions.ServerIdLength(serverId, nameof(LeaveServerAsync));
 
         await rest.DeleteAsync($"/servers/{serverId}");
     }
 
-    /// <inheritdoc cref="ModifyDefaultPermissionsAsync(RevoltRestClient, string, ServerPermissions)" />
+    /// <inheritdoc cref="ModifyDefaultPermissionsAsync(StoatRestClient, string, ServerPermissions)" />
     public static Task ModifyDefaultPermissionsAsync(this Server server, ServerPermissions permissions)
         => ModifyDefaultPermissionsAsync(server.Client.Rest, server.Id, permissions);
 
-    /// <inheritdoc cref="ModifyDefaultPermissionsAsync(RevoltRestClient, string, ServerPermissions)" />
-    public static Task ModifyDefaultPermissionsAsync(this RevoltRestClient rest, Server server, ServerPermissions permissions)
+    /// <inheritdoc cref="ModifyDefaultPermissionsAsync(StoatRestClient, string, ServerPermissions)" />
+    public static Task ModifyDefaultPermissionsAsync(this StoatRestClient rest, Server server, ServerPermissions permissions)
         => ModifyDefaultPermissionsAsync(rest, server.Id, permissions);
 
     /// <summary>
     /// Modify the default member permissions for the server.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Server> ModifyDefaultPermissionsAsync(this RevoltRestClient rest, string serverId, ServerPermissions permissions)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Server> ModifyDefaultPermissionsAsync(this StoatRestClient rest, string serverId, ServerPermissions permissions)
     {
         Conditions.ServerIdLength(serverId, nameof(ModifyDefaultPermissionsAsync));
 
@@ -113,20 +113,20 @@ public static class ServerHelper
         return new Server(rest.Client, server);
     }
 
-    /// <inheritdoc cref="ModifyServerAsync(RevoltRestClient, string, Option{string}?, Option{string?}, Option{string?}?, Option{string?}?)" />
+    /// <inheritdoc cref="ModifyServerAsync(StoatRestClient, string, Option{string}?, Option{string?}, Option{string?}?, Option{string?}?)" />
     public static Task<Server> ModifyAsync(this Server server, Option<string>? name = null, Option<string?> description = null, Option<string?>? icon = null, Option<string?>? banner = null)
         => ModifyServerAsync(server.Client.Rest, server.Id, name, description, icon, banner);
 
-    /// <inheritdoc cref="ModifyServerAsync(RevoltRestClient, string, Option{string}?, Option{string?}, Option{string?}?, Option{string?}?)" />
-    public static Task<Server> ModifyServerAsync(this RevoltRestClient rest, Server server, Option<string>? name = null, Option<string?> description = null, Option<string?>? icon = null, Option<string?>? banner = null)
+    /// <inheritdoc cref="ModifyServerAsync(StoatRestClient, string, Option{string}?, Option{string?}, Option{string?}?, Option{string?}?)" />
+    public static Task<Server> ModifyServerAsync(this StoatRestClient rest, Server server, Option<string>? name = null, Option<string?> description = null, Option<string?>? icon = null, Option<string?>? banner = null)
         => ModifyServerAsync(rest, server.Id, name, description, icon, banner);
 
     /// <summary>
-    /// Modify the properties of a Revolt server such as name, description, icon and banner.
+    /// Modify the properties of a Stoat server such as name, description, icon and banner.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Server> ModifyServerAsync(this RevoltRestClient rest, string serverId, Option<string>? name = null, Option<string?> description = null, Option<string?>? icon = null, Option<string?>? banner = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Server> ModifyServerAsync(this StoatRestClient rest, string serverId, Option<string>? name = null, Option<string?> description = null, Option<string?>? icon = null, Option<string?>? banner = null)
     {
         Conditions.ServerIdLength(serverId, nameof(ModifyServerAsync));
         ModifyServerRequest Req = new ModifyServerRequest();
@@ -168,27 +168,27 @@ public static class ServerHelper
                 Conditions.AttachmentIdLength(banner.Value, nameof(ModifyServerAsync));
                 Req.banner = Optional.Some(banner.Value);
             }
-                
+
         }
 
         ServerJson server = await rest.PatchAsync<ServerJson>($"/servers/{serverId}", Req);
         return new Server(rest.Client, server);
     }
 
-    /// <inheritdoc cref="ModifyServerSystemMessagesAsync(RevoltRestClient, string, Option{string?}?, Option{string?}?, Option{string?}?, Option{string?}?)" />
+    /// <inheritdoc cref="ModifyServerSystemMessagesAsync(StoatRestClient, string, Option{string?}?, Option{string?}?, Option{string?}?, Option{string?}?)" />
     public static Task ModifySystemMessagesAsync(this Server server, Option<string?>? userJoinedChannelId = null, Option<string?>? userLeftChannelId = null, Option<string?>? userKickedChannelId = null, Option<string?>? userBannedChannelId = null)
         => ModifyServerSystemMessagesAsync(server.Client.Rest, server.Id, userJoinedChannelId, userLeftChannelId, userKickedChannelId, userBannedChannelId);
 
-    /// <inheritdoc cref="ModifyServerSystemMessagesAsync(RevoltRestClient, string, Option{string?}?, Option{string?}?, Option{string?}?, Option{string?}?)" />
-    public static Task ModifyServerSystemMessagesAsync(this RevoltRestClient rest, Server server, Option<string?>? userJoinedChannelId = null, Option<string?>? userLeftChannelId = null, Option<string?>? userKickedChannelId = null, Option<string?>? userBannedChannelId = null)
+    /// <inheritdoc cref="ModifyServerSystemMessagesAsync(StoatRestClient, string, Option{string?}?, Option{string?}?, Option{string?}?, Option{string?}?)" />
+    public static Task ModifyServerSystemMessagesAsync(this StoatRestClient rest, Server server, Option<string?>? userJoinedChannelId = null, Option<string?>? userLeftChannelId = null, Option<string?>? userKickedChannelId = null, Option<string?>? userBannedChannelId = null)
         => ModifyServerSystemMessagesAsync(rest, server.Id, userJoinedChannelId, userLeftChannelId, userKickedChannelId, userBannedChannelId);
 
     /// <summary>
-    /// Modify the properties of a Revolt server such as name, description, icon and banner.
+    /// Modify the properties of a Stoat server such as name, description, icon and banner.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static async Task<Server> ModifyServerSystemMessagesAsync(this RevoltRestClient rest, string serverId, Option<string?>? userJoinedChannelId = null, Option<string?>? userLeftChannelId = null, Option<string?>? userKickedChannelId = null, Option<string?>? userBannedChannelId = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static async Task<Server> ModifyServerSystemMessagesAsync(this StoatRestClient rest, string serverId, Option<string?>? userJoinedChannelId = null, Option<string?>? userLeftChannelId = null, Option<string?>? userKickedChannelId = null, Option<string?>? userBannedChannelId = null)
     {
         Conditions.ServerIdLength(serverId, nameof(ModifyServerAsync));
         ModifyServerRequest Req = new ModifyServerRequest();

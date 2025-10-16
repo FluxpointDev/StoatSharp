@@ -1,10 +1,9 @@
-﻿using RevoltSharp.Rest;
-using System.Net;
+﻿using System.Net;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
-/// Config options for the RevoltSharp lib.
+/// Config options for the StoatSharp lib.
 /// </summary>
 public class ClientConfig
 {
@@ -49,24 +48,24 @@ public class ClientConfig
     /// The cf_clearance cookie for Cloudflare.
     /// </summary>
     /// <remarks>
-    /// This is only neccesary if Revolt is currently in Under Attack Mode (eg during a DDoS attack).
-    /// Please ensure that the user agent and IP used to generate the clearance cookie will be identical to the ones used by your RevoltSharp client, or else CloudFlare will not accept the clearance.
+    /// This is only neccesary if Stoat is currently in Under Attack Mode (eg during a DDoS attack).
+    /// Please ensure that the user agent and IP used to generate the clearance cookie will be identical to the ones used by your StoatSharp client, or else CloudFlare will not accept the clearance.
     /// </remarks>
     public string? CfClearance = null;
 
     /// <summary>
     /// Set the default logging mode on what to show in the console.
     /// </summary>
-    public RevoltLogSeverity LogMode = RevoltLogSeverity.Error;
+    public StoatLogSeverity LogMode = StoatLogSeverity.Error;
 }
 
 /// <summary>
-/// Debug settings for the RevoltSharp lib.
+/// Debug settings for the StoatSharp lib.
 /// </summary>
 public class ClientDebugConfig
 {
     /// <summary>
-    /// This is only used when running Windows OS, if true then RevoltClient will not disable console quick edit mode for command prompt.
+    /// This is only used when running Windows OS, if true then StoatClient will not disable console quick edit mode for command prompt.
     /// </summary>
     public bool EnableConsoleQuickEdit { get; set; }
 
@@ -86,12 +85,8 @@ public class ClientDebugConfig
     /// </remarks>
     public string WebsocketUrl { get; internal set; } = "wss://events.stoat.chat";
 
-    //public string VoiceServerUrl { get; internal set; } = "https://vortex.revolt.chat/";
-
-    //public string VoiceWebsocketUrl { get; internal set; } = "wss://vortex.revolt.chat";
-
     /// <summary>
-    /// Log all websocket events that you get from Revolt.
+    /// Log all websocket events that you get from Stoat.
     /// </summary>
     /// <remarks>
     /// Do not use this in production!
@@ -114,7 +109,7 @@ public class ClientDebugConfig
     public bool LogWebSocketUnknownEvent { get; set; }
 
     /// <summary>
-    /// Log the internal request used on <see cref="RevoltRestClient.SendRequestAsync(RequestType, string, IRevoltRequest)"/> and <see cref="RevoltRestClient.UploadFileAsync(byte[], string, UploadFileType)"/>
+    /// Log the internal request used on <see cref="StoatRestClient.SendRequestAsync(RequestType, string, IStoatRequest)"/> and <see cref="StoatRestClient.UploadFileAsync(byte[], string, UploadFileType)"/>
     /// </summary>
     public bool LogRestRequest { get; set; }
 

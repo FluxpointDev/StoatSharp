@@ -1,22 +1,21 @@
 ﻿using Newtonsoft.Json.Linq;
-using RevoltSharp.Rest;
+using StoatSharp.Rest;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public static class AccountHelper
 {
-    public static async Task<OnboardStatus> GetAccountOnboardingStatus(this RevoltRestClient rest)
+    public static async Task<OnboardStatus> GetAccountOnboardingStatus(this StoatRestClient rest)
     {
         OnboardStatus Json = await rest.GetAsync<OnboardStatus>("onboard/hello");
         return Json;
     }
 
-    public static async Task CompleteAccountOnboardingAsync(this RevoltRestClient rest, string username)
+    public static async Task CompleteAccountOnboardingAsync(this StoatRestClient rest, string username)
     {
         await rest.PostAsync<OnboardStatus>("onboard/complete", new AccountOnboardingRequest
         {
@@ -24,7 +23,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task<AccountSession[]?> GetAccountSessionsAsync(this RevoltRestClient rest)
+    public static async Task<AccountSession[]?> GetAccountSessionsAsync(this StoatRestClient rest)
     {
         AccountSessionJson[] Json = await rest.GetAsync<AccountSessionJson[]>("auth/session/all");
         if (Json == null)
@@ -33,7 +32,7 @@ public static class AccountHelper
         return Json.Select(x => new AccountSession(x, rest.Client)).ToArray();
     }
 
-    public static async Task DeleteAllAccountSessionsAsync(this RevoltRestClient rest, bool includeCurrentSession)
+    public static async Task DeleteAllAccountSessionsAsync(this StoatRestClient rest, bool includeCurrentSession)
     {
         await rest.DeleteAsync("auth/session/all?revoke_self=" + includeCurrentSession);
     }
@@ -41,10 +40,10 @@ public static class AccountHelper
     public static Task DeleteAsync(this AccountSession session)
         => DeleteAccountSessionAsync(session.Client.Rest, session.Id);
 
-    public static Task DeleteAccountSessionAsync(this RevoltRestClient rest, AccountSession session)
+    public static Task DeleteAccountSessionAsync(this StoatRestClient rest, AccountSession session)
         => DeleteAccountSessionAsync(rest, session.Id);
 
-    public static async Task DeleteAccountSessionAsync(this RevoltRestClient rest, string sessionId)
+    public static async Task DeleteAccountSessionAsync(this StoatRestClient rest, string sessionId)
     {
         await rest.DeleteAsync("/auth/session/" + sessionId);
     }
@@ -52,10 +51,10 @@ public static class AccountHelper
     public static Task ModifyAsync(this AccountSession session, string sessionName)
         => ModifyAccountSessionAsync(session.Client.Rest, session.Id, sessionName);
 
-    public static Task ModifyAccountSessionAsync(this RevoltRestClient rest, AccountSession session, string sessionName)
+    public static Task ModifyAccountSessionAsync(this StoatRestClient rest, AccountSession session, string sessionName)
         => ModifyAccountSessionAsync(rest, session.Id, sessionName);
 
-    public static async Task ModifyAccountSessionAsync(this RevoltRestClient rest, string sessionId, string sessionName)
+    public static async Task ModifyAccountSessionAsync(this StoatRestClient rest, string sessionId, string sessionName)
     {
         await rest.PatchAsync<dynamic>("auth/session/" + sessionId, new ModifyAccountSessionRequest
         {
@@ -63,7 +62,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task<Dictionary<string, Tuple<long, string>>> GetAccountSettingsAsync(this RevoltRestClient rest, string[] keys)
+    public static async Task<Dictionary<string, Tuple<long, string>>> GetAccountSettingsAsync(this StoatRestClient rest, string[] keys)
     {
         Dictionary<string, JArray> Values = await rest.PostAsync<Dictionary<string, JArray>>("sync/settings/fetch", new AccountFetchSettingsRequest
         {
@@ -73,12 +72,12 @@ public static class AccountHelper
         return Values.ToDictionary(x => x.Key, x => new Tuple<long, string>(x.Value.First().Value<long>(), x.Value.Last().Value<string>()));
     }
 
-    public static async Task ModifyAccountSettingsAsync(this RevoltRestClient rest, Dictionary<string, string> settings)
+    public static async Task ModifyAccountSettingsAsync(this StoatRestClient rest, Dictionary<string, string> settings)
     {
         await rest.SendRequestAsync<dynamic>(RequestType.Post, "sync/settings/set?timestamp=" + DateTime.UtcNow.ToTimestamp(), settings);
     }
 
-    public static async Task<ChannelReadState[]?> GetAccountUnreadsAsync(this RevoltRestClient rest)
+    public static async Task<ChannelReadState[]?> GetAccountUnreadsAsync(this StoatRestClient rest)
     {
         ChannelReadStateJson[] Json = await rest.GetAsync<ChannelReadStateJson[]>("sync/unreads");
         if (Json == null)
@@ -87,7 +86,7 @@ public static class AccountHelper
         return Json.Select(x => new ChannelReadState(x)).ToArray();
     }
 
-    public static async Task CreateAccountAsync(this RevoltRestClient rest, string email, string password, string? inviteCode = null, string? captchaCode = null)
+    public static async Task CreateAccountAsync(this StoatRestClient rest, string email, string password, string? inviteCode = null, string? captchaCode = null)
     {
         await rest.PostAsync("auth/account/create", new CreateAccountRequest
         {
@@ -98,7 +97,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task VerifyAccountAsync(this RevoltRestClient rest, string email, string? captchaCode)
+    public static async Task VerifyAccountAsync(this StoatRestClient rest, string email, string? captchaCode)
     {
         await rest.PostAsync("auth/account/reverify", new AccountVerificationRequest
         {
@@ -107,12 +106,12 @@ public static class AccountHelper
         });
     }
 
-    public static async Task RequestAccountDeletionAsync(this RevoltRestClient rest)
+    public static async Task RequestAccountDeletionAsync(this StoatRestClient rest)
     {
         await rest.PostAsync("auth/account/delete");
     }
 
-    public static async Task ConfirmAccountDeletionAsync(this RevoltRestClient rest, string token)
+    public static async Task ConfirmAccountDeletionAsync(this StoatRestClient rest, string token)
     {
         await rest.PutAsync("auth/account/delete", new AccountConfirmDeletionRequest
         {
@@ -120,7 +119,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task<AccountInfo?> GetAccountInfoAsync(this RevoltRestClient rest)
+    public static async Task<AccountInfo?> GetAccountInfoAsync(this StoatRestClient rest)
     {
         AccountInfoJson? json = await rest.GetAsync<AccountInfoJson>("auth/account");
         if (json == null)
@@ -129,12 +128,12 @@ public static class AccountHelper
         return new AccountInfo(rest.Client, json);
     }
 
-    public static async Task DisableAccountAsync(this RevoltRestClient rest)
+    public static async Task DisableAccountAsync(this StoatRestClient rest)
     {
-        await rest.PostAsync("auth/account/disable"); 
+        await rest.PostAsync("auth/account/disable");
     }
 
-    public static async Task ChangeAccountPasswordAsync(this RevoltRestClient rest, string currentPassword, string newPassword)
+    public static async Task ChangeAccountPasswordAsync(this StoatRestClient rest, string currentPassword, string newPassword)
     {
         await rest.PatchAsync("auth/account/change/password", new AccountChangePasswordRequest
         {
@@ -143,7 +142,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task ChangeAccountEmailAsync(this RevoltRestClient rest, string currentPassword, string newEmail)
+    public static async Task ChangeAccountEmailAsync(this StoatRestClient rest, string currentPassword, string newEmail)
     {
         await rest.PatchAsync("auth/account/change/email", new AccountChangeEmailRequest
         {
@@ -152,7 +151,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task RequestPasswordResetAsync(this RevoltRestClient rest, string email, string? captchaCode = null)
+    public static async Task RequestPasswordResetAsync(this StoatRestClient rest, string email, string? captchaCode = null)
     {
         await rest.PostAsync("auth/account/reset_password", new PasswordResetRequest
         {
@@ -161,7 +160,7 @@ public static class AccountHelper
         });
     }
 
-    public static async Task ConfirmPasswordResetAsync(this RevoltRestClient rest, string token, string password, bool removeSessions = false)
+    public static async Task ConfirmPasswordResetAsync(this StoatRestClient rest, string token, string password, bool removeSessions = false)
     {
         await rest.PatchAsync("auth/account/reset_password", new AccountPasswordResetRequest
         {
@@ -171,12 +170,12 @@ public static class AccountHelper
         });
     }
 
-    public static async Task AccountLogoutAsync(this RevoltRestClient rest)
+    public static async Task AccountLogoutAsync(this StoatRestClient rest)
     {
         await rest.PostAsync("auth/session/logout");
     }
 
-    public static async Task<AccountMFA?> AccountMFAInfoAsync(this RevoltRestClient rest)
+    public static async Task<AccountMFA?> AccountMFAInfoAsync(this StoatRestClient rest)
     {
         AccountMFAJson? json = await rest.GetAsync<AccountMFAJson>("auth/mfa");
         if (json == null)

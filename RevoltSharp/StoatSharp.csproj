@@ -3,20 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
 	  <ImplicitUsings>disable</ImplicitUsings>
-    <Version>8.3.0</Version>
+    <Version>9.0.0</Version>
     <Authors>Builderb (Fluxpoint Development)</Authors>
     <Company>Fluxpoint Development</Company>
-    <Description>A C# lib for using the revolt chat API and connecting to the gateway with a user or bot account.</Description>
-    <Product>RevoltSharp</Product>
-    <PackageProjectUrl>https://docs.fluxpoint.dev/revoltsharp</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/FluxpointDev/RevoltSharp</RepositoryUrl>
-    <PackageTags>revolt, revolt bot, bot, revoltsharp, revolt c#</PackageTags>
-    <PackageReleaseNotes>See changelog https://docs.fluxpoint.dev/revoltsharp/changelog</PackageReleaseNotes>
+    <Description>A C# lib for using the Stoat Chat API and connecting to the gateway with a user or bot account.</Description>
+    <Product>StoatSharp</Product>
+    <PackageProjectUrl>https://docs.fluxpoint.dev/stoatsharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FluxpointDev/StoatSharp</RepositoryUrl>
+    <PackageTags>revolt, revolt bot, bot, revoltsharp, revoltchat, stoatchat, stoat, revolt c#</PackageTags>
+    <PackageReleaseNotes>See changelog https://docs.fluxpoint.dev/stoatsharp/changelog</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <PackageIcon>PackageIcon.png</PackageIcon>
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>RevoltSharp.xml</DocumentationFile>
+    <DocumentationFile>StoatSharp.xml</DocumentationFile>
   </PropertyGroup>
   
   <ItemGroup>

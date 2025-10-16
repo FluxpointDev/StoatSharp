@@ -2,13 +2,13 @@
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
 /// The error type for this request/function
 /// </summary>
 [JsonConverter(typeof(StringEnumConverter))]
-public enum RevoltErrorType
+public enum StoatErrorType
 {
     /// <summary>
     /// Unknown error type.
@@ -169,12 +169,12 @@ public enum RevoltErrorType
     /// </summary>
     NotOwner,
     /// <summary>
-    /// A Revolt instance database issue has occured.
+    /// A Stoat instance database issue has occured.
     /// </summary>
     [EnumMember(Value = "DatabaseError")]
-    RevoltDatabaseError,
+    DatabaseError,
     /// <summary>
-    /// A Revolt instance internal issue has occured.
+    /// A Stoat instance internal issue has occured.
     /// </summary>
     [EnumMember(Value = "InternalError")]
     InternalServerError,
@@ -187,7 +187,7 @@ public enum RevoltErrorType
     /// </summary>
     InvalidCredentials,
     /// <summary>
-    /// Invalid object property for the Revolt instance.
+    /// Invalid object property for the Stoat instance.
     /// </summary>
     InvalidProperty,
     /// <summary>

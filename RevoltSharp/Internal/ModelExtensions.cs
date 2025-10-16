@@ -1,7 +1,7 @@
 ﻿using Optionals;
 using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal static class ModelExtensions
@@ -10,7 +10,7 @@ internal static class ModelExtensions
     {
         return (T)Enum.Parse(typeof(T), value, ignoreCase);
     }
-    internal static Optional<Attachment?> ToModel(this Optional<AttachmentJson> json, RevoltClient client)
+    internal static Optional<Attachment?> ToModel(this Optional<AttachmentJson> json, StoatClient client)
     {
         if (!json.HasValue)
             return Optional.None<Attachment?>();
@@ -18,7 +18,7 @@ internal static class ModelExtensions
         return Optional.Some(json.Value.ToModel(client));
     }
 
-    internal static Attachment? ToModel(this AttachmentJson json, RevoltClient client)
+    internal static Attachment? ToModel(this AttachmentJson json, StoatClient client)
     {
         if (json == null)
             return null;

@@ -1,8 +1,8 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 /// <summary>
-/// System messages sent by Revolt for information/changes.
+/// System messages sent by Stoat for information/changes.
 /// </summary>
 /// <typeparam name="Type"></typeparam>
 public class SystemMessage<Type> : Message where Type : SystemData
@@ -17,7 +17,7 @@ public class SystemMessage<Type> : Message where Type : SystemData
     /// </summary>
     public SystemType SystemType { get; internal set; }
 
-    internal SystemMessage(RevoltClient client, MessageJson model, Type type, SystemType systemType)
+    internal SystemMessage(StoatClient client, MessageJson model, Type type, SystemType systemType)
         : base(client, model)
     {
         base.Type = MessageType.System;

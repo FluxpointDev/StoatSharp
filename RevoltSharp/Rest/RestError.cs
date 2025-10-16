@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace RevoltSharp.Rest;
+namespace StoatSharp.Rest;
 
 internal class RestError
 {
     [JsonProperty("type")]
-    public RevoltErrorType Type = RevoltErrorType.Unknown;
+    public StoatErrorType Type = StoatErrorType.Unknown;
 
     [JsonProperty("permission")]
     public string? Permission;

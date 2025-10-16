@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 
 /// <summary>
@@ -6,7 +6,7 @@
 /// </summary>
 public class UnknownChannel : Channel
 {
-    internal UnknownChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal UnknownChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         Type = ChannelType.Unknown;
     }
@@ -28,7 +28,7 @@ public class UnknownChannel : Channel
 /// </summary>
 public class UnknownServerChannel : ServerChannel
 {
-    internal UnknownServerChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal UnknownServerChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         Type = ChannelType.Unknown;
     }

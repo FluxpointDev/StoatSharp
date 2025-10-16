@@ -2,7 +2,7 @@
 using Optionals;
 using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class OptionalSerializerConverter<T> : JsonConverter

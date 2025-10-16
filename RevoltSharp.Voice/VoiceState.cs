@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class VoiceState

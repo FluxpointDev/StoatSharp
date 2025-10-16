@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public static class EmojiList
 {

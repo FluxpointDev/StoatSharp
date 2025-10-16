@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 [DebuggerDisplay(@"{DebuggerDisplay,nq}")]

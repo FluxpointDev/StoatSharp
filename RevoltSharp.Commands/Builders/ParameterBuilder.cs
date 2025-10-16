@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace RevoltSharp.Commands.Builders;
+namespace StoatSharp.Commands.Builders;
 
 
 public class ParameterBuilder

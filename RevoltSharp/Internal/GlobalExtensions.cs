@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public static class GlobalExtensions
 {
@@ -10,8 +10,8 @@ public static class GlobalExtensions
             return number;
 
         if (bint > 0)
-            throw new RevoltArgumentException($"Failed to parse big int because it's bigger than Int.MaxValue ({int.MaxValue})");
+            throw new StoatArgumentException($"Failed to parse big int because it's bigger than Int.MaxValue ({int.MaxValue})");
 
-        throw new RevoltArgumentException($"Failed to parse big int becasue it's less than Int.Minvalue ({int.MinValue})");
+        throw new StoatArgumentException($"Failed to parse big int becasue it's less than Int.Minvalue ({int.MinValue})");
     }
 }

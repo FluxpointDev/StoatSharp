@@ -1,8 +1,8 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
-internal class AccountChangePasswordRequest : IRevoltRequest
+internal class AccountChangePasswordRequest : IStoatRequest
 {
     public string password { get; set; }
     public string current_password { get; set; }

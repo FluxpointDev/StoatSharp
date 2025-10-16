@@ -1,7 +1,7 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
-internal class AccountFetchSettingsRequest : IRevoltRequest
+namespace StoatSharp;
+internal class AccountFetchSettingsRequest : IStoatRequest
 {
     public string[] keys { get; set; }
 }

@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("RevoltSharp.Rest")]
-[assembly: InternalsVisibleTo("RevoltSharp.Websocket")]
-[assembly: InternalsVisibleTo("RevoltSharp.Commands")]
-[assembly: InternalsVisibleTo("RevoltSharp.Voice")]
-[assembly: InternalsVisibleTo("RevoltSharp.InstanceAdmin")]
+[assembly: InternalsVisibleTo("StoatSharp.Rest")]
+[assembly: InternalsVisibleTo("StoatSharp.Websocket")]
+[assembly: InternalsVisibleTo("StoatSharp.Commands")]
+[assembly: InternalsVisibleTo("StoatSharp.Voice")]
+[assembly: InternalsVisibleTo("StoatSharp.InstanceAdmin")]

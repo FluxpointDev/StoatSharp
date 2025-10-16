@@ -1,6 +1,6 @@
 ﻿using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class ServerUpdatedProperties

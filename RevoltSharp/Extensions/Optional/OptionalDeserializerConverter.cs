@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 public class OptionalDeserializerConverter : JsonConverter

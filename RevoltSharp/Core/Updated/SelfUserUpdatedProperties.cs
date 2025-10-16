@@ -1,10 +1,10 @@
 ﻿using Optionals;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public class SelfUserUpdatedProperties : UserUpdatedProperties
 {
-    internal SelfUserUpdatedProperties(RevoltClient client, PartialUserJson json) : base(client, json)
+    internal SelfUserUpdatedProperties(StoatClient client, PartialUserJson json) : base(client, json)
     {
         if (json.Profile.HasValue)
             ProfileContent = json.Profile.Value.Content;

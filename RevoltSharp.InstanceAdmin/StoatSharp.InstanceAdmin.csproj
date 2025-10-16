@@ -1,29 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>RevoltSharp</RootNamespace>
+    <RootNamespace>StoatSharp</RootNamespace>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 
 	  <Version>1.3.0</Version>
 	  <Authors>Builderb (Fluxpoint Development)</Authors>
 	  <Company>Fluxpoint Development</Company>
-	  <Product>RevoltSharp.InstanceAdmin</Product>
-	  <Description>Methods and extensions for managing your own self-hosted Revolt instance.</Description>
-	  <PackageProjectUrl>https://docs.fluxpoint.dev/revoltsharp</PackageProjectUrl>
+	  <Product>StoatSharp.InstanceAdmin</Product>
+	  <Description>Methods and extensions for managing your own self-hosted Stoat instance.</Description>
+	  <PackageProjectUrl>https://docs.fluxpoint.dev/stoatsharp</PackageProjectUrl>
 	  <PackageIcon>PackageIcon.png</PackageIcon>
-	  <RepositoryUrl>https://github.com/FluxpointDev/RevoltSharp</RepositoryUrl>
+	  <RepositoryUrl>https://github.com/FluxpointDev/StoatSharp</RepositoryUrl>
 	  <PackageTags>revolt, revolt bot, bot, revoltsharp, revolt c#</PackageTags>
-	  <PackageReleaseNotes>See changelog https://docs.fluxpoint.dev/revoltsharp/changelog</PackageReleaseNotes>
+	  <PackageReleaseNotes>See changelog https://docs.fluxpoint.dev/stoatsharp/changelog</PackageReleaseNotes>
 	  
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<DocumentationFile>RevoltSharp.InstanceAdmin.xml</DocumentationFile>
+	<DocumentationFile>StoatSharp.InstanceAdmin.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RevoltSharp\RevoltSharp.csproj" />
+    <ProjectReference Include="..\RevoltSharp\StoatSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,30 +1,30 @@
 ﻿using Newtonsoft.Json;
-using RevoltSharp.Rest;
+using StoatSharp.Rest;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 /// <summary>
 /// Special logger class with custom title and console colors.
 /// </summary>
-public class RevoltLogger
+public class StoatLogger
 {
     /// <summary>
     /// Initialize your own logging system with a custom title and log mode.
     /// </summary>
     /// <param name="title"></param>
     /// <param name="logMode"></param>
-    public RevoltLogger(string title, RevoltLogSeverity logMode)
+    public StoatLogger(string title, StoatLogSeverity logMode)
     {
         Title = title;
         LogMode = logMode;
         LoggerTask = Task.Factory.StartNew(async () =>
         {
-            foreach (RevoltLogJsonMessage msg in MessageQueue.GetConsumingEnumerable())
+            foreach (StoatLogJsonMessage msg in MessageQueue.GetConsumingEnumerable())
             {
                 if (msg.Data is string str)
                 {
@@ -52,11 +52,11 @@ public class RevoltLogger
 
     private Task LoggerTask { get; set; }
 
-    private RevoltLogSeverity LogMode { get; set; }
+    private StoatLogSeverity LogMode { get; set; }
 
-    private BlockingCollection<RevoltLogJsonMessage> MessageQueue = new BlockingCollection<RevoltLogJsonMessage>();
+    private BlockingCollection<StoatLogJsonMessage> MessageQueue = new BlockingCollection<StoatLogJsonMessage>();
 
-    #pragma warning disable IDE0051 // Remove unused private members
+#pragma warning disable IDE0051 // Remove unused private members
 
     /// <summary> Reset console color </summary>
     public static readonly string Reset = "\u001b[39m";
@@ -89,7 +89,7 @@ public class RevoltLogger
     /// <summary> Light Grey console color </summary>
     public static readonly string LightGrey = "\u001b[37m";
 
-    #pragma warning restore IDE0051 // Remove unused private members
+#pragma warning restore IDE0051 // Remove unused private members
 
 
     private static string FormatJsonPretty(string json, bool allowOptionals)
@@ -99,8 +99,8 @@ public class RevoltLogger
             using (StringReader text = new StringReader(json))
             using (JsonReader reader = new JsonTextReader(text))
             {
-                dynamic parsedJson = RevoltClient.Deserializer.Deserialize<dynamic>(reader);
-                return RevoltRestClient.SerializeJsonPretty(parsedJson);
+                dynamic parsedJson = StoatClient.Deserializer.Deserialize<dynamic>(reader);
+                return StoatRestClient.SerializeJsonPretty(parsedJson);
             }
         }
         else
@@ -108,13 +108,13 @@ public class RevoltLogger
             dynamic parsedJson = JsonConvert.DeserializeObject(json);
             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
         }
-        
+
     }
 
     private static string FormatJsonPretty(object json, bool allowOptionals)
     {
         if (allowOptionals)
-            return RevoltRestClient.SerializeJsonPretty(json);
+            return StoatRestClient.SerializeJsonPretty(json);
 
         return JsonConvert.SerializeObject(json, Formatting.Indented);
     }
@@ -124,7 +124,7 @@ public class RevoltLogger
     /// </summary>
     public void LogJson(string message, object data)
     {
-        MessageQueue.Add(new RevoltLogJsonMessage { Message = message, Data = data });
+        MessageQueue.Add(new StoatLogJsonMessage { Message = message, Data = data });
     }
 
 
@@ -135,7 +135,7 @@ public class RevoltLogger
     /// <para>Error: Red</para>
     /// <para>Debug: Grey</para>
     /// </summary>
-    public void LogMessage(string message, RevoltLogSeverity severity = RevoltLogSeverity.Debug)
+    public void LogMessage(string message, StoatLogSeverity severity = StoatLogSeverity.Debug)
     {
         if (severity < LogMode)
             return;
@@ -143,25 +143,25 @@ public class RevoltLogger
         switch (severity)
         {
             // White
-            case RevoltLogSeverity.Info:
+            case StoatLogSeverity.Info:
                 {
                     Console.WriteLine($"[{Title}] {message}");
                 }
                 break;
             // Yellow
-            case RevoltLogSeverity.Warn:
+            case StoatLogSeverity.Warn:
                 {
                     Console.WriteLine($"[{Title}] {Yellow}{message}{Reset}");
                 }
                 break;
             // Red
-            case RevoltLogSeverity.Error:
+            case StoatLogSeverity.Error:
                 {
                     Console.WriteLine($"[{Title}] {Red}{message}{Reset}");
                 }
                 break;
             // Grey
-            case RevoltLogSeverity.Debug:
+            case StoatLogSeverity.Debug:
                 {
                     Console.WriteLine($"[{Title}] {Grey}{message}{Reset}");
                 }
@@ -187,16 +187,16 @@ public class RevoltLogger
     }
 }
 
-internal class RevoltLogJsonMessage
+internal class StoatLogJsonMessage
 {
     public string Message;
     public object Data;
 }
 
 /// <summary>
-/// The severity of a log message raised by <see cref="RevoltClient.OnLog"/>.
+/// The severity of a log message raised by <see cref="StoatClient.OnLog"/>.
 /// </summary>
-public enum RevoltLogSeverity
+public enum StoatLogSeverity
 {
     /// <summary>
     /// All messages including debug ones.

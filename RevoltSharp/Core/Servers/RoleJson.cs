@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Numerics;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 internal class RoleJson

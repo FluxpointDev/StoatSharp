@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Optionals;
 
-namespace RevoltSharp.WebSocket;
+namespace StoatSharp.WebSocket;
 
 
 internal class ServerJoinEventJson

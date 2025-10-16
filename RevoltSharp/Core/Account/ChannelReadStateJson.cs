@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 internal class ChannelReadStateJson
 {
     public ChannelReadStateIdsJson _id;

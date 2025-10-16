@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public class QueryBuilder
 {

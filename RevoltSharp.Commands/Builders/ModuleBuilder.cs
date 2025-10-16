@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace RevoltSharp.Commands.Builders;
+namespace StoatSharp.Commands.Builders;
 
 
 public class ModuleBuilder

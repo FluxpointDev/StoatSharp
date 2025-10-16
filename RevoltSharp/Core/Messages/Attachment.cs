@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
-/// Revolt file attachment for messages which could by any type including an image.
+/// Stoat file attachment for messages which could by any type including an image.
 /// </summary>
 public class Attachment : CreatedEntity
 {
-    internal Attachment(RevoltClient client, AttachmentJson model) : base(client, model.Id)
+    internal Attachment(StoatClient client, AttachmentJson model) : base(client, model.Id)
     {
         Tag = model.Tag;
         Filename = model.Filename;
@@ -81,7 +81,7 @@ public class Attachment : CreatedEntity
         return $"{Client.Config.Debug.UploadUrl}{Tag}/{Id}/{Filename}";
     }
 
-    internal static Attachment? Create(RevoltClient client, AttachmentJson? model)
+    internal static Attachment? Create(StoatClient client, AttachmentJson? model)
     {
         if (model != null)
             return new Attachment(client, model);

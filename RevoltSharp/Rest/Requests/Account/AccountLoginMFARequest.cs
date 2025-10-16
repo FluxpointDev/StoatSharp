@@ -1,5 +1,5 @@
-﻿namespace RevoltSharp.Rest.Requests;
-internal class AccountLoginMFARequest : IRevoltRequest
+﻿namespace StoatSharp.Rest.Requests;
+internal class AccountLoginMFARequest : IStoatRequest
 {
     public string mfa_ticket { get; set; }
     public string friendly_name { get; set; }

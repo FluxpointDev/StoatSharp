@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace RevoltSharp.Rest.Requests;
+namespace StoatSharp.Rest.Requests;
 
 
-internal class EditMemberRequest : IRevoltRequest
+internal class EditMemberRequest : IStoatRequest
 {
     public Optional<string[]> roles { get; set; }
     public Optional<string> nickname { get; set; }

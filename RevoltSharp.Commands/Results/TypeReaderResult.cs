@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 [DebuggerDisplay(@"{DebuggerDisplay,nq}")]

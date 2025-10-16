@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RevoltSharp.Requests;
+namespace StoatSharp.Requests;
 internal class AdminMessagesDataJson
 {
     [JsonProperty("messages")]

@@ -1,4 +1,4 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 /// <summary>
 /// Permissions for the webhook that can be used.

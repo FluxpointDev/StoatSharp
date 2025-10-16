@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 
 /// <summary>
@@ -8,7 +8,7 @@ namespace RevoltSharp;
 /// </summary>
 public class DMChannel : Channel
 {
-    internal DMChannel(RevoltClient client, ChannelJson model) : base(client, model)
+    internal DMChannel(StoatClient client, ChannelJson model) : base(client, model)
     {
         Type = ChannelType.DM;
         Active = model.Active;

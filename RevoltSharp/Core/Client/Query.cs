@@ -1,7 +1,7 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 /// <summary>
-/// Query information about the connected Revolt instance.
+/// Query information about the connected Stoat instance.
 /// </summary>
 public class Query
 {
@@ -9,7 +9,7 @@ public class Query
     internal Query(QueryJson json)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {
-        RevoltVersion = json.RevoltVersion;
+        StoatVersion = json.RevoltVersion;
         AppUrl = json.AppUrl;
         WebsocketUrl = json.WebsocketUrl;
         CaptchaEnabled = json.ServerFeatures.captcha.enabled;
@@ -22,17 +22,11 @@ public class Query
         JanuaryServerUrl = json.ServerFeatures.JanuaryServer.url;
         if (!JanuaryServerUrl.EndsWith("/"))
             JanuaryServerUrl += "/";
-
-        //VoiceApiUrl = json.ServerFeatures.VoiceServer.url;
-        //if (!VoiceApiUrl.EndsWith("/"))
-        //    VoiceApiUrl += "/";
-
-        //VoiceWebsocketUrl = json.ServerFeatures.VoiceServer.ws;
     }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-    public string RevoltVersion { get; internal set; }
+    public string StoatVersion { get; internal set; }
 
     public string AppUrl { get; internal set; }
 

@@ -1,4 +1,4 @@
-﻿using RevoltSharp;
+﻿using StoatSharp;
 using System;
 using System.Threading.Tasks;
 
@@ -7,7 +7,7 @@ namespace TestBot;
 
 public class EventTests
 {
-    public EventTests(RevoltClient client)
+    public EventTests(StoatClient client)
     {
         client.OnChannelCreated += Client_OnChannelCreated;
         client.OnChannelDeleted += Client_OnChannelDeleted;
@@ -74,7 +74,7 @@ public class EventTests
             Console.WriteLine("Message: " + message_cache.Id);
 
 
-            var message = await message_cache.GetOrDownloadAsync();
+            Message message = await message_cache.GetOrDownloadAsync();
             UserMessage um = message as UserMessage;
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(message, Newtonsoft.Json.Formatting.Indented));
 

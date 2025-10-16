@@ -1,4 +1,4 @@
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 /// <summary> Defines the type of error a command can throw. </summary>

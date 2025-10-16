@@ -1,21 +1,21 @@
 ﻿using Newtonsoft.Json;
 using Optionals;
-using RevoltSharp.Rest;
-using RevoltSharp.Rest.Requests;
-using RevoltSharp.WebSocket;
+using StoatSharp.Rest;
+using StoatSharp.Rest.Requests;
+using StoatSharp.WebSocket;
 using System.Threading.Tasks;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
-namespace RevoltSharp;
+namespace StoatSharp;
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
 
 /// <summary>
-/// Revolt http/rest methods for base channel types.
+/// Stoat http/rest methods for base channel types.
 /// </summary>
 public static class ChannelHelper
 {
-    /// <inheritdoc cref="GetChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="GetChannelAsync(StoatRestClient, string)" />
     public static Task<Channel?> GetChannelAsync(this Server server, string channelId)
         => InternalGetChannelAsync<Channel>(server.Client.Rest, channelId);
 
@@ -25,12 +25,12 @@ public static class ChannelHelper
     /// <returns>
     /// <see cref="Channel"/> or <see langword="null" />
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static Task<Channel?> GetChannelAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static Task<Channel?> GetChannelAsync(this StoatRestClient rest, string channelId)
         => InternalGetChannelAsync<Channel>(rest, channelId);
 
-    internal static async Task<TValue?> InternalGetChannelAsync<TValue>(this RevoltRestClient rest, string channelId)
+    internal static async Task<TValue?> InternalGetChannelAsync<TValue>(this StoatRestClient rest, string channelId)
         where TValue : Channel
     {
         Conditions.ChannelIdLength(channelId, nameof(GetChannelAsync));
@@ -42,7 +42,7 @@ public static class ChannelHelper
         if (ChannelJson == null)
             return null;
 
-        TValue Channel = (TValue)RevoltSharp.Channel.Create(rest.Client, ChannelJson);
+        TValue Channel = (TValue)StoatSharp.Channel.Create(rest.Client, ChannelJson);
         if (rest.Client.WebSocket != null)
             rest.Client.WebSocket.ChannelCache.TryAdd(channelId, Channel);
 
@@ -50,12 +50,12 @@ public static class ChannelHelper
     }
 
 
-    /// <inheritdoc cref="ModifyChannelAsync(RevoltRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string})" />
+    /// <inheritdoc cref="ModifyChannelAsync(StoatRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string})" />
     public static Task<Channel> ModifyChannelAsync(this Server server, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null)
         => InternalModifyChannelAsync<Channel>(server.Client.Rest, channelId, name, desc, iconId, nsfw, null);
 
-    /// <inheritdoc cref="ModifyChannelAsync(RevoltRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string})" />
-    public static Task<Channel> ModifyChannelAsync(this RevoltRestClient rest, Channel channel, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
+    /// <inheritdoc cref="ModifyChannelAsync(StoatRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string})" />
+    public static Task<Channel> ModifyChannelAsync(this StoatRestClient rest, Channel channel, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
         => InternalModifyChannelAsync<Channel>(rest, channel.Id, name, desc, iconId, nsfw, owner);
 
     /// <summary>
@@ -64,12 +64,12 @@ public static class ChannelHelper
     /// <returns>
     /// <see cref="Channel"/>
     /// </returns>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static Task<Channel> ModifyChannelAsync(this RevoltRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static Task<Channel> ModifyChannelAsync(this StoatRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
         => InternalModifyChannelAsync<Channel>(rest, channelId, name, desc, iconId, nsfw, owner);
 
-    internal static async Task<TChannel> InternalModifyChannelAsync<TChannel>(this RevoltRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null) where TChannel : Channel
+    internal static async Task<TChannel> InternalModifyChannelAsync<TChannel>(this StoatRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null) where TChannel : Channel
     {
         Conditions.ChannelIdLength(channelId, nameof(ModifyChannelAsync));
 
@@ -122,35 +122,35 @@ public static class ChannelHelper
     /// <summary>
     /// Delete a server channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
     public static Task DeleteChannelAsync(this Server server, string channelId)
         => InternalDeleteChannelAsync(server.Client.Rest, channelId);
 
-    /// <inheritdoc cref="DeleteChannelAsync(RevoltRestClient, string)" />
-    public static Task DeleteChannelAsync(this RevoltRestClient rest, Channel channel)
+    /// <inheritdoc cref="DeleteChannelAsync(StoatRestClient, string)" />
+    public static Task DeleteChannelAsync(this StoatRestClient rest, Channel channel)
         => InternalDeleteChannelAsync(rest, channel.Id);
 
     /// <summary>
     /// Delete a channel.
     /// </summary>
-    /// <exception cref="RevoltArgumentException"></exception>
-    /// <exception cref="RevoltRestException"></exception>
-    public static Task DeleteChannelAsync(this RevoltRestClient rest, string channelId)
+    /// <exception cref="StoatArgumentException"></exception>
+    /// <exception cref="StoatRestException"></exception>
+    public static Task DeleteChannelAsync(this StoatRestClient rest, string channelId)
         => InternalDeleteChannelAsync(rest, channelId);
 
-    internal static async Task InternalDeleteChannelAsync(this RevoltRestClient rest, string channelId)
+    internal static async Task InternalDeleteChannelAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(DeleteChannelAsync));
 
         await rest.DeleteAsync($"/channels/{channelId}");
     }
 
-    /// <inheritdoc cref="TriggerTypingChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="TriggerTypingChannelAsync(StoatRestClient, string)" />
     public static Task TriggerTypingAsync(this Channel channel) => TriggerTypingChannelAsync(channel.Client.Rest, channel.Id);
 
-    /// <inheritdoc cref="TriggerTypingChannelAsync(RevoltRestClient, string)" />
-    public static Task TriggerTypingAsync(this RevoltRestClient rest, Channel channel) => TriggerTypingChannelAsync(rest, channel.Id);
+    /// <inheritdoc cref="TriggerTypingChannelAsync(StoatRestClient, string)" />
+    public static Task TriggerTypingAsync(this StoatRestClient rest, Channel channel) => TriggerTypingChannelAsync(rest, channel.Id);
 
     /// <summary>
     /// Trigger the typing indicator one-time on a channel which will stop after 3 seconds.
@@ -158,7 +158,7 @@ public static class ChannelHelper
     /// <remarks>
     /// This will only work with <see cref="ClientMode.WebSocket"/>
     /// </remarks>
-    public static async Task TriggerTypingChannelAsync(this RevoltRestClient rest, string channelId)
+    public static async Task TriggerTypingChannelAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(TriggerTypingChannelAsync));
         Conditions.WebSocketOnly(rest, nameof(TriggerTypingChannelAsync));
@@ -169,11 +169,11 @@ public static class ChannelHelper
         await rest.Client.WebSocket.Send(rest.Client.WebSocket.WebSocket, JsonConvert.SerializeObject(new BeginTypingSocketRequest(channelId)), new System.Threading.CancellationToken());
     }
 
-    /// <inheritdoc cref="BeginTypingChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="BeginTypingChannelAsync(StoatRestClient, string)" />
     public static Task BeginTypingAsync(this Channel channel) => BeginTypingChannelAsync(channel.Client.Rest, channel.Id);
 
-    /// <inheritdoc cref="BeginTypingChannelAsync(RevoltRestClient, string)" />
-    public static Task BeginTypingAsync(this RevoltRestClient rest, Channel channel) => BeginTypingChannelAsync(rest, channel.Id);
+    /// <inheritdoc cref="BeginTypingChannelAsync(StoatRestClient, string)" />
+    public static Task BeginTypingAsync(this StoatRestClient rest, Channel channel) => BeginTypingChannelAsync(rest, channel.Id);
 
     /// <summary>
     /// Trigger the typing indicator continuously on a channel, you can use the <see cref="TypingNotifier"/> class to stop typing or using the StopTypingChannelAsync rest/channel request.
@@ -181,22 +181,22 @@ public static class ChannelHelper
     /// <remarks>
     /// This will only work with <see cref="ClientMode.WebSocket"/>
     /// </remarks>
-    public static async Task<TypingNotifier> BeginTypingChannelAsync(this RevoltRestClient rest, string channelId)
+    public static async Task<TypingNotifier> BeginTypingChannelAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(BeginTypingChannelAsync));
         Conditions.WebSocketOnly(rest, nameof(BeginTypingChannelAsync));
 
-        if (rest.Client.WebSocket.TypingChannels.TryGetValue(channelId, out var typing))
+        if (rest.Client.WebSocket.TypingChannels.TryGetValue(channelId, out TypingNotifier? typing))
             return typing;
 
         return new TypingNotifier(rest, channelId);
     }
 
-    /// <inheritdoc cref="StopTypingChannelAsync(RevoltRestClient, string)" />
+    /// <inheritdoc cref="StopTypingChannelAsync(StoatRestClient, string)" />
     public static Task StopTypingAsync(this Channel channel) => StopTypingChannelAsync(channel.Client.Rest, channel.Id);
 
-    /// <inheritdoc cref="StopTypingChannelAsync(RevoltRestClient, string)" />
-    public static Task StopTypingAsync(this RevoltRestClient rest, Channel channel) => StopTypingChannelAsync(rest, channel.Id);
+    /// <inheritdoc cref="StopTypingChannelAsync(StoatRestClient, string)" />
+    public static Task StopTypingAsync(this StoatRestClient rest, Channel channel) => StopTypingChannelAsync(rest, channel.Id);
 
     /// <summary>
     /// Trigger the stop typing on a channel which will stop the current user from typing in the channel.
@@ -206,7 +206,7 @@ public static class ChannelHelper
     /// </remarks>
     /// <param name="rest"></param>
     /// <param name="channelId"></param>
-    public static async Task StopTypingChannelAsync(this RevoltRestClient rest, string channelId)
+    public static async Task StopTypingChannelAsync(this StoatRestClient rest, string channelId)
     {
         Conditions.ChannelIdLength(channelId, nameof(StopTypingChannelAsync));
         Conditions.WebSocketOnly(rest, nameof(StopTypingChannelAsync));

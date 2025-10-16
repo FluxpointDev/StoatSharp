@@ -1,11 +1,11 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 
 /// <summary>
-/// Revolt channel webhook to use with 3rd party services and APIs.
+/// Stoat channel webhook to use with 3rd party services and APIs.
 /// </summary>
 public class Webhook : CreatedEntity
 {
-    internal Webhook(RevoltClient client, WebhookJson model) : base(client, model.Id)
+    internal Webhook(StoatClient client, WebhookJson model) : base(client, model.Id)
     {
         Name = model.Name!;
         Avatar = Attachment.Create(Client, model.Avatar);

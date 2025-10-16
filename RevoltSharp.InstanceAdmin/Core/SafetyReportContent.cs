@@ -1,7 +1,7 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 public interface ISafetyReportContent
 {
-    internal static ISafetyReportContent? Create(RevoltClient client, SafetyReportType type, SafetyReportedContentJson model)
+    internal static ISafetyReportContent? Create(StoatClient client, SafetyReportType type, SafetyReportedContentJson model)
     {
         switch (type)
         {
@@ -17,7 +17,7 @@ public interface ISafetyReportContent
 }
 public class SafetyReportedServer : CreatedEntity, ISafetyReportContent
 {
-    internal SafetyReportedServer(RevoltClient client, SafetyReportedContentJson model) : base(client, model.Id)
+    internal SafetyReportedServer(StoatClient client, SafetyReportedContentJson model) : base(client, model.Id)
     {
         Reason = model.Reason.ToEnum<SafetyReportServerReason>();
     }
@@ -27,7 +27,7 @@ public class SafetyReportedServer : CreatedEntity, ISafetyReportContent
 }
 public class SafetyReportedUser : CreatedEntity, ISafetyReportContent
 {
-    internal SafetyReportedUser(RevoltClient client, SafetyReportedContentJson model) : base(client, model.Id)
+    internal SafetyReportedUser(StoatClient client, SafetyReportedContentJson model) : base(client, model.Id)
     {
         MessageId = model.MessageId.HasValue ? model.MessageId.Value : string.Empty;
         Reason = model.Reason.ToEnum<SafetyReportUserReason>();
@@ -40,7 +40,7 @@ public class SafetyReportedUser : CreatedEntity, ISafetyReportContent
 }
 public class SafetyReportedMessage : CreatedEntity, ISafetyReportContent
 {
-    internal SafetyReportedMessage(RevoltClient client, SafetyReportedContentJson model) : base(client, model.MessageId.Value)
+    internal SafetyReportedMessage(StoatClient client, SafetyReportedContentJson model) : base(client, model.MessageId.Value)
     {
         Reason = model.Reason.ToEnum<SafetyReportMessageReason>();
     }

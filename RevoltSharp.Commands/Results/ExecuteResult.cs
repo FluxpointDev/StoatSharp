@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 /// <summary>

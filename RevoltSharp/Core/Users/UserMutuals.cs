@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
 public class UserMutuals
 {

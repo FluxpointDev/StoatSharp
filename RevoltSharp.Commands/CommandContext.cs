@@ -1,11 +1,11 @@
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 /// <summary> The context of a command which may contain the client, user, guild, channel, and message. </summary>
 public class CommandContext
 {
     /// <inheritdoc/>
-    public RevoltClient Client { get; }
+    public StoatClient Client { get; }
     /// <inheritdoc/>
     public Server? Server { get; }
     /// <inheritdoc/>
@@ -29,7 +29,7 @@ public class CommandContext
     /// </summary>
     /// <param name="client">The underlying client.</param>
     /// <param name="msg">The underlying message.</param>
-    public CommandContext(RevoltClient client, UserMessage msg)
+    public CommandContext(StoatClient client, UserMessage msg)
     {
         Client = client;
         Channel = msg.Channel!;

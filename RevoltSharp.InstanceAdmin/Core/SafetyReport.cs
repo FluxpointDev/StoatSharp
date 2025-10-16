@@ -1,7 +1,7 @@
-﻿namespace RevoltSharp;
+﻿namespace StoatSharp;
 public class SafetyReport : CreatedEntity
 {
-    internal SafetyReport(RevoltClient client, SafetyReportJson model) : base(client, model.Id)
+    internal SafetyReport(StoatClient client, SafetyReportJson model) : base(client, model.Id)
     {
         Status = model.Status.ToEnum<SafetyReportStatus>();
         AuthorId = model.AuthorId!;

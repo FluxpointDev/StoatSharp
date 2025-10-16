@@ -1,10 +1,10 @@
-﻿using RevoltSharp.Rest;
+﻿using StoatSharp.Rest;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 
-internal class AccountPasswordResetRequest : IRevoltRequest
+internal class AccountPasswordResetRequest : IStoatRequest
 {
-    public string token {  get; set; }
+    public string token { get; set; }
     public string password { get; set; }
     public bool remove_sessions { get; set; }
 }

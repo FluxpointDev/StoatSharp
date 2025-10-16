@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RevoltSharp.Commands;
+namespace StoatSharp.Commands;
 
 
 /// <summary>

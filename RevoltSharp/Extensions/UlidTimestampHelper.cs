@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace RevoltSharp;
+namespace StoatSharp;
 internal readonly struct UlidTimestampHelper
 {
     private const long TIMESTAMP_MASK_0 = 255;
