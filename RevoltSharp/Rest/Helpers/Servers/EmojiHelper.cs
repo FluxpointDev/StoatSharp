@@ -22,7 +22,8 @@ public static class EmojiHelper
     /// <remarks>
     /// Will be <see langword="null" /> if using <see cref="ClientMode.Http"/> or you can't access the user.
     /// </remarks>
-    public static Task GetCreatorAsync(this Emoji emoji)
+    /// <returns><see cref="User"/></returns>
+    public static Task<User?> GetCreatorAsync(this Emoji emoji)
         => UserHelper.GetUserAsync(emoji.Client.Rest, emoji.CreatorId);
 
     /// <inheritdoc cref="GetEmojiAsync(StoatRestClient, string)" />

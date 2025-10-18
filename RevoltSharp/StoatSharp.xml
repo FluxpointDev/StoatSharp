@@ -4271,6 +4271,15 @@
             Stoat http/rest methods for webhooks.
             </summary>
         </member>
+        <member name="M:StoatSharp.WebhookHelper.GetCreatorAsync(StoatSharp.Webhook)">
+            <summary>
+            The user that created this webhook.
+            </summary>
+            <remarks>
+            Will be <see langword="null" /> if using <see cref="F:StoatSharp.ClientMode.Http"/> or you can't access the user.
+            </remarks>
+            <returns><see cref="T:StoatSharp.User"/></returns>
+        </member>
         <member name="M:StoatSharp.WebhookHelper.GetWebhooksAsync(StoatSharp.GroupChannel)">
             <inheritdoc cref="M:StoatSharp.WebhookHelper.GetWebhooksAsync(StoatSharp.Rest.StoatRestClient,System.String)" />
         </member>
@@ -4298,6 +4307,86 @@
             <exception cref="T:StoatSharp.StoatRestException" />
             <exception cref="T:StoatSharp.StoatPermissionException" />
         </member>
+        <member name="M:StoatSharp.WebhookHelper.GetWebhookAsync(StoatSharp.StoatWebhookClient)">
+            <summary>
+            Get the current webhook for this webhook client.
+            </summary>
+            <param name="wh"></param>
+            <returns><see cref="T:StoatSharp.Webhook"/></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.GetWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String)">
+            <summary>
+            Get a webhook using the id and token.
+            </summary>
+            <param name="rest"></param>
+            <param name="webhookId"></param>
+            <param name="webhookToken"></param>
+            <returns><see cref="T:StoatSharp.Webhook"/></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.DeleteWebhookAsync(StoatSharp.StoatWebhookClient)">
+            <summary>
+            Delete the current webhook for this webhook client.
+            </summary>
+            <param name="wh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.DeleteWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String)">
+            <summary>
+            Delete a webhook that you can manage
+            </summary>
+            <param name="rest"></param>
+            <param name="webhookId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.DeleteWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String)">
+            <summary>
+            Delete a webhook
+            </summary>
+            <param name="rest"></param>
+            <param name="webhookId"></param>
+            <param name="webhookToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.DeleteAsync(StoatSharp.Webhook)">
+            <summary>
+            Delete the current webhook.
+            </summary>
+            <param name="wh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.InternalDeleteWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String)">
+            <summary>
+            Delete a webhook.
+            </summary>
+            <param name="rest"></param>
+            <param name="webhookId"></param>
+            <param name="webhookToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.ModifyAsync(StoatSharp.Webhook,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})">
+            <inheritdoc cref="M:StoatSharp.WebhookHelper.InternalModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})"/>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.ModifyWebhookAsync(StoatSharp.StoatWebhookClient,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})">
+            <inheritdoc cref="M:StoatSharp.WebhookHelper.InternalModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})"/>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.ModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})">
+            <inheritdoc cref="M:StoatSharp.WebhookHelper.InternalModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})"/>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.ModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})">
+            <inheritdoc cref="M:StoatSharp.WebhookHelper.InternalModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})"/>
+        </member>
+        <member name="M:StoatSharp.WebhookHelper.InternalModifyWebhookAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,StoatSharp.Option{System.String},StoatSharp.Option{System.String},StoatSharp.Option{StoatSharp.WebhookPermissions})">
+            <summary>
+            Edit a webhook that you can manage.
+            </summary>
+            <param name="rest"></param>
+            <param name="webhookId"></param>
+            <param name="webhookToken"></param>
+            <param name="name"></param>
+            <param name="avatarId"></param>
+            <param name="permissions"></param>
+            <returns><see cref="T:StoatSharp.Webhook"/></returns>
+        </member>
         <member name="T:StoatSharp.CategoryHelper">
             <summary>
             Stoat http/rest methods for categories.
@@ -4315,6 +4404,7 @@
             <remarks>
             Will be <see langword="null" /> if using <see cref="F:StoatSharp.ClientMode.Http"/> or you can't access the user.
             </remarks>
+            <returns><see cref="T:StoatSharp.User"/></returns>
         </member>
         <member name="M:StoatSharp.EmojiHelper.GetEmojiAsync(StoatSharp.Server,System.String)">
             <inheritdoc cref="M:StoatSharp.EmojiHelper.GetEmojiAsync(StoatSharp.Rest.StoatRestClient,System.String)" />
