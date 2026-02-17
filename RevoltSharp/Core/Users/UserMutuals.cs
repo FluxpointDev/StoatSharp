@@ -16,8 +16,14 @@ public class UserMutuals
             Servers = Array.Empty<string>();
         else
             Servers = json.servers;
+
+        if (json == null || json.channels == null)
+            Channels = Array.Empty<string>();
+        else
+            Channels = json.channels;
     }
 
     public IReadOnlyCollection<string> Users { get; internal set; }
     public IReadOnlyCollection<string> Servers { get; internal set; }
+    public IReadOnlyCollection<string> Channels { get; internal set; }
 }

@@ -13,6 +13,18 @@ internal class EditMemberRequest : IStoatRequest
     public Optional<DateTime> timeout { get; set; }
     public Optional<List<string>> remove { get; set; }
 
+    /// <summary>
+    /// Voice mute
+    /// </summary>
+    public Optional<bool> can_publish { get; set; }
+
+    /// <summary>
+    /// Voice deafen
+    /// </summary>
+    public Optional<bool> can_receive { get; set; }
+
+    public Optional<string> voice_channel { get; set; }
+
     public void RemoveValue(string value)
     {
         if (!remove.HasValue)
