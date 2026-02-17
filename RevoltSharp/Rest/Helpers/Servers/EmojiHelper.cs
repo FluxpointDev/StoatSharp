@@ -112,7 +112,6 @@ public static class EmojiHelper
     /// <exception cref="StoatRestException"></exception>
     public static async Task<Emoji> CreateEmojiAsync(this StoatRestClient rest, string serverId, string attachmentIdOrFile, string emojiName, bool nsfw = false)
     {
-        Conditions.NotAllowedForBots(rest, nameof(CreateEmojiAsync));
         Conditions.ServerIdLength(serverId, nameof(CreateEmojiAsync));
         Conditions.EmojiNameLength(emojiName, nameof(CreateEmojiAsync));
         Conditions.AttachmentIdLength(attachmentIdOrFile, nameof(CreateEmojiAsync), true);
@@ -159,7 +158,6 @@ public static class EmojiHelper
     public static async Task DeleteEmojiAsync(this StoatRestClient rest, string emojiId)
     {
         Conditions.EmojiIdLength(emojiId, nameof(DeleteEmojiAsync));
-        Conditions.NotAllowedForBots(rest, nameof(DeleteEmojiAsync));
 
         await rest.DeleteAsync($"/custom/emoji/{emojiId}");
     }
