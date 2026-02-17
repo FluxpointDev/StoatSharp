@@ -4960,6 +4960,16 @@
             Use <see cref="M:StoatSharp.Rest.StoatRestClient.SendRequestAsync(StoatSharp.Rest.RequestType,System.String,StoatSharp.Rest.IStoatRequest)"/> or <see cref="!:StoatRestClient.SendRequestAsync&lt;TResponse&gt;(RequestType, string, IStoatRequest, bool)"/>
             </summary>
         </member>
+        <member name="P:StoatSharp.Rest.Requests.EditMemberRequest.can_publish">
+            <summary>
+            Voice mute
+            </summary>
+        </member>
+        <member name="P:StoatSharp.Rest.Requests.EditMemberRequest.can_receive">
+            <summary>
+            Voice deafen
+            </summary>
+        </member>
         <member name="T:StoatSharp.Rest.StoatRestClient">
             <summary>
             The internal http client used for sending requests to the Stoat instance API and built-in extension methods.
