@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="StoatSharp.Challenge/StoatSharp.Challenge.csproj" />
+  <Project Path="StoatSharp.Commands/StoatSharp.Commands.csproj">
+    <BuildDependency Project="StoatSharp/StoatSharp.csproj" />
+  </Project>
+  <Project Path="StoatSharp.InstanceAdmin/StoatSharp.InstanceAdmin.csproj" />
+  <Project Path="StoatSharp.Voice/StoatSharp.Voice.csproj" />
+  <Project Path="StoatSharp/StoatSharp.csproj" />
+  <Project Path="TestBot/TestBot.csproj">
+    <BuildDependency Project="StoatSharp.Commands/StoatSharp.Commands.csproj" />
+  </Project>
+</Solution>

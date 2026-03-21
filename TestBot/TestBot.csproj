@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RevoltSharp.Commands\StoatSharp.Commands.csproj" />
-    <ProjectReference Include="..\RevoltSharp.InstanceAdmin\StoatSharp.InstanceAdmin.csproj" />
-    <ProjectReference Include="..\RevoltSharp.Voice\StoatSharp.Voice.csproj" />
-    <ProjectReference Include="..\RevoltSharp\StoatSharp.csproj" />
+    <ProjectReference Include="..\StoatSharp.Commands\StoatSharp.Commands.csproj" />
+    <ProjectReference Include="..\StoatSharp.InstanceAdmin\StoatSharp.InstanceAdmin.csproj" />
+    <ProjectReference Include="..\StoatSharp.Voice\StoatSharp.Voice.csproj" />
+    <ProjectReference Include="..\StoatSharp\StoatSharp.csproj" />
   </ItemGroup>
 
 </Project>

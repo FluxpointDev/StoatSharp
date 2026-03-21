@@ -21,7 +21,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RevoltSharp\StoatSharp.csproj" />
+		<ProjectReference Include="..\StoatSharp\StoatSharp.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
