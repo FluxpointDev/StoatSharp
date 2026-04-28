@@ -4658,19 +4658,19 @@
             <exception cref="T:StoatSharp.StoatArgumentException"></exception>
             <exception cref="T:StoatSharp.StoatRestException"></exception>
         </member>
-        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Server,System.String,System.String)">
-            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String)" />
+        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Server,System.String,System.String,System.Int32)">
+            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String,System.Int32)" />
         </member>
-        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Server,StoatSharp.ServerMember,System.String)">
-            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String)" />
+        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Server,StoatSharp.ServerMember,System.String,System.Int32)">
+            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String,System.Int32)" />
         </member>
-        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Server,StoatSharp.User,System.String)">
-            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String)" />
+        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Server,StoatSharp.User,System.String,System.Int32)">
+            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String,System.Int32)" />
         </member>
-        <member name="M:StoatSharp.MemberHelper.BanAsync(StoatSharp.ServerMember,System.String)">
-            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String)" />
+        <member name="M:StoatSharp.MemberHelper.BanAsync(StoatSharp.ServerMember,System.String,System.Int32)">
+            <inheritdoc cref="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String,System.Int32)" />
         </member>
-        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String)">
+        <member name="M:StoatSharp.MemberHelper.BanMemberAsync(StoatSharp.Rest.StoatRestClient,System.String,System.String,System.String,System.Int32)">
             <summary>
             Ban a member from a server.
             </summary>

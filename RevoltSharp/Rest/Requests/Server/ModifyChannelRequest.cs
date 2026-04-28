@@ -12,8 +12,7 @@ internal class ModifyChannelRequest : IStoatRequest
     public Optional<bool> nsfw { get; set; }
     public Optional<List<string>> remove { get; set; }
     public Optional<string> owner { get; set; }
-
-
+    public Optional<int> slowmode { get; set; }
 
     public void RemoveValue(string value)
     {

@@ -38,5 +38,23 @@ internal class InviteJson
     public AttachmentJson? CreatorAvatar { get; set; }
 
     [JsonProperty("type")]
-    public string? ChannelType { get; set; }
+    public string? Type { get; set; }
+
+    [JsonProperty("member_count")]
+    public ulong MemberCount { get; set; }
+
+    [JsonProperty("server_id")]
+    public string? ServerId { get; set; }
+
+    [JsonProperty("server_name")]
+    public string? ServerName { get; set; }
+
+    [JsonProperty("server_icon")]
+    public AttachmentJson? ServerIcon { get; set; }
+
+    [JsonProperty("server_banner")]
+    public AttachmentJson? ServerBanner { get; set; }
+
+    [JsonProperty("server_flags")]
+    public ServerFlags ServerFlags { get; set; }
 }

@@ -9,11 +9,8 @@ internal class ServerMemberJoinEventJson
     [JsonProperty("id")]
     public string? ServerId;
 
-    [JsonProperty("user")]
-    public string? UserId;
-
-    //[JsonProperty("member")]
-    //public ServerMemberJson Member;
+    [JsonProperty("member")]
+    public ServerMemberJson Member;
 }
 internal class ServerMemberLeaveEventJson
 {

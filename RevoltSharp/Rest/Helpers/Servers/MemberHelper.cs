@@ -308,21 +308,21 @@ public static class MemberHelper
         await rest.DeleteAsync($"servers/{serverId}/members/{userId}");
     }
 
-    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string)" />
-    public static Task<ServerBanInfo> BanMemberAsync(this Server server, string userId, string? reason = null)
-        => BanMemberAsync(server.Client.Rest, server.Id, userId, reason);
+    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string, int)" />
+    public static Task<ServerBanInfo> BanMemberAsync(this Server server, string userId, string? reason = null, int pruneMessages = 0)
+        => BanMemberAsync(server.Client.Rest, server.Id, userId, reason, pruneMessages);
 
-    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string)" />
-    public static Task<ServerBanInfo> BanMemberAsync(this Server server, ServerMember member, string? reason = null)
-        => BanMemberAsync(server.Client.Rest, server.Id, member.Id, reason);
+    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string, int)" />
+    public static Task<ServerBanInfo> BanMemberAsync(this Server server, ServerMember member, string? reason = null, int pruneMessages = 0)
+        => BanMemberAsync(server.Client.Rest, server.Id, member.Id, reason, pruneMessages);
 
-    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string)" />
-    public static Task<ServerBanInfo> BanMemberAsync(this Server server, User user, string? reason = null)
-        => BanMemberAsync(server.Client.Rest, server.Id, user.Id, reason);
+    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string, int)" />
+    public static Task<ServerBanInfo> BanMemberAsync(this Server server, User user, string? reason = null, int pruneMessages = 0)
+        => BanMemberAsync(server.Client.Rest, server.Id, user.Id, reason, pruneMessages);
 
-    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string)" />
-    public static Task<ServerBanInfo> BanAsync(this ServerMember member, string? reason = null)
-        => BanMemberAsync(member.Client.Rest, member.ServerId, member.Id, reason);
+    /// <inheritdoc cref="BanMemberAsync(StoatRestClient, string, string, string, int)" />
+    public static Task<ServerBanInfo> BanAsync(this ServerMember member, string? reason = null, int pruneMessages = 0)
+        => BanMemberAsync(member.Client.Rest, member.ServerId, member.Id, reason, pruneMessages);
 
     /// <summary>
     /// Ban a member from a server.
@@ -332,7 +332,7 @@ public static class MemberHelper
     /// </remarks>
     /// <exception cref="StoatArgumentException"></exception>
     /// <exception cref="StoatRestException"></exception>
-    public static async Task<ServerBanInfo> BanMemberAsync(this StoatRestClient rest, string serverId, string userId, string? reason = null)
+    public static async Task<ServerBanInfo> BanMemberAsync(this StoatRestClient rest, string serverId, string userId, string? reason = null, int pruneMessages = 0)
     {
         Conditions.ServerIdLength(serverId, nameof(BanMemberAsync));
         Conditions.UserIdLength(userId, nameof(BanMemberAsync));
@@ -340,6 +340,8 @@ public static class MemberHelper
         ReasonRequest Req = new ReasonRequest();
         if (!string.IsNullOrEmpty(reason))
             Req.reason = Optional.Some(reason);
+        if (pruneMessages != 0)
+            Req.delete_message_seconds = Optional.Some(pruneMessages);
 
         ServerBanInfoJson ServerBanJson = await rest.PutAsync<ServerBanInfoJson>($"servers/{serverId}/bans/{userId}", Req);
         return new ServerBanInfo(rest.Client, ServerBanJson);

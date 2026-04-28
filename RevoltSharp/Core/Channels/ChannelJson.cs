@@ -53,4 +53,7 @@ internal class ChannelJson
 
     [JsonProperty("nsfw")]
     public bool IsNsfw { get; set; }
+
+    [JsonProperty("slowmode")]
+    public int Slowmode { get; set; }
 }

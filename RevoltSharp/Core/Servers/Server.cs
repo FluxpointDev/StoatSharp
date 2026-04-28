@@ -39,6 +39,7 @@ public class Server : CreatedEntity
         IsDiscoverable = model.Discoverable;
         IsNsfw = model.Nsfw;
         SystemMessages = new ServerSystemMessages(client, model.SystemMessages);
+        Flags = model.Flags;
     }
 
     /// <summary>
@@ -146,6 +147,8 @@ public class Server : CreatedEntity
     public bool IsDiscoverable { get; internal set; }
 
     public bool IsNsfw { get; internal set; }
+
+    public ServerFlags Flags { get; internal set; }
 
     public ServerMember? GetCachedMember(string userId)
     {

@@ -48,6 +48,9 @@ internal class ServerJson
 
     [JsonProperty("nsfw")]
     public bool Nsfw { get; set; }
+
+    [JsonProperty("flags")]
+    public ServerFlags Flags { get; set; }
 }
 
 internal class ServerSystemMessagesJson

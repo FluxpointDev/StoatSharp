@@ -50,13 +50,13 @@ public static class ChannelHelper
     }
 
 
-    /// <inheritdoc cref="ModifyChannelAsync(StoatRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string})" />
-    public static Task<Channel> ModifyChannelAsync(this Server server, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null)
-        => InternalModifyChannelAsync<Channel>(server.Client.Rest, channelId, name, desc, iconId, nsfw, null);
+    /// <inheritdoc cref="ModifyChannelAsync(StoatRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string}, Option{int})" />
+    public static Task<Channel> ModifyChannelAsync(this Server server, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<int> slowmode = null)
+        => InternalModifyChannelAsync<Channel>(server.Client.Rest, channelId, name, desc, iconId, nsfw, null, slowmode);
 
-    /// <inheritdoc cref="ModifyChannelAsync(StoatRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string})" />
-    public static Task<Channel> ModifyChannelAsync(this StoatRestClient rest, Channel channel, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
-        => InternalModifyChannelAsync<Channel>(rest, channel.Id, name, desc, iconId, nsfw, owner);
+    /// <inheritdoc cref="ModifyChannelAsync(StoatRestClient, string, Option{string}, Option{string}, Option{string}, Option{bool}, Option{string}, Option{int})" />
+    public static Task<Channel> ModifyChannelAsync(this StoatRestClient rest, Channel channel, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null, Option<int> slowmode = null)
+        => InternalModifyChannelAsync<Channel>(rest, channel.Id, name, desc, iconId, nsfw, owner, slowmode);
 
     /// <summary>
     /// Update a channel.
@@ -66,10 +66,10 @@ public static class ChannelHelper
     /// </returns>
     /// <exception cref="StoatArgumentException"></exception>
     /// <exception cref="StoatRestException"></exception>
-    public static Task<Channel> ModifyChannelAsync(this StoatRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null)
-        => InternalModifyChannelAsync<Channel>(rest, channelId, name, desc, iconId, nsfw, owner);
+    public static Task<Channel> ModifyChannelAsync(this StoatRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null, Option<int> slowmode = null)
+        => InternalModifyChannelAsync<Channel>(rest, channelId, name, desc, iconId, nsfw, owner, slowmode);
 
-    internal static async Task<TChannel> InternalModifyChannelAsync<TChannel>(this StoatRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null) where TChannel : Channel
+    internal static async Task<TChannel> InternalModifyChannelAsync<TChannel>(this StoatRestClient rest, string channelId, Option<string>? name = null, Option<string?>? desc = null, Option<string?>? iconId = null, Option<bool>? nsfw = null, Option<string>? owner = null, Option<int> slowmode = null) where TChannel : Channel
     {
         Conditions.ChannelIdLength(channelId, nameof(ModifyChannelAsync));
 
@@ -110,6 +110,14 @@ public static class ChannelHelper
         {
             Conditions.OwnerIdLength(owner.Value, nameof(ModifyChannelAsync));
             Req.owner = Optional.Some(owner.Value);
+        }
+
+        if (slowmode != null)
+        {
+            if (slowmode.Value == 0)
+                Req.RemoveValue("Slowmode");
+            else
+                Req.slowmode = Optional.Some(slowmode.Value);
         }
         ChannelJson Json = await rest.PatchAsync<ChannelJson>($"/channels/{channelId}", Req);
         return (TChannel)Channel.Create(rest.Client, Json);

@@ -682,7 +682,7 @@ internal class StoatSocketClient
                 case "ServerMemberJoin":
                     {
                         ServerMemberJoinEventJson @event = payload.ToObject<ServerMemberJoinEventJson>(StoatClient.Deserializer);
-                        if (@event.UserId == CurrentUser.Id)
+                        if (@event.Member.Id.User == CurrentUser.Id)
                         {
                             Server server = await Client.Rest.GetServerAsync(@event.ServerId);
                             if (server == null)
@@ -690,7 +690,7 @@ internal class StoatSocketClient
 
                             Client.InvokeLog("Joined Server: " + server.Name, StoatLogSeverity.Debug);
 
-                            ServerMember Member = new ServerMember(Client, new ServerMemberJson { Id = new ServerMemberIdsJson { Server = @event.ServerId, User = @event.UserId }, JoinedAt = DateTime.UtcNow }, null, CurrentUser);
+                            ServerMember Member = new ServerMember(Client, new ServerMemberJson { Id = new ServerMemberIdsJson { Server = @event.ServerId, User = @event.Member.Id.User }, JoinedAt = DateTime.UtcNow }, null, CurrentUser);
                             server.AddMember(Member);
                             Client.InvokeServerJoined(server, CurrentUser);
                         }
@@ -703,11 +703,11 @@ internal class StoatSocketClient
                                     return;
                             }
 
-                            User user = await Client.Rest.GetUserAsync(@event.UserId);
+                            User user = await Client.Rest.GetUserAsync(@event.Member.Id.User);
                             if (user == null)
                                 return;
 
-                            ServerMember Member = new ServerMember(Client, new ServerMemberJson { Id = new ServerMemberIdsJson { Server = @event.ServerId, User = @event.UserId }, JoinedAt = DateTime.UtcNow }, null, user);
+                            ServerMember Member = new ServerMember(Client, new ServerMemberJson { Id = new ServerMemberIdsJson { Server = @event.ServerId, User = @event.Member.Id.User }, JoinedAt = DateTime.UtcNow }, null, user);
                             Server.AddMember(Member);
                             Client.InvokeMemberJoined(Server, Member);
                         }

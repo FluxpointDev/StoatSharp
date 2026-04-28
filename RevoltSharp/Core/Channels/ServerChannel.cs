@@ -17,7 +17,10 @@ public class ServerChannel : Channel
         InternalRolePermissions = model.RolePermissions != null ? model.RolePermissions.ToDictionary(x => x.Key, x => new ChannelPermissions(Server, x.Value)) : new Dictionary<string, ChannelPermissions>();
         Name = model.Name!;
         Description = model.Description;
-        Icon = Attachment.Create(client, model.Icon);
+        if (model.Icon != null)
+            Icon = Attachment.Create(client, model.Icon);
+
+        Slowmode = model.Slowmode;
     }
 
     /// <summary>
@@ -70,6 +73,8 @@ public class ServerChannel : Channel
     /// This may be <see langword="null" />
     /// </remarks>
     public Attachment? Icon { get; internal set; }
+
+    public int Slowmode { get; internal set; }
 
     /// <summary>
     /// Check if a member has a permission for the channel
